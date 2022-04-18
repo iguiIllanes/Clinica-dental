@@ -105,10 +105,11 @@
 }
 /* Card */
 .card {
-    position: relative;
+    position:relative;
     background: #ffffff;
     border-radius: 5px;
-    padding: 50px 0 40px 0;
+    margin-top: 90px;
+    padding: 50px 0 55px 0;
     box-sizing: border-box;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     -webkit-transition: .3s ease;
@@ -148,22 +149,24 @@
     z-index: 1;
     border-left: 5px solid #01c0c8;
     margin: 0 0 25px;
-    padding: 10px 0 10px 42px;
+    margin-bottom: 20px;
+    padding: 1px 0 10px 42px;
     color: #01c0c8;
-    font-size: 22px;
-    font-weight: 600;
+    font-size: 26px;
+    font-weight: 580;
     text-transform: uppercase;
 }
 .card .title span {
-    font-size: 13px;
+    font-size: 19px;
     display: block;
     margin: 0;
+    margin-bottom: 5px;
     line-height: 18px;
-    font-weight: 400;
-    color: #444;
+    font-weight: 3;
+    color: #666;
 }
 .card .title .msg {
-    font-size: 13px;
+    font-size: 17px;
     color: #666;
     display: block;
     margin: 0;
@@ -175,7 +178,7 @@
 }
 .card .input-container {
     position: relative;
-    margin: 0 0px 30px;
+    margin: 0 200px 30px;
 }
 .form-line .search-btn {
     display: inline-block;

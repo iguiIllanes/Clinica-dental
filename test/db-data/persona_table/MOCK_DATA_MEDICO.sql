@@ -1,0 +1,13 @@
+insert into Medico (id_personaAI, Fecha_Contrato, usuario, pass, Contratado, Correo_Instit) values (13, '2021-06-07', 'hkirman0', 'FEttE2GslaKL', 0, 'rbrazelton0@china.com.cn');
+insert into Medico (id_personaAI, Fecha_Contrato, usuario, pass, Contratado, Correo_Instit) values (14, '2021-11-10', 'jfavelle1', 'gldL82zQf', 1, 'jmillican1@ucoz.ru');
+insert into Medico (id_personaAI, Fecha_Contrato, usuario, pass, Contratado, Correo_Instit) values (15, '2021-07-29', 'lliven2', 'hu9rC55', 0, 'tswidenbank2@lycos.com');
+insert into Medico (id_personaAI, Fecha_Contrato, usuario, pass, Contratado, Correo_Instit) values (16, '2021-09-14', 'ushaefer3', 'DVictb787UPU', 0, 'oheavens3@blogspot.com');
+insert into Medico (id_personaAI, Fecha_Contrato, usuario, pass, Contratado, Correo_Instit) values (17, '2022-02-16', 'ahatto4', 'l7zjBpr', 0, 'fspottiswoode4@auda.org.au');
+insert into Medico (id_personaAI, Fecha_Contrato, usuario, pass, Contratado, Correo_Instit) values (18, '2022-01-01', 'magglione5', 'HeCcpF', 0, 'fluffman5@latimes.com');
+insert into Medico (id_personaAI, Fecha_Contrato, usuario, pass, Contratado, Correo_Instit) values (19, '2022-02-14', 'nleghorn6', 'XSu27b', 1, 'lstitch6@ameblo.jp');
+insert into Medico (id_personaAI, Fecha_Contrato, usuario, pass, Contratado, Correo_Instit) values (20, '2021-10-10', 'mharley7', 'l5SUgHj', 1, 'tnaton7@elpais.com');
+insert into Medico (id_personaAI, Fecha_Contrato, usuario, pass, Contratado, Correo_Instit) values (21, '2021-09-18', 'kmoorcroft8', 'UwdBr5E0h55', 1, 'tciccotto8@wordpress.com');
+insert into Medico (id_personaAI, Fecha_Contrato, usuario, pass, Contratado, Correo_Instit) values (22, '2022-01-23', 'kmcphelimy9', 'viMSOnHk', 1, 'manwell9@webs.com');
+insert into Medico (id_personaAI, Fecha_Contrato, usuario, pass, Contratado, Correo_Instit) values (23, '2022-02-19', 'mortsa', 'RqPfQX', 0, 'ngoodenougha@springer.com');
+insert into Medico (id_personaAI, Fecha_Contrato, usuario, pass, Contratado, Correo_Instit) values (24, '2022-01-25', 'hreitenbachb', 'pkF14Ttj', 0, 'kwylltb@gmpg.org');
+insert into Medico (id_personaAI, Fecha_Contrato, usuario, pass, Contratado, Correo_Instit) values (25, '2021-07-18', 'utethacotc', 'h2x1TNf', 1, 'aklaggemanc@digg.com');

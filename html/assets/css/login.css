@@ -1,11 +1,11 @@
 .authentication {
     background-image: url('../images/bg-1.jpg');
-    background-size: cover;
+    background-size: fill;
     background-position: top center;
 }
 .authentication .theme-bg {
     background: linear-gradient(45deg, #49cdd0, #ab9ae5);
-    height: 100%;
+    height: 130%;
     opacity: 0.5;
     position: absolute;
     width: 100%;

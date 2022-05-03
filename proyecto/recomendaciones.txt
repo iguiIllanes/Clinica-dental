@@ -1,0 +1,12 @@
+Autor: Ignacio Illanes Bequer
+dependencias:
+  bootstrap css = 4.3.1 -> CDN
+  bootstrap js = 4.3.1 -> CDN
+  jquery = 3.3.1 -> CDN
+  popper.js = 1.14.7 -> CDN
+  Javascript = latest
+  node js = latest
+  express = latest
+  multer = latest
+
+IMPORTANTE: se necesita una conexion a internet y un servidor local para poder ver los estilos, imagenes y lógica funcional de la página de forma correcta.

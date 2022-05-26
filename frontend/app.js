@@ -13,6 +13,20 @@ app.get('/', function(req, res) {
     res.render('index');
 });
 
+// inciar sesion paciente
+app.get('/pacienteiniciarsesion', function(req, res){
+    res.render('sign-in-paciente');
+});
+
+app.post('/iniciosesionpaciente', function(req, res){
+    //TODO ver esta huevada >:v
+});
+
+
+app.get('/medicoiniciarsesion', function(req, res){
+    res.render('sign-in-doctor');
+});
+
 // about page
 app.get('/about', function(req, res) {
     res.render('pages/about');

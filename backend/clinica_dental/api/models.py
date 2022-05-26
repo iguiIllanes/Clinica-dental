@@ -24,6 +24,7 @@ class PagosConsulta(models.Model):
 
     def __str__(self):
         return self.id_pago_consulta
+
 class Medicina(models.Model):
     id_med = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=255)

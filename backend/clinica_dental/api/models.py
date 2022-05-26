@@ -30,7 +30,7 @@ class Paciente(models.Model):
     alergias = models.CharField(max_length=255)
     enfermedades_base = models.CharField(max_length=255)
     def __str__(self):
-        return self.id_persona + ' ' + self.usuario
+        return str(self.id_persona) + ' ' + self.usuario
     
 
 class Medico(models.Model):
@@ -41,7 +41,7 @@ class Medico(models.Model):
     contratado = models.BooleanField()
     correo_institucional = models.CharField(max_length=255)
     def __str__(self):
-        return self.id_persona + ' ' + self.usuario
+        return str(self.id_persona) + ' ' + self.usuario
 
 class Especialidad(models.Model):
     id_especialidad = models.AutoField(primary_key=True)

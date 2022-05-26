@@ -11,7 +11,6 @@ class Persona(models.Model):
     def __str__(self):
         return self.id_persona + ' ' + self.nombre
 
-<<<<<<< HEAD
 class Consulta(models.Model):
     id_Consulta = models.AutoField(primary_key=True)
     id_Cita = models.ForeignKey(Cita, on_delete=models.CASCADE)
@@ -47,7 +46,6 @@ class Consulta_Medicina_Receta(models.Model):
 
 
 
-=======
 class Servicio(models.Model):
     id_servicio = models.AutoField(primary_key=True)
     nombre_servicio = models.CharField(max_length=255)
@@ -69,4 +67,3 @@ class Medicina(models.Model):
     tipo = models.CharField(max_length=255)
     def __str__(self):
         return self.id_med
->>>>>>> c77c59e7604901e229fc5d80da1919bdbd1c1a87

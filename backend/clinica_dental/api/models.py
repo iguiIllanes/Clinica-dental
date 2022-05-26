@@ -8,7 +8,7 @@ class Persona(models.Model):
     telefono = models.IntegerField()
     fecha_nacimiento = models.DateField()
     def __str__(self):
-        return self.id_persona + ' ' + self.nombre
+        return str(self.id_persona) + " " + self.nombre +  " " + self.apellido
 
 class Laboratorio(models.Model):
     id_Lab = models.AutoField(primary_key=True)
@@ -17,20 +17,13 @@ class Laboratorio(models.Model):
         return self.id_Lab + ' ' +self.Nombres
 
 
-class Consulta_Medicina_Receta(models.Model):
-    id_Receta = models.AutoField(primary_key=True)
-    id_Med = models.ForeignKey(Medicina,on_delete=models.CASCADE)
-    Desc = models.CharField(max_length=255)
-    id_Consulta = models.ForeignKey(Consulta,on_delete=models.CASCADE)
-    def __str__(self):
-        return self.id_Receta + ' ' + self.id_Med + ' ' +self.id_Consulta
     
 class Servicio(models.Model):
     id_servicio = models.AutoField(primary_key=True)
     nombre_servicio = models.CharField(max_length=255)
 
 class Paciente(models.Model):
-    id_persona = models.ForeignKey(Persona, primary_key=True)
+    id_persona = models.ForeignKey(Persona, primary_key=True, on_delete=models.CASCADE)
     correo_paciente = models.CharField(max_length=255)
     usuario = models.CharField(max_length=255)
     password = models.CharField(max_length=255)
@@ -41,7 +34,7 @@ class Paciente(models.Model):
     
 
 class Medico(models.Model):
-    id_persona = models.ForeignKey(Persona, primary_key=True)
+    id_persona = models.ForeignKey(Persona, primary_key=True, on_delete=models.CASCADE)
     fecha_contrato = models.DateTimeField()
     usuario = models.CharField(max_length=255)
     password = models.CharField(max_length=255)
@@ -58,9 +51,9 @@ class Especialidad(models.Model):
 
 class MedicoEspecialidad(models.Model):
     id_med_esp = models.AutoField(primary_key=True)
-    id_especialidad = models.ForeignKey(Especialidad)
+    id_especialidad = models.ForeignKey(Especialidad, on_delete=models.CASCADE)
     fecha_titulo = models.DateTimeField()
-    medico_id_persona = models.ForeignKey(Medico)
+    medico_id_persona = models.ForeignKey(Medico, on_delete=models.CASCADE)
     def __str__(self):
         return self.id_med_esp
 
@@ -91,9 +84,9 @@ class Tarjeta(models.Model):
 
 class PagoReserva(models.Model):
     id_pago = models.AutoField(primary_key=True)
-    monto = models.DecimalField(7,2)
-    id_tarjeta = foreing_Key=True
-    id_cita = foreing_Key=True
+    monto = models.FloatField()
+    id_tarjeta = models.ForeignKey(Tarjeta, on_delete=models.CASCADE)
+    id_cita = models.ForeignKey(Cita, on_delete=models.CASCADE)
     def str(self) -> str:
         return self.id_pago + ' ' +self.monto
 
@@ -106,6 +99,13 @@ class Consulta(models.Model):
     def __str__(self):
         return self.id_Consulta + ' ' + self.id_Cita + ' ' +self.id_Servicio
 
+class PagosConsulta(models.Model):
+    id_pago_consulta = models.AutoField(primary_key=True)
+    id_consulta = models.ForeignKey(Consulta, on_delete=models.CASCADE)
+    monto = models.FloatField()
+    def __str__(self):
+        return self.id_pago_consulta
+
 class Rayos_X(models.Model):
     id_Rayos = models.AutoField(primary_key=True)
     Tipo = models.CharField(max_length=255)
@@ -113,3 +113,11 @@ class Rayos_X(models.Model):
     id_Lab = models.ForeignKey(Laboratorio,on_delete=models.CASCADE)
     def __str__(self):
         return self.id_Rayos + ' ' + self.id_Consulta + ' ' + self.id_Lab
+
+class Consulta_Medicina_Receta(models.Model):
+    id_Receta = models.AutoField(primary_key=True)
+    id_Med = models.ForeignKey(Medicina,on_delete=models.CASCADE)
+    Desc = models.CharField(max_length=255)
+    id_Consulta = models.ForeignKey(Consulta,on_delete=models.CASCADE)
+    def __str__(self):
+        return self.id_Receta + ' ' + self.id_Med + ' ' +self.id_Consulta

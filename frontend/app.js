@@ -100,28 +100,17 @@ app.get('/doctor-panel-de-control', function(req,res){
 
 // inciar sesion paciente
 app.get('/paciente-iniciar-sesion', function(req, res){
+    req.session.isDoctor = false; // para la autenticacion
     res.render('sign-in-paciente');
 });
 
-app.get('/infodoctores', function(req, res){
-    res.render('doctors');
+//iniciar sesion doctor
+app.get('/doctor-iniciar-sesion', function(req, res){
+    req.session.isDoctor = true; // para la autenticacion
+    res.render('sign-in-doctor');
 });
 
-
-app.get('/historialPaciente', function(req, res){
-    res.render('patient-profile');
-});
-
-app.get('/agendarcita', function(req, res){
-    res.render('book-appointment');
-});
-
-
-app.get('/anadirpago', function(req, res){
-    res.render('add-payments');
-});
-
-app.post('/signinpaciente', async (req, res) => { // para iniciar sesion
+app.post('/auth', async (req, res) => { // para iniciar sesion
     username  = req.body.username
     password = req.body.password
     const query = "SELECT usuario, password FROM api_paciente WHERE usuario = '" + username + "' AND password = '" + password + "'";
@@ -140,6 +129,24 @@ app.post('/signinpaciente', async (req, res) => { // para iniciar sesion
 
     connection.execSql(sqlRequest);
 })
+
+app.get('/infodoctores', function(req, res){
+    res.render('doctors');
+});
+
+
+app.get('/historialPaciente', function(req, res){
+    res.render('patient-profile');
+});
+
+app.get('/agendarcita', function(req, res){
+    res.render('book-appointment');
+});
+
+
+app.get('/anadirpago', function(req, res){
+    res.render('add-payments');
+});
 
 
 app.get('/medicoiniciarsesion', function(req, res){

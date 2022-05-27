@@ -28,7 +28,7 @@ class MedicoEspecialidadSerializer(serializers.ModelSerializer):
         model = MedicoEspecialidad
         fields = ('id_med_esp','id_especialidad','fecha_titulo','medico_id_persona')
 class PacienteSerializer(serializers.ModelSerializer):
-    id_persona = PersonaSerializer()
+    # id_persona = PersonaSerializer()
     class Meta:
         model = Paciente
         fields = ('id_persona', 'correo_paciente', 'usuario', 'password', 'alergias', 'enfermedades_base')

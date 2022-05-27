@@ -92,8 +92,17 @@ app.get('/medicoiniciarsesion', function(req, res){
     res.render('sign-in-doctor');
 });
 
+app.get('/pagos', function(req, res){
+    res.render('payments');
+});
+
+
 app.get('/anadir-doctor', function(req, res){
     res.render('add-doctor');
+});
+
+app.get('/perfil-doctor', function(req, res){
+    res.render('profile');
 });
 
 // about page

@@ -7,8 +7,8 @@ class Persona(models.Model):
     apellido = models.CharField(max_length=255)
     telefono = models.IntegerField()
     fecha_nacimiento = models.DateField()
-    def __str__(self):
-        return str(self.id_persona) + " " + self.nombre +  " " + self.apellido
+    #def __str__(self):
+     #   return str(self.id_persona) + " " + self.nombre +  " " + self.apellido
 
 class Laboratorio(models.Model):
     id_Lab = models.AutoField(primary_key=True)
@@ -34,7 +34,7 @@ class Paciente(models.Model):
     
 
 class Medico(models.Model):
-    id_persona = models.ForeignKey(Persona, primary_key=True, on_delete=models.CASCADE)
+    id_persona = models.OneToOneField(Persona, primary_key=True, on_delete=models.CASCADE)
     fecha_contrato = models.DateTimeField()
     usuario = models.CharField(max_length=255)
     password = models.CharField(max_length=255)

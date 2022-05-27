@@ -21,6 +21,7 @@ from .views import (
 router = routers.DefaultRouter()
 
 urlpatterns = [
+    
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
@@ -33,4 +34,9 @@ urlpatterns = [
     path ('medicos/',MedicosListApiView.as_view()),
     path('medicos/<int:id_medico>/',MedicosDetailApiView.as_view()),
     path('medicos_especialidades/',MedicosEspecialidadesListApiView.as_view()),
+    path ('especialidades/',EspecialidadesListApiView.as_view()),
+    
+
+
+
 ]

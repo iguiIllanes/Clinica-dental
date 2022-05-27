@@ -65,6 +65,10 @@ app.get('/pacienteiniciarsesion', function(req, res){
     res.render('sign-in-paciente');
 });
 
+app.get('/infodoctores', function(req, res){
+    res.render('doctors');
+});
+
 app.post('/signinpaciente', async (req, res) => {
     iniciarSesion(req.body.username, req.body.password);
 })

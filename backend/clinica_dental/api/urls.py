@@ -7,13 +7,18 @@ from .views import (
     PersonaApiView,
 
     PacientesApiView,
+
+    MedicosListApiView,
+    MedicosDetailApiView,
+
+    EspecialidadesListApiView,
+
+    MedicosEspecialidadesListApiView
+
 )
 
 router = routers.DefaultRouter()
 
-from .views import (
-    MedicosListApiView,
-)
 router = routers.DefaultRouter()
 # router.register(r'personas', views.PersonaViewSet)
 # router.register(r'medicos',views.MedicoViewSet)
@@ -29,5 +34,11 @@ urlpatterns = [
     path('personas/', PersonasApiView.as_view()),
     path('personas/<int:persona_id>/', PersonaApiView.as_view()),
     path('pacientes/', PacientesApiView.as_view()),
-    path ('medicos/',MedicosListApiView.as_view())
+    
+    path ('medicos/',MedicosListApiView.as_view()),
+    path('medicos/<int:id_medico>/', MedicosDetailApiView.as_view()),
+
+    path ('especialidades/',EspecialidadesListApiView.as_view()),
+
+    path ('medicos_especialidades/',MedicosEspecialidadesListApiView.as_view()),
 ]

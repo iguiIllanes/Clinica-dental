@@ -27,6 +27,7 @@ router = routers.DefaultRouter()
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
+    
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('personas/', PersonasListApiView.as_view()),
@@ -35,4 +36,9 @@ urlpatterns = [
     path ('medicos/',MedicosListApiView.as_view()),
     path('medicos/<int:id_medico>/',MedicosDetailApiView.as_view()),
     path('medicos_especialidades/',MedicosEspecialidadesListApiView.as_view()),
+    path ('especialidades/',EspecialidadesListApiView.as_view()),
+    
+
+
+
 ]

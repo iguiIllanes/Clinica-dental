@@ -7,6 +7,8 @@ class Persona(models.Model):
     apellido = models.CharField(max_length=255)
     telefono = models.IntegerField()
     fecha_nacimiento = models.DateField()
+    class Meta:
+        unique_together = ["ci","nombre", "apellido", "fecha_nacimiento"]
     def __str__(self):
         return str(self.id_persona) + " " + self.nombre +  " " + self.apellido
 
@@ -25,7 +27,7 @@ class Servicio(models.Model):
 class Paciente(models.Model):
     id_persona = models.OneToOneField(Persona, primary_key=True, on_delete=models.CASCADE)
     correo_paciente = models.CharField(max_length=255)
-    usuario = models.CharField(max_length=255)
+    usuario = models.CharField(max_length=255,unique=True)
     password = models.CharField(max_length=255)
     alergias = models.CharField(max_length=255)
     enfermedades_base = models.CharField(max_length=255)
@@ -36,7 +38,7 @@ class Paciente(models.Model):
 class Medico(models.Model):
     id_persona = models.OneToOneField(Persona, primary_key=True, on_delete=models.CASCADE)
     fecha_contrato = models.DateTimeField()
-    usuario = models.CharField(max_length=255)
+    usuario = models.CharField(max_length=255,unique=True)
     password = models.CharField(max_length=255)
     contratado = models.BooleanField()
     correo_institucional = models.CharField(max_length=255)

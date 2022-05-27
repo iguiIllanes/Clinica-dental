@@ -22,7 +22,7 @@ from .models import Paciente
 from .models import Cita
 
 
-class PersonasApiView(APIView):
+class PersonasListApiView(APIView):
     def get(self, request, *args, **kwargs):
         personas = Persona.objects.all()
         serializer = PersonaSerializer(personas, many=True)
@@ -43,7 +43,7 @@ class PersonasApiView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 
-class PersonaApiView(APIView):
+class PersonasDetailApiView(APIView):
     def get_persona(self, persona_id):
         try:
             return Persona.objects.get(id_persona=persona_id);
@@ -77,7 +77,7 @@ class PersonaApiView(APIView):
         )
 
 
-class PacientesApiView(APIView):
+class PacientesListApiView(APIView):
     def get(self, request, *args, **kwargs):
         pacientes = Paciente.objects.all()
         serializer = PacienteSerializer(pacientes, many=True)

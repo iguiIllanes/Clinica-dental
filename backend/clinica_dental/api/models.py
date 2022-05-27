@@ -7,10 +7,8 @@ class Persona(models.Model):
     apellido = models.CharField(max_length=255)
     telefono = models.IntegerField()
     fecha_nacimiento = models.DateField()
-    # def __str__(self):
-    #     return str(self.id_persona) + " " + self.nombre +  " " + self.apellido
-    #def __str__(self):
-     #   return str(self.id_persona) + " " + self.nombre +  " " + self.apellido
+    def __str__(self):
+        return str(self.id_persona) + " " + self.nombre +  " " + self.apellido
 
 class Laboratorio(models.Model):
     id_Lab = models.AutoField(primary_key=True)

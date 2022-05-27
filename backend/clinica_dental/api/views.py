@@ -46,7 +46,7 @@ class PersonasListApiView(APIView):
 class PersonasDetailApiView(APIView):
     def get_persona(self, persona_id):
         try:
-            return Persona.objects.get(id_persona=persona_id);
+            return Persona.objects.get(id_persona=persona_id)
         except Persona.DoesNotExist:
             return None
 
@@ -100,23 +100,12 @@ class PacientesListApiView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
         
 class MedicosListApiView(APIView):
-    # add permission to check if user is authenticated
-    #permission_classes = [permissions.IsAuthenticated]
-
-    # 1. List all
     def get(self, request, *args, **kwargs):
-        '''
-        List all the todo items for given requested user
-        '''
-        medicos = Medico.objects.all()#filter(user = request)
+        medicos = Medico.objects.all()
         serializer = MedicoSerializer(medicos, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    # 2. Create
     def post(self, request, *args, **kwargs):
-        '''
-        Create the Todo with given todo data
-        '''
         data = {
             'id_persona': request.data.get('id_persona'),
             'fecha_contrato': request.data.get('fecha_contrato'), 
@@ -125,10 +114,98 @@ class MedicosListApiView(APIView):
             'contratado': request.data.get('contratado'), 
             'correo_institucional': request.data.get('correo_institucional'),    
         }
-
         serializer = MedicoSerializer(data=data)
         if serializer.is_valid():
              serializer.save()
              return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class MedicosDetailApiView(APIView):
+
+    def get_object(self, id_medico):
+        try:
+            return Medico.objects.get(id_persona=id_medico)
+        except Medico.DoesNotExist:
+            return None
+
+    def get(self, request, id_medico, *args, **kwargs):
+        medico_instance = self.get_object(id_medico)
+        if not medico_instance:
+            return Response(
+                {"res": "Object with that id does not exists"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        serializer = MedicoSerializer(medico_instance)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+    def put(self, request,id_medico, *args, **kwargs):
+        medico_instance = self.get_object(id_medico)
+        if not medico_instance:
+            return Response(
+                {"res": "Object with that id does not exists"}, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        data = {
+            'fecha_contrato': request.data.get('fecha_contrato'), 
+            'usuario': request.data.get('usuario'), 
+            'password': request.data.get('password'), 
+            'contratado': request.data.get('contratado'), 
+            'correo_institucional': request.data.get('correo_institucional'), 
+        }
+        serializer = MedicoSerializer(instance = medico_instance, data=data, partial = True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, id_medico, *args, **kwargs):
+
+        medico_instance = self.get_object(id_medico)
+        if not medico_instance:
+            return Response(
+                {"res": "Object with that id does not exists"}, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        medico_instance.delete()
+        return Response(
+            {"res": "Object deleted!"},
+            status=status.HTTP_200_OK
+        )
+
+class EspecialidadesListApiView(APIView):
+    def get(self, request, *args, **kwargs):
+        especialidades = Especialidad.objects.all()
+        serializer = EspecialidadSerializer(especialidades, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request, *args, **kwargs):
+        data = {
+            'especialidad': request.data.get('especialidad'),
+        }
+        serializer = EspecialidadSerializer(data=data)
+        if serializer.is_valid():
+             serializer.save()
+             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class  MedicosEspecialidadesListApiView(APIView):
+    def get(self, request, *args, **kwargs):
+        medicos_especialidades = MedicoEspecialidad.objects.all()
+        serializer = MedicoEspecialidadSerializer(medicos_especialidades, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request, *args, **kwargs):
+        data = {
+            'id_especialidad': request.data.get('id_especialidad'),
+            'fecha_titulo': request.data.get('fecha_titulo'),
+            'medico_id_persona': request.data.get('medico_id_persona'),
+        }
+        serializer = MedicoEspecialidadSerializer(data=data)
+        if serializer.is_valid():
+             serializer.save()
+             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 

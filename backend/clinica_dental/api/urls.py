@@ -7,13 +7,11 @@ from .views import (
     PersonasDetailApiView,
 
     PacientesListApiView,
+    MedicosListApiView,
 )
 
 router = routers.DefaultRouter()
 
-from .views import (
-    MedicosListApiView,
-)
 router = routers.DefaultRouter()
 # router.register(r'personas', views.PersonaViewSet)
 # router.register(r'medicos',views.MedicoViewSet)

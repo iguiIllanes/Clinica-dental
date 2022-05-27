@@ -14,6 +14,7 @@ class PersonaSerializer(serializers.ModelSerializer):
         fields = ('id_persona', 'ci', 'nombre', 'apellido', 'telefono', 'fecha_nacimiento')
 
 class MedicoSerializer(serializers.ModelSerializer):
+    id_persona = PersonaSerializer()
     class Meta:
         model = Medico
         fields = ('id_persona','fecha_contrato','usuario', 'password','contratado','correo_institucional')
@@ -28,7 +29,7 @@ class MedicoEspecialidadSerializer(serializers.ModelSerializer):
         model = MedicoEspecialidad
         fields = ('id_med_esp','id_especialidad','fecha_titulo','medico_id_persona')
 class PacienteSerializer(serializers.ModelSerializer):
-    # id_persona = PersonaSerializer()
+    id_persona = PersonaSerializer()
     class Meta:
         model = Paciente
         fields = ('id_persona', 'correo_paciente', 'usuario', 'password', 'alergias', 'enfermedades_base')

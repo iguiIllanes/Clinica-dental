@@ -98,6 +98,25 @@ class PacientesListApiView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
+
+class PacientesDetailApiView(APIView):
+    def get_paciente(self, usuario):
+        try:
+            return Paciente.objects.get(usuario = usuario);
+        except Paciente.DoesNotExist:
+            return None;
+    
+    def get(self, request, usuario, *args, **kwargs):
+        paciente_instance = self.get_paciente(usuario)
+        if not paciente_instance:
+            return Response(
+                {"res": "Object with that id does not exists"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        serializer = PacienteSerializer(paciente_instance)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
         
 class MedicosListApiView(APIView):
     def get(self, request, *args, **kwargs):

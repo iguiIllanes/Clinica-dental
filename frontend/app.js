@@ -6,6 +6,10 @@ var bodyParser = require('body-parser');
 
 //configuracion de express-session
 var session = require('express-session');
+const res = require('express/lib/response');
+const { request } = require('express');
+
+const apiRequest = require("request");
 
 var app = express();
 
@@ -27,7 +31,10 @@ app.use(bodyParser.json());
 var Connection = require('tedious').Connection;
 var config = {
     server: '10.147.17.7',
-    options: {},
+    options: {
+        encrypt: true,
+        database: "clinica-dental"
+    },
     authentication:{
         type: 'default',
         options: {
@@ -38,6 +45,7 @@ var config = {
 };
 
 var connection = new Connection(config);
+var Request = require('tedious').Request;
 
 connection.on('connect', function(err){
     if(err){
@@ -55,13 +63,43 @@ app.set('view engine', 'ejs');
 // para los estilos
 app.use(express.static('public'));
 
-// index page
 app.get('/', function(req, res) {
-    res.render('index');
+    if(req.session.loggedIn) { // para verificar si se inicio sesion
+        if(req.sesion.isDoctor){ // para verificar si es doctor //TODO VER LA VARIABLE DE sesion de doctor en login doctor
+            res.redirect('/doctor-panel-de-control');
+        }else{
+            res.redirect('/paciente-panel-de-control');
+        }
+    }else{
+        res.redirect('/paciente-iniciar-sesion');
+    }
+});
+
+// panel de control paciente
+app.get('/paciente-panel-de-control', function(req, res) {
+    // aqui empezamos con el consumo de la api en api/pacientes/
+    apiRequest("http://127.0.0.1:8000/api/pacientes/"+req.session.username, (err, response, body) => {
+        if(!err){
+            const paciente = JSON.parse(body); // asignamos el JSON a paciente
+            const nombre = paciente.id_persona.nombre; // accedemos al contenido de paciente
+            const apellido = paciente.id_persona.apellido;
+
+            res.render('paciente-menu',{ // pasamos los datos de paciente a paciente-menu
+                nombre: nombre,
+                apellido: apellido,
+            });
+        }else{
+            res.send("Algo ocurrio con la conexion al API. Intenta mas tarde.")
+        }
+    })
+});
+
+app.get('/doctor-panel-de-control', function(req,res){
+    
 });
 
 // inciar sesion paciente
-app.get('/pacienteiniciarsesion', function(req, res){
+app.get('/paciente-iniciar-sesion', function(req, res){
     res.render('sign-in-paciente');
 });
 
@@ -83,12 +121,24 @@ app.get('/anadirpago', function(req, res){
     res.render('add-payments');
 });
 
-app.get('/anadir-paciente', function(req, res){
-    res.render('add-patient');
-});
+app.post('/signinpaciente', async (req, res) => { // para iniciar sesion
+    username  = req.body.username
+    password = req.body.password
+    const query = "SELECT usuario, password FROM api_paciente WHERE usuario = '" + username + "' AND password = '" + password + "'";
 
-app.post('/signinpaciente', async (req, res) => {
-    iniciarSesion(req.body.username, req.body.password);
+    sqlRequest = new Request(query, function(err, rowCount){
+        if(err){ // si falla algo
+            res.send("Algo paso. Porfavor intenta mas tarde.")
+        }else if(rowCount <= 0){ // si el registro con esos datos no existe
+            res.send("Usuario y/o password incorrectos. Intenta de nuevo.")
+        }else if(rowCount > 0){ // si el query es correcto
+            req.session.loggedIn = true;
+            req.session.username = username;
+            res.redirect('/paciente-panel-de-control');
+        }
+    });
+
+    connection.execSql(sqlRequest);
 })
 
 
@@ -126,24 +176,3 @@ app.get('/about', function(req, res) {
 
 app.listen(8080);
 console.log('8080 is the magic port');
-
-
-//TODO corregir esto
-function iniciarSesion(username, password) {
-    const query = `SELECT usuario, password FROM api_paciente WHERE usuario = ${username} AND password = ${password}`;
-    request = new Request(query, (err, rowCount)=>{
-        if(err){
-            console.log(err);
-        }else{
-            console.log("Bienvenido!");
-        }
-    });
-
-    request.on('row', function(columns){
-        columns.forEach(column =>{
-            console.log(column.value);
-        });
-    });
-
-    connection.execSql(request);
-}

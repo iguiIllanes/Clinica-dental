@@ -69,6 +69,20 @@ app.get('/infodoctores', function(req, res){
     res.render('doctors');
 });
 
+
+app.get('/historialPaciente', function(req, res){
+    res.render('patient-profile');
+});
+
+app.get('/agendarcita', function(req, res){
+    res.render('book-appointment');
+});
+
+
+app.get('/anadirpago', function(req, res){
+    res.render('add-payments');
+});
+
 app.post('/signinpaciente', async (req, res) => {
     iniciarSesion(req.body.username, req.body.password);
 })
@@ -78,8 +92,17 @@ app.get('/medicoiniciarsesion', function(req, res){
     res.render('sign-in-doctor');
 });
 
+app.get('/pagos', function(req, res){
+    res.render('payments');
+});
+
+
 app.get('/anadir-doctor', function(req, res){
     res.render('add-doctor');
+});
+
+app.get('/perfil-doctor', function(req, res){
+    res.render('profile');
 });
 
 // about page

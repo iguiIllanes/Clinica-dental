@@ -23,7 +23,7 @@ class Servicio(models.Model):
     nombre_servicio = models.CharField(max_length=255)
 
 class Paciente(models.Model):
-    id_persona = models.ForeignKey(Persona, primary_key=True, on_delete=models.CASCADE)
+    id_persona = models.OneToOneField(Persona, primary_key=True, on_delete=models.CASCADE)
     correo_paciente = models.CharField(max_length=255)
     usuario = models.CharField(max_length=255)
     password = models.CharField(max_length=255)
@@ -34,7 +34,7 @@ class Paciente(models.Model):
     
 
 class Medico(models.Model):
-    id_persona = models.ForeignKey(Persona, primary_key=True, on_delete=models.CASCADE)
+    id_persona = models.OneToOneField(Persona, primary_key=True, on_delete=models.CASCADE)
     fecha_contrato = models.DateTimeField()
     usuario = models.CharField(max_length=255)
     password = models.CharField(max_length=255)

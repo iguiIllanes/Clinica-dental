@@ -63,31 +63,43 @@ app.set('view engine', 'ejs');
 // para los estilos
 app.use(express.static('public'));
 
-// index page
 app.get('/', function(req, res) {
-    if(req.session.loggedIn){
-        // aqui empezamos con el consumo de la api en api/pacientes/
-        apiRequest("http://127.0.0.1:8000/api/pacientes/"+req.session.username, (err, response, body) => {
-            if(!err){
-                const paciente = JSON.parse(body); // asignamos el JSON a paciente
-                const nombre = paciente.id_persona.nombre; // accedemos al contenido de paciente
-                const apellido = paciente.id_persona.apellido;
-
-                res.render('paciente-menu',{ // pasamos los datos de paciente a paciente-menu
-                    nombre: nombre,
-                    apellido: apellido,
-                });
-            }else{
-                res.send("Algo ocurrio con la conexion al API. Intenta mas tarde.")
-            }
-        })
+    if(req.session.loggedIn) { // para verificar si se inicio sesion
+        if(req.sesion.isDoctor){ // para verificar si es doctor //TODO VER LA VARIABLE DE sesion de doctor en login doctor
+            res.redirect('/doctor-panel-de-control');
+        }else{
+            res.redirect('/paciente-panel-de-control');
+        }
     }else{
-        res.redirect('/pacienteiniciarsesion');
+        res.redirect('/paciente-iniciar-sesion');
     }
 });
 
+// panel de control paciente
+app.get('/paciente-panel-de-control', function(req, res) {
+    // aqui empezamos con el consumo de la api en api/pacientes/
+    apiRequest("http://127.0.0.1:8000/api/pacientes/"+req.session.username, (err, response, body) => {
+        if(!err){
+            const paciente = JSON.parse(body); // asignamos el JSON a paciente
+            const nombre = paciente.id_persona.nombre; // accedemos al contenido de paciente
+            const apellido = paciente.id_persona.apellido;
+
+            res.render('paciente-menu',{ // pasamos los datos de paciente a paciente-menu
+                nombre: nombre,
+                apellido: apellido,
+            });
+        }else{
+            res.send("Algo ocurrio con la conexion al API. Intenta mas tarde.")
+        }
+    })
+});
+
+app.get('/doctor-panel-de-control', function(req,res){
+    
+});
+
 // inciar sesion paciente
-app.get('/pacienteiniciarsesion', function(req, res){
+app.get('/paciente-iniciar-sesion', function(req, res){
     res.render('sign-in-paciente');
 });
 
@@ -122,7 +134,7 @@ app.post('/signinpaciente', async (req, res) => { // para iniciar sesion
         }else if(rowCount > 0){ // si el query es correcto
             req.session.loggedIn = true;
             req.session.username = username;
-            res.redirect('/');
+            res.redirect('/paciente-panel-de-control');
         }
     });
 

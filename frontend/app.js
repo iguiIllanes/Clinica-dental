@@ -74,7 +74,7 @@ app.get('/medicoiniciarsesion', function(req, res){
     res.render('sign-in-doctor');
 });
 
-app.get('/doctor/anadir', (req, res)=>{
+app.get('/anadir-doctor', function(req, res){
     res.render('add-doctor');
 });
 

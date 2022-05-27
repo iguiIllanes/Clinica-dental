@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 
 //configuracion de express-session
 var session = require('express-session');
+const res = require('express/lib/response');
 
 var app = express();
 
@@ -27,7 +28,10 @@ app.use(bodyParser.json());
 var Connection = require('tedious').Connection;
 var config = {
     server: '10.147.17.7',
-    options: {},
+    options: {
+        encrypt: true,
+        database: "clinica-dental"
+    },
     authentication:{
         type: 'default',
         options: {
@@ -38,6 +42,7 @@ var config = {
 };
 
 var connection = new Connection(config);
+var Request = require('tedious').Request;
 
 connection.on('connect', function(err){
     if(err){
@@ -83,8 +88,21 @@ app.get('/anadirpago', function(req, res){
     res.render('add-payments');
 });
 
-app.post('/signinpaciente', async (req, res) => {
-    iniciarSesion(req.body.username, req.body.password);
+app.post('/signinpaciente', async (req, res) => { // para iniciar sesion
+    username  = req.body.username
+    password = req.body.password
+    const query = "SELECT usuario, password FROM api_paciente WHERE usuario = '" + username + "' AND password = '" + password + "'";
+    request = new Request(query, function(err, rowCount){
+        if(err){
+            res.send("Algo paso. Porfavor intenta mas tarde.")
+        }else if(rowCount <= 0){
+            res.send("Usuario y/o password incorrectos. Intenta de nuevo.")
+        }else if(rowCount > 0){
+            res.redirect('/');
+        }
+    });
+
+    connection.execSql(request);
 })
 
 
@@ -112,24 +130,3 @@ app.get('/about', function(req, res) {
 
 app.listen(8080);
 console.log('8080 is the magic port');
-
-
-//TODO corregir esto
-function iniciarSesion(username, password) {
-    const query = `SELECT usuario, password FROM api_paciente WHERE usuario = ${username} AND password = ${password}`;
-    request = new Request(query, (err, rowCount)=>{
-        if(err){
-            console.log(err);
-        }else{
-            console.log("Bienvenido!");
-        }
-    });
-
-    request.on('row', function(columns){
-        columns.forEach(column =>{
-            console.log(column.value);
-        });
-    });
-
-    connection.execSql(request);
-}

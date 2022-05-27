@@ -69,6 +69,10 @@ app.get('/infodoctores', function(req, res){
     res.render('doctors');
 });
 
+app.get('/agendarcita', function(req, res){
+    res.render('book-appointment');
+});
+
 app.post('/signinpaciente', async (req, res) => {
     iniciarSesion(req.body.username, req.body.password);
 })

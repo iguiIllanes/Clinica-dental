@@ -7,6 +7,9 @@ var bodyParser = require('body-parser');
 //configuracion de express-session
 var session = require('express-session');
 const res = require('express/lib/response');
+const { request } = require('express');
+
+const apiRequest = require("request");
 
 var app = express();
 
@@ -62,7 +65,25 @@ app.use(express.static('public'));
 
 // index page
 app.get('/', function(req, res) {
-    res.render('index');
+    if(req.session.loggedIn){
+        // aqui empezamos con el consumo de la api en api/pacientes/
+        apiRequest("http://127.0.0.1:8000/api/pacientes/"+req.session.username, (err, response, body) => {
+            if(!err){
+                const paciente = JSON.parse(body); // asignamos el JSON a paciente
+                const nombre = paciente.id_persona.nombre; // accedemos al contenido de paciente
+                const apellido = paciente.id_persona.apellido;
+
+                res.render('paciente-menu',{ // pasamos los datos de paciente a paciente-menu
+                    nombre: nombre,
+                    apellido: apellido,
+                });
+            }else{
+                res.send("Algo ocurrio con la conexion al API. Intenta mas tarde.")
+            }
+        })
+    }else{
+        res.redirect('/pacienteiniciarsesion');
+    }
 });
 
 // inciar sesion paciente
@@ -92,17 +113,20 @@ app.post('/signinpaciente', async (req, res) => { // para iniciar sesion
     username  = req.body.username
     password = req.body.password
     const query = "SELECT usuario, password FROM api_paciente WHERE usuario = '" + username + "' AND password = '" + password + "'";
-    request = new Request(query, function(err, rowCount){
-        if(err){
+
+    sqlRequest = new Request(query, function(err, rowCount){
+        if(err){ // si falla algo
             res.send("Algo paso. Porfavor intenta mas tarde.")
-        }else if(rowCount <= 0){
+        }else if(rowCount <= 0){ // si el registro con esos datos no existe
             res.send("Usuario y/o password incorrectos. Intenta de nuevo.")
-        }else if(rowCount > 0){
+        }else if(rowCount > 0){ // si el query es correcto
+            req.session.loggedIn = true;
+            req.session.username = username;
             res.redirect('/');
         }
     });
 
-    connection.execSql(request);
+    connection.execSql(sqlRequest);
 })
 
 

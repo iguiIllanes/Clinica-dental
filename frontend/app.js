@@ -83,6 +83,10 @@ app.get('/anadirpago', function(req, res){
     res.render('add-payments');
 });
 
+app.get('/anadir-paciente', function(req, res){
+    res.render('add-patient');
+});
+
 app.post('/signinpaciente', async (req, res) => {
     iniciarSesion(req.body.username, req.body.password);
 })
@@ -91,6 +95,16 @@ app.post('/signinpaciente', async (req, res) => {
 app.get('/medicoiniciarsesion', function(req, res){
     res.render('sign-in-doctor');
 });
+
+app.get('/pagos-paciente', function(req, res){
+    res.render('patient-invoice');
+});
+
+
+app.get('/agenda-doctor', function(req, res){
+    res.render('doctor-schedule');
+});
+
 
 app.get('/pagos', function(req, res){
     res.render('payments');

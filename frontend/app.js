@@ -73,6 +73,11 @@ app.get('/agendarcita', function(req, res){
     res.render('book-appointment');
 });
 
+
+app.get('/anadirpago', function(req, res){
+    res.render('add-payments');
+});
+
 app.post('/signinpaciente', async (req, res) => {
     iniciarSesion(req.body.username, req.body.password);
 })

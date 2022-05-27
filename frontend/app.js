@@ -69,6 +69,11 @@ app.get('/infodoctores', function(req, res){
     res.render('doctors');
 });
 
+
+app.get('/historialPaciente', function(req, res){
+    res.render('patient-profile');
+});
+
 app.get('/agendarcita', function(req, res){
     res.render('book-appointment');
 });

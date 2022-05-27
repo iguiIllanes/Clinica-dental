@@ -5,6 +5,7 @@ from .models import Persona
 from .models import Medico
 from .models import Especialidad
 from .models import MedicoEspecialidad
+from .models import Cita, Persona, Paciente
 
 class PersonaSerializer(serializers.ModelSerializer):
     class Meta:
@@ -25,3 +26,12 @@ class MedicoEspecialidadSerializer(serializers.ModelSerializer):
     class Meta:
         model = MedicoEspecialidad
         fields = ('id_med_esp','id_especialidad','fecha_titulo','medico_id_persona')
+class PacienteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Paciente
+        fields = ('id_persona', 'correo_paciente', 'usuario', 'password', 'alergias', 'enfermedades_base')
+
+class CitaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Cita
+        fields = ('id_cita', 'id_paciente', 'id_doctor', 'fecha_reserva', 'fecha_consulta')

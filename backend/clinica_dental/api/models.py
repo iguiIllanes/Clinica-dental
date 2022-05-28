@@ -69,8 +69,8 @@ class Medicina(models.Model):
 
 class Cita(models.Model):
     id_cita = models.AutoField(primary_key=True)
-    id_paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
-    id_doctor = models.ForeignKey(Medico, on_delete=models.CASCADE)
+    id_paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE, null=True)
+    id_doctor = models.ForeignKey(Medico, on_delete=models.CASCADE, null=True)
     fecha_reserva = models.DateField()
     fecha_consulta = models.DateTimeField()
     def str(self) -> str:
@@ -80,7 +80,7 @@ class Tarjeta(models.Model):
     id_tarjeta = models.AutoField(primary_key=True)
     fecha_caducidad = models.DateField()
     cvc = models.IntegerField()
-    id_paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
+    id_paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE, null=True)
     def str(self) -> str:
         return self.id_tarjeta
 

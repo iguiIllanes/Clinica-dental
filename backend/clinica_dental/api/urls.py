@@ -38,10 +38,16 @@ urlpatterns = [
     path ('pacientes/<str:usuario>/', PacientesDetailApiView.as_view()),
 
     path ('medicos/',MedicosListApiView.as_view()),
+<<<<<<< HEAD
     path ('medicos/<int:id_medico>/',MedicosDetailApiView.as_view()),
 
     path ('medicos_especialidades/',MedicosEspecialidadesListApiView.as_view()),
     path ('medicos_especialidades/<int:id_med_esp>/',MedicosEspecialidadesDetailApiView.as_view()),
+=======
+    path('medicos/<str:usuario>/',MedicosDetailApiView.as_view()),
+    path('medicos_especialidades/',MedicosEspecialidadesListApiView.as_view()),
+    path('medicos_especialidades/<int:id_med_esp>/',MedicosEspecialidadesDetailApiView.as_view()),
+>>>>>>> 6947f2061c586737b46cf1b0bd0ccc372bbc4797
 
     path ('especialidades/',EspecialidadesListApiView.as_view()),
     path ('especialidades/<int:id_especialidad>/',EspecialidadesDetailApiView.as_view()),

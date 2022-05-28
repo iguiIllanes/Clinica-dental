@@ -11,6 +11,8 @@ const { request } = require('express');
 
 const apiRequest = require("request");
 
+const calendario = require("./calendario");
+
 var app = express();
 
 
@@ -96,17 +98,18 @@ app.get('/paciente-panel-de-control', function(req, res) {
 
 app.get('/doctor-panel-de-control', function(req,res){
     // aqui empezamos con el consumo de la api en /api/pacientes/
-    apiRequest("http://127.0.0.1:8000/api/medicos/"+req.session.username, (err, response, body) => {
+    apiRequest("http://127.0.0.1:8000/api/medicos/"+req.session.username, async (err, response, body) => {
         if(!err){
             const usuario = JSON.parse(body); // asignamos el JSON a paciente
             const nombre = usuario.id_persona.nombre; // accedemos al contenido de paciente
             const apellido = usuario.id_persona.apellido;
-            const id_doctor = usuario.id_persona;
-            // window.sessionStorage.setItem("id_doctor", usuario.id_persona.id_persona); // variable para el calendario del doctor
-
+            const id_doctor = usuario.id_persona.id_persona;
+            const cal = await calendario.getCalendario(id_doctor);
             res.render('paciente-menu',{ // pasamos los datos de paciente a paciente-menu
                 nombre: "Dr. "+nombre,
                 apellido: apellido,
+                id_doctor: id_doctor,
+                calendario: cal,
             });
         }else{
             res.send("Algo ocurrio con la conexion al API. Intenta mas tarde.")

@@ -1,12 +1,10 @@
 const fecha = new Date(); // para la fecha
 
-// const id_doctor = sessionStorage.getItem("id_doctor"); // recupera la variable de sesion de app.js
-
-// let apiResponse = await fetch("http:/127.0.0.1:8000/api/citas/medico")
-
-// alert("OE, tu id es: " + id_doctor);
-
-
+const calendario = (document.getElementById("calendar-data").innerText).replace('\\',''); //recupera calendario de HTML
+document.getElementById("calendar-data").innerHTML = " "; // borra calendario de HTML
+var finalCalendario = calendario.replace(/\\/g,""); //quita los backslashes de la cadena
+finalCalendario = eval(finalCalendario.slice(1,-1)); // quita los elementos del principio y final, luego convierte a JSON
+var calendarioParsed = [];
 
 const eventColors = [
 	'b-l b-2x b-greensea',
@@ -18,6 +16,15 @@ const eventColors = [
 	'b-l b-2x b-drank'
 ];
 
+for(var i=0; i<finalCalendario.length; i++) { // itera sobre el JSON para formatear una nueva lista para el calendario
+	console.log(finalCalendario[i]);
+	calendarioParsed[i] = {
+		title: finalCalendario[i]['id_paciente']['nombre'],
+		start: finalCalendario[i]['fecha_consulta'],
+		className:eventColors[Math.floor(Math.random() * 7)]
+	};
+}
+
 "use strict";
 $('#calendar').fullCalendar({
 	header: {
@@ -25,10 +32,10 @@ $('#calendar').fullCalendar({
 		center: 'title',
 		right: 'next'
 	},
-	defaultDate: `${fecha.getFullYear()}-${fecha.getMonth()+1}-${fecha.getDate()}`, //obtiene la fecha actual
+	defaultDate: `${fecha.getFullYear()}-${fecha.getMonth() + 1}-${fecha.getDate()}`, //obtiene la fecha actual
 	editable: true,
 	droppable: true, // this allows things to be dropped onto the calendar
-	drop: function() {
+	drop: function () {
 		// is the "remove after drop" checkbox checked?
 		if ($('#drop-remove').is(':checked')) {
 			// if so, remove the element from the "Draggable Events" list
@@ -36,13 +43,7 @@ $('#calendar').fullCalendar({
 		}
 	},
 	eventLimit: true, // allow "more" link when too many events
-	events: [
-		{
-			title: 'Cita 1',
-			start: '2022-05-28T22:00:00Z',
-			className: eventColors[Math.floor(Math.random() * 7)]
-		},
-	]
+	events: calendarioParsed, // recupera el calendario del JSON
 });
 
 // Hide default header
@@ -53,62 +54,62 @@ $('#calendar').fullCalendar({
 
 
 // Previous month action
-$('#cal-prev').click(function(){
-	$('#calendar').fullCalendar( 'prev' );
+$('#cal-prev').click(function () {
+	$('#calendar').fullCalendar('prev');
 });
 
 // Next month action
-$('#cal-next').click(function(){
-	$('#calendar').fullCalendar( 'next' );
+$('#cal-next').click(function () {
+	$('#calendar').fullCalendar('next');
 });
 
 // Change to month view
-$('#change-view-month').click(function(){
+$('#change-view-month').click(function () {
 	$('#calendar').fullCalendar('changeView', 'month');
 
 	// safari fix
-	$('#content .main').fadeOut(0, function() {
-		setTimeout( function() {
-			$('#content .main').css({'display':'table'});
+	$('#content .main').fadeOut(0, function () {
+		setTimeout(function () {
+			$('#content .main').css({ 'display': 'table' });
 		}, 0);
 	});
 
 });
 
 // Change to week view
-$('#change-view-week').click(function(){
-	$('#calendar').fullCalendar( 'changeView', 'agendaWeek');
+$('#change-view-week').click(function () {
+	$('#calendar').fullCalendar('changeView', 'agendaWeek');
 
 	// safari fix
-	$('#content .main').fadeOut(0, function() {
-		setTimeout( function() {
-			$('#content .main').css({'display':'table'});
+	$('#content .main').fadeOut(0, function () {
+		setTimeout(function () {
+			$('#content .main').css({ 'display': 'table' });
 		}, 0);
 	});
 
 });
 
 // Change to day view
-$('#change-view-day').click(function(){
-	$('#calendar').fullCalendar( 'changeView','agendaDay');
+$('#change-view-day').click(function () {
+	$('#calendar').fullCalendar('changeView', 'agendaDay');
 
 	// safari fix
-	$('#content .main').fadeOut(0, function() {
-		setTimeout( function() {
-			$('#content .main').css({'display':'table'});
+	$('#content .main').fadeOut(0, function () {
+		setTimeout(function () {
+			$('#content .main').css({ 'display': 'table' });
 		}, 0);
 	});
 
 });
 
 // Change to today view
-$('#change-view-today').click(function(){
+$('#change-view-today').click(function () {
 	$('#calendar').fullCalendar('today');
 });
 
 /* initialize the external events
  -----------------------------------------------------------------*/
-$('#external-events .event-control').each(function() {
+$('#external-events .event-control').each(function () {
 
 	// store data so the calendar knows to render an event upon drop
 	$(this).data('event', {
@@ -125,20 +126,20 @@ $('#external-events .event-control').each(function() {
 
 });
 
-$('#external-events .event-control .event-remove').on('click', function(){
+$('#external-events .event-control .event-remove').on('click', function () {
 	$(this).parent().remove();
 });
 
 // Submitting new event form
-$('#add-event').submit(function(e){
+$('#add-event').submit(function (e) {
 	e.preventDefault();
 	var form = $(this);
 
-	var newEvent = $('<div class="event-control p-10 mb-10">'+$('#event-title').val() +'<a class="pull-right text-muted event-remove"><i class="fa fa-trash-o"></i></a></div>');
+	var newEvent = $('<div class="event-control p-10 mb-10">' + $('#event-title').val() + '<a class="pull-right text-muted event-remove"><i class="fa fa-trash-o"></i></a></div>');
 
 	$('#external-events .event-control:last').after(newEvent);
 
-	$('#external-events .event-control').each(function() {
+	$('#external-events .event-control').each(function () {
 
 		// store data so the calendar knows to render an event upon drop
 		$(this).data('event', {
@@ -155,7 +156,7 @@ $('#add-event').submit(function(e){
 
 	});
 
-	$('#external-events .event-control .event-remove').on('click', function(){
+	$('#external-events .event-control .event-remove').on('click', function () {
 		$(this).parent().remove();
 	});
 

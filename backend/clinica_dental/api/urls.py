@@ -32,7 +32,7 @@ urlpatterns = [
     path('pacientes/<str:usuario>/', PacientesDetailApiView.as_view()),
 
     path ('medicos/',MedicosListApiView.as_view()),
-    path('medicos/<int:id_medico>/',MedicosDetailApiView.as_view()),
+    path('medicos/<str:usuario>/',MedicosDetailApiView.as_view()),
     path('medicos_especialidades/',MedicosEspecialidadesListApiView.as_view()),
     path ('especialidades/',EspecialidadesListApiView.as_view()),
     

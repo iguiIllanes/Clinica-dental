@@ -141,14 +141,14 @@ class MedicosListApiView(APIView):
 
 class MedicosDetailApiView(APIView):
 
-    def get_object(self, id_medico):
+    def get_object(self, usuario):
         try:
-            return Medico.objects.get(id_persona=id_medico)
+            return Medico.objects.get(usuario = usuario)
         except Medico.DoesNotExist:
             return None
 
-    def get(self, request, id_medico, *args, **kwargs):
-        medico_instance = self.get_object(id_medico)
+    def get(self, request, usuario, *args, **kwargs):
+        medico_instance = self.get_object(usuario)
         if not medico_instance:
             return Response(
                 {"res": "Object with that id does not exists"},

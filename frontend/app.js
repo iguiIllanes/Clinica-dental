@@ -103,7 +103,7 @@ app.get('/doctor-panel-de-control', function(req,res){
             const apellido = usuario.id_persona.apellido;
 
             res.render('paciente-menu',{ // pasamos los datos de paciente a paciente-menu
-                nombre: nombre,
+                nombre: "Dr. "+nombre,
                 apellido: apellido,
             });
         }else{
@@ -145,12 +145,12 @@ app.post('/auth', async (req, res) => { // para iniciar sesion
     connection.execSql(sqlRequest);
 })
 
-app.get('/infodoctores', function(req, res){
+app.get('/info-doctores', function(req, res){
     res.render('doctors');
 });
 
 
-app.get('/historialPaciente', function(req, res){
+app.get('/historial-paciente', function(req, res){
     res.render('patient-profile');
 });
 

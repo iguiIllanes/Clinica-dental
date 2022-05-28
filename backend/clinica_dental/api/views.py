@@ -329,3 +329,75 @@ class MedicosEspecialidadesDetailApiView(APIView):
             status=status.HTTP_200_OK
         )
 
+class  CitasListApiView(APIView):
+    def get(self, request, *args, **kwargs):
+        citas = Cita.objects.all()
+        serializer = CitaSerializer(citas, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request, *args, **kwargs):
+        data = {
+            'id_paciente': request.data.get('id_paciente'),
+            'id_doctor': request.data.get('id_doctor'),
+            'fecha_reserva': request.data.get('fecha_reserva'),
+            'fecha_consulta': request.data.get('fecha_consulta'),
+        }
+        serializer = CitaSerializer(data=data)
+        if serializer.is_valid():
+             serializer.save()
+             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class CitasDetailApiView(APIView):
+
+    def get_object(self, id_cita):
+        try:
+            return Cita.objects.get(id_cita=id_cita)
+        except Cita.DoesNotExist:
+            return None
+
+    def get(self, request, id_cita, *args, **kwargs):
+        cita_instance = self.get_object(id_cita)
+        if not cita_instance:
+            return Response(
+                {"res": "Object with that id does not exists"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        serializer = CitaSerializer(cita_instance)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+    def put(self, request,id_cita, *args, **kwargs):
+        cita_instance = self.get_object(id_cita)
+        if not cita_instance:
+            return Response(
+                {"res": "Object with that id does not exists"}, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        data = {
+            'id_paciente': request.data.get('id_paciente'),
+            'id_doctor': request.data.get('id_doctor'),
+            'fecha_reserva': request.data.get('fecha_reserva'),
+            'fecha_consulta': request.data.get('fecha_consulta'),
+        }
+        serializer = CitaSerializer(instance = cita_instance, data=data, partial = True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, id_cita, *args, **kwargs):
+
+        cita_instance = self.get_object(id_cita)
+        if not cita_instance:
+            return Response(
+                {"res": "Object with that id does not exists"}, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        cita_instance.delete()
+        return Response(
+            {"res": "Object deleted!"},
+            status=status.HTTP_200_OK
+        )
+

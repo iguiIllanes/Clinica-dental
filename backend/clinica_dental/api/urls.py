@@ -19,31 +19,35 @@ from .views import (
 
     MedicosEspecialidadesListApiView,
     MedicosEspecialidadesDetailApiView,
+
+    CitasListApiView,
+    CitasDetailApiView,
 )
 
 router = routers.DefaultRouter()
 
 urlpatterns = [
     
-    path('', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path ('', include(router.urls)),
+    path ('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
-    path('personas/', PersonasListApiView.as_view()),
-    path('personas/<int:persona_id>/', PersonasDetailApiView.as_view()),
+    path ('personas/', PersonasListApiView.as_view()),
+    path ('personas/<int:persona_id>/', PersonasDetailApiView.as_view()),
 
-    path('pacientes/', PacientesListApiView.as_view()),
-    path('pacientes/<str:usuario>/', PacientesDetailApiView.as_view()),
+    path ('pacientes/', PacientesListApiView.as_view()),
+    path ('pacientes/<str:usuario>/', PacientesDetailApiView.as_view()),
 
     path ('medicos/',MedicosListApiView.as_view()),
-    path('medicos/<int:id_medico>/',MedicosDetailApiView.as_view()),
+    path ('medicos/<int:id_medico>/',MedicosDetailApiView.as_view()),
 
-    path('medicos_especialidades/',MedicosEspecialidadesListApiView.as_view()),
-    path('medicos_especialidades/<int:id_med_esp>/',MedicosEspecialidadesDetailApiView.as_view()),
+    path ('medicos_especialidades/',MedicosEspecialidadesListApiView.as_view()),
+    path ('medicos_especialidades/<int:id_med_esp>/',MedicosEspecialidadesDetailApiView.as_view()),
 
     path ('especialidades/',EspecialidadesListApiView.as_view()),
     path ('especialidades/<int:id_especialidad>/',EspecialidadesDetailApiView.as_view()),
+
+    path ('citas/',CitasListApiView.as_view()),
+    path ('citas/<int:id_cita>/',CitasDetailApiView.as_view()),
     
-
-
 
 ]

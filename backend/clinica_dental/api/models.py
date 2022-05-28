@@ -37,7 +37,7 @@ class Paciente(models.Model):
 
 class Medico(models.Model):
     id_persona = models.OneToOneField(Persona, primary_key=True, on_delete=models.CASCADE)
-    fecha_contrato = models.DateTimeField()
+    fecha_contrato = models.DateField()
     usuario = models.CharField(max_length=255,unique=True)
     password = models.CharField(max_length=255)
     contratado = models.BooleanField()
@@ -54,7 +54,7 @@ class Especialidad(models.Model):
 class MedicoEspecialidad(models.Model):
     id_med_esp = models.AutoField(primary_key=True)
     id_especialidad = models.ForeignKey(Especialidad, on_delete=models.CASCADE)
-    fecha_titulo = models.DateTimeField()
+    fecha_titulo = models.DateField()
     medico_id_persona = models.ForeignKey(Medico, on_delete=models.CASCADE)
     def __str__(self):
         return self.id_med_esp
@@ -69,8 +69,8 @@ class Medicina(models.Model):
 
 class Cita(models.Model):
     id_cita = models.AutoField(primary_key=True)
-    id_paciente = foreing_key=True
-    id_doctor = foreign_key=True
+    id_paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
+    id_doctor = models.ForeignKey(Medico, on_delete=models.CASCADE)
     fecha_reserva = models.DateField()
     fecha_consulta = models.DateTimeField()
     def str(self) -> str:
@@ -80,7 +80,7 @@ class Tarjeta(models.Model):
     id_tarjeta = models.AutoField(primary_key=True)
     fecha_caducidad = models.DateField()
     cvc = models.IntegerField()
-    id_paciente = foreing_key=True
+    id_paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
     def str(self) -> str:
         return self.id_tarjeta
 

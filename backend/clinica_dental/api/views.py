@@ -102,9 +102,9 @@ class PacientesListApiView(APIView):
 class PacientesDetailApiView(APIView):
     def get_paciente(self, usuario):
         try:
-            return Paciente.objects.get(usuario = usuario);
+            return Paciente.objects.get(usuario = usuario)
         except Paciente.DoesNotExist:
-            return None;
+            return None
     
     def get(self, request, usuario, *args, **kwargs):
         paciente_instance = self.get_paciente(usuario)
@@ -209,6 +209,56 @@ class EspecialidadesListApiView(APIView):
              return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class EspecialidadesDetailApiView(APIView):
+
+    def get_object(self, id_especialidad):
+        try:
+            return Especialidad.objects.get(id_especialidad=id_especialidad)
+        except Especialidad.DoesNotExist:
+            return None
+
+    def get(self, request, id_especialidad, *args, **kwargs):
+        especialidad_instance = self.get_object(id_especialidad)
+        if not especialidad_instance:
+            return Response(
+                {"res": "Object with that id does not exists"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        serializer = EspecialidadSerializer(especialidad_instance)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+    def put(self, request,id_especialidad, *args, **kwargs):
+        especialidad_instance = self.get_object(id_especialidad)
+        if not especialidad_instance:
+            return Response(
+                {"res": "Object with that id does not exists"}, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        data = {
+            'especialidad': request.data.get('especialidad'), 
+        }
+        serializer = EspecialidadSerializer(instance = especialidad_instance, data=data, partial = True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, id_especialidad, *args, **kwargs):
+
+        especialidad_instance = self.get_object(id_especialidad)
+        if not especialidad_instance:
+            return Response(
+                {"res": "Object with that id does not exists"}, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        especialidad_instance.delete()
+        return Response(
+            {"res": "Object deleted!"},
+            status=status.HTTP_200_OK
+        )
+
 class  MedicosEspecialidadesListApiView(APIView):
     def get(self, request, *args, **kwargs):
         medicos_especialidades = MedicoEspecialidad.objects.all()
@@ -227,4 +277,55 @@ class  MedicosEspecialidadesListApiView(APIView):
              return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class MedicosEspecialidadesDetailApiView(APIView):
+
+    def get_object(self, id_med_esp):
+        try:
+            return MedicoEspecialidad.objects.get(id_med_esp=id_med_esp)
+        except MedicoEspecialidad.DoesNotExist:
+            return None
+
+    def get(self, request, id_med_esp, *args, **kwargs):
+        medico_especialidad_instance = self.get_object(id_med_esp)
+        if not medico_especialidad_instance:
+            return Response(
+                {"res": "Object with that id does not exists"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        serializer = MedicoEspecialidadSerializer(medico_especialidad_instance)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+    def put(self, request,id_med_esp, *args, **kwargs):
+        medico_especialidad_instance = self.get_object(id_med_esp)
+        if not medico_especialidad_instance:
+            return Response(
+                {"res": "Object with that id does not exists"}, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        data = {
+            'id_especialidad': request.data.get('id_especialidad'),
+            'fecha_titulo': request.data.get('fecha_titulo'),
+            'medico_id_persona': request.data.get('medico_id_persona'),
+        }
+        serializer = MedicoEspecialidadSerializer(instance = medico_especialidad_instance, data=data, partial = True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, id_med_esp, *args, **kwargs):
+
+        medico_especialidad_instance = self.get_object(id_med_esp)
+        if not medico_especialidad_instance:
+            return Response(
+                {"res": "Object with that id does not exists"}, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        medico_especialidad_instance.delete()
+        return Response(
+            {"res": "Object deleted!"},
+            status=status.HTTP_200_OK
+        )
 

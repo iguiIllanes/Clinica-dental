@@ -77,12 +77,12 @@ app.get('/', function(req, res) {
 
 // panel de control paciente
 app.get('/paciente-panel-de-control', function(req, res) {
-    // aqui empezamos con el consumo de la api en api/pacientes/
+    // aqui empezamos con el consumo de la api en /api/pacientes/
     apiRequest("http://127.0.0.1:8000/api/pacientes/"+req.session.username, (err, response, body) => {
         if(!err){
-            const paciente = JSON.parse(body); // asignamos el JSON a paciente
-            const nombre = paciente.id_persona.nombre; // accedemos al contenido de paciente
-            const apellido = paciente.id_persona.apellido;
+            const usuario = JSON.parse(body); // asignamos el JSON a paciente
+            const nombre = usuario.id_persona.nombre; // accedemos al contenido de paciente
+            const apellido = usuario.id_persona.apellido;
 
             res.render('paciente-menu',{ // pasamos los datos de paciente a paciente-menu
                 nombre: nombre,
@@ -95,7 +95,21 @@ app.get('/paciente-panel-de-control', function(req, res) {
 });
 
 app.get('/doctor-panel-de-control', function(req,res){
-    
+    // aqui empezamos con el consumo de la api en /api/pacientes/
+    apiRequest("http://127.0.0.1:8000/api/medicos/"+req.session.username, (err, response, body) => {
+        if(!err){
+            const usuario = JSON.parse(body); // asignamos el JSON a paciente
+            const nombre = usuario.id_persona.nombre; // accedemos al contenido de paciente
+            const apellido = usuario.id_persona.apellido;
+
+            res.render('paciente-menu',{ // pasamos los datos de paciente a paciente-menu
+                nombre: "Dr. "+nombre,
+                apellido: apellido,
+            });
+        }else{
+            res.send("Algo ocurrio con la conexion al API. Intenta mas tarde.")
+        }
+    })
 });
 
 // inciar sesion paciente
@@ -116,7 +130,8 @@ app.get('/doctor-iniciar-sesion', function(req, res){
 app.post('/auth', async (req, res) => { // para iniciar sesion
     username  = req.body.username
     password = req.body.password
-    const query = "SELECT usuario, password FROM api_paciente WHERE usuario = '" + username + "' AND password = '" + password + "'";
+
+    const query = "SELECT usuario, password FROM "+ (req.session.isDoctor ? "api_medico" : "api_paciente") + " WHERE usuario = '" + username + "' AND password = '" + password + "'";
 
     sqlRequest = new Request(query, function(err, rowCount){
         if(err){ // si falla algo
@@ -126,19 +141,19 @@ app.post('/auth', async (req, res) => { // para iniciar sesion
         }else if(rowCount > 0){ // si el query es correcto
             req.session.loggedIn = true;
             req.session.username = username;
-            res.redirect('/paciente-panel-de-control');
+            res.redirect(req.session.isDoctor ? '/doctor-panel-de-control' : '/paciente-panel-de-control');
         }
     });
 
     connection.execSql(sqlRequest);
 })
 
-app.get('/infodoctores', function(req, res){
+app.get('/info-doctores', function(req, res){
     res.render('doctors');
 });
 
 
-app.get('/historialPaciente', function(req, res){
+app.get('/historial-paciente', function(req, res){
     res.render('patient-profile');
 });
 

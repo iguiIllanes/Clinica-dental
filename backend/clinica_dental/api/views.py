@@ -421,3 +421,24 @@ class MedicoCitasApiView(APIView):
 
         serializer = CitaSerializer(cita_instance, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+class CitasPorMedicoApiView(APIView):
+    def get_citas(self, id_doctor):
+        try:
+            return Cita.objects.get(id_doctor = id_doctor)
+        except Cita.DoesNotExist:
+            return None
+
+    def get(self, request, id_doctor, *args, **kwargs):
+        citas_instance = self.get_citas(id_doctor)
+        if not citas_instance:
+            return Response(
+                {"res": "Object with that id does not exists"}, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
+ 
+
+        citas_serializer = CitaSerializer(citas_instance, many=True)
+        return Response(citas_serializer.data, status=status.HTTP_200_OK)
+
+

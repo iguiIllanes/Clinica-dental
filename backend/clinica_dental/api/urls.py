@@ -23,6 +23,7 @@ from .views import (
     CitasListApiView,
     CitasDetailApiView,
     MedicoCitasApiView
+  #  CitasPorMedicoApiView,
 )
 
 router = routers.DefaultRouter()
@@ -52,4 +53,5 @@ urlpatterns = [
 
     path ('citas/medico/<int:id_medico>/',MedicoCitasApiView.as_view()),
     
+   # path ('citas/medico/<int:id_doctor>/', CitasPorMedicoApiView.as_view()),
 ]

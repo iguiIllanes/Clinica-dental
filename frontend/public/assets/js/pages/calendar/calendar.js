@@ -1,3 +1,8 @@
+const fecha = new Date(); // para la fecha
+
+const apiRequest = new request();
+
+
 "use strict";
 $('#calendar').fullCalendar({
 	header: {
@@ -5,7 +10,7 @@ $('#calendar').fullCalendar({
 		center: 'title',
 		right: 'next'
 	},
-	defaultDate: '2015-02-12',
+	defaultDate: `${fecha.getFullYear()}-${fecha.getMonth()+1}-${fecha.getDate()}`, //obtiene la fecha actual
 	editable: true,
 	droppable: true, // this allows things to be dropped onto the calendar
 	drop: function() {
@@ -17,77 +22,19 @@ $('#calendar').fullCalendar({
 	},
 	eventLimit: true, // allow "more" link when too many events
 	events: [
+		
 		{
-			title: 'All Day Event',
-			start: '2015-02-01',
+			title: 'Cita 1',
+			start: '2022-05-27T22:00:00Z',
 			className: 'b-l b-2x b-greensea'
 		},
-		{
-			title: 'Long Event',
-			start: '2015-02-07',
-			end: '2015-02-10',
-			className: 'bg-cyan'
-		},
-		{
-			id: 999,
-			title: 'Repeating Event',
-			start: '2015-02-09T16:00:00',
-			className: 'b-l b-2x b-lightred'
-		},
-		{
-			id: 999,
-			title: 'Repeating Event',
-			start: '2015-02-16T16:00:00',
-			className: 'b-l b-2x b-success'
-		},
-		{
-			title: 'Conference',
-			start: '2015-02-11',
-			end: '2015-02-13',
-			className: 'b-l b-2x b-primary'
-		},
-		{
-			title: 'Meeting',
-			start: '2015-02-12T10:30:00',
-			end: '2015-02-12T12:30:00',
-			className: 'b-l b-2x b-amethyst'
-		},
-		{
-			title: 'Lunch',
-			start: '2015-02-12T12:00:00',
-			className: 'b-l b-2x b-primary'
-		},
-		{
-			title: 'Meeting',
-			start: '2015-02-12T14:30:00',
-			className: 'b-l b-2x b-drank'
-		},
-		{
-			title: 'Happy Hour',
-			start: '2015-02-12T17:30:00',
-			className: 'b-l b-2x b-lightred'
-		},
-		{
-			title: 'Dinner',
-			start: '2015-02-12T20:00:00',
-			className: 'b-l b-2x b-amethyst'
-		},
-		{
-			title: 'Birthday Party',
-			start: '2015-02-13T07:00:00',
-			className: 'b-l b-2x b-primary'
-		},
-		{
-			title: 'Click for Google',
-			url: 'http://google.com/',
-			start: '2015-02-28',
-			className: 'b-l b-2x b-greensea'
-		}
 	]
 });
 
 // Hide default header
 //$('.fc-header').hide();
+
+
 
 
 

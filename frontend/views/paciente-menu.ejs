@@ -150,7 +150,9 @@
             <div class="user-info">
                 <div class="admin-image"> <img src="assets/images/random-avatar7.jpg" alt=""> </div>
                 <div class="admin-action-info"> <span>Bienvenido/a</span>
-                    <h3><%= nombre %></h3>
+                    <h3>
+                        <%= nombre %>
+                    </h3>
                     <ul>
 
                         <li><a data-placement="bottom" title="Go to Profile" href="profile.html"><i
@@ -308,9 +310,11 @@
                     <div class="card m-t-20">
                         <div class="body">
                             <button class="btn btn-raised btn-success btn-sm m-r-0 m-t-0"
-                                id="change-view-today">Hoy</button>
+                                id="change-view-day">Hoy</button>
                             <button class="btn btn-raised btn-default btn-sm m-r-0 m-t-0"
-                                id="change-view-day">Día</button>
+                                id="change-view-week">Esta Semana</button>
+                            <button class="btn btn-raised btn-default btn-sm m-r-0 m-t-0"
+                                id="change-view-month">Este Mes</button>
 
                             <div id="calendar"></div>
                         </div>

@@ -425,7 +425,7 @@ class MedicoCitasApiView(APIView):
 class CitasPorMedicoApiView(APIView):
     def get_citas(self, id_doctor):
         try:
-            return Cita.objects.get(id_doctor = id_doctor)
+            return Cita.objects.filter(id_doctor = id_doctor)
         except Cita.DoesNotExist:
             return None
 

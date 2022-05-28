@@ -54,6 +54,6 @@ class CitaSerializer(serializers.ModelSerializer):
         fields = ('id_cita', 'id_paciente', 'id_doctor', 'fecha_reserva', 'fecha_consulta')
     def to_representation(self, instance):
         response = super().to_representation(instance)
-        response['id_paciente'] = PacienteSerializer(instance.id_paciente).data
-        response['id_doctor'] = MedicoSerializer(instance.id_doctor).data
+        response['id_paciente'] = PacienteSerializer(instance.id_paciente).data['id_persona']
+        response['id_doctor'] = MedicoSerializer(instance.id_doctor).data['id_persona']
         return response  

@@ -1,7 +1,22 @@
 const fecha = new Date(); // para la fecha
 
-const apiRequest = new request();
+// const id_doctor = sessionStorage.getItem("id_doctor"); // recupera la variable de sesion de app.js
 
+// let apiResponse = await fetch("http:/127.0.0.1:8000/api/citas/medico")
+
+// alert("OE, tu id es: " + id_doctor);
+
+
+
+const eventColors = [
+	'b-l b-2x b-greensea',
+	'bg-cyan',
+	'b-l b-2x b-lightred',
+	'b-l b-2x b-success',
+	'b-l b-2x b-primary',
+	'b-l b-2x b-amethyst',
+	'b-l b-2x b-drank'
+];
 
 "use strict";
 $('#calendar').fullCalendar({
@@ -22,11 +37,10 @@ $('#calendar').fullCalendar({
 	},
 	eventLimit: true, // allow "more" link when too many events
 	events: [
-		
 		{
 			title: 'Cita 1',
-			start: '2022-05-27T22:00:00Z',
-			className: 'b-l b-2x b-greensea'
+			start: '2022-05-28T22:00:00Z',
+			className: eventColors[Math.floor(Math.random() * 7)]
 		},
 	]
 });

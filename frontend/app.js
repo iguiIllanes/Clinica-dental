@@ -101,6 +101,8 @@ app.get('/doctor-panel-de-control', function(req,res){
             const usuario = JSON.parse(body); // asignamos el JSON a paciente
             const nombre = usuario.id_persona.nombre; // accedemos al contenido de paciente
             const apellido = usuario.id_persona.apellido;
+            const id_doctor = usuario.id_persona;
+            // window.sessionStorage.setItem("id_doctor", usuario.id_persona.id_persona); // variable para el calendario del doctor
 
             res.render('paciente-menu',{ // pasamos los datos de paciente a paciente-menu
                 nombre: "Dr. "+nombre,

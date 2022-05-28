@@ -124,6 +124,9 @@ app.get('/doctor-iniciar-sesion', function(req, res){
     res.render('sign-in-doctor');
 });
 
+
+
+
 app.post('/auth', async (req, res) => { // para iniciar sesion
     username  = req.body.username
     password = req.body.password

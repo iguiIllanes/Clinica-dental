@@ -613,14 +613,15 @@
                 </li>
               </ul>
             </div>
-            <div class="body">
-              <!-- Formulario registro doctor -->
-              <form action="" method="POST">
+            <!-- formulario para registro de doctor -->
+
+            <form>
+              <div class="body">
                 <div class="row clearfix">
                   <div class="col-sm-6">
                     <div class="form-group">
                       <div class="form-line">
-                        <input type="text" class="form-control" placeholder="Nombres" />
+                        <input type="text" class="form-control" placeholder="Nombres" name="nombre" />
                       </div>
                     </div>
                   </div>
@@ -677,99 +678,75 @@
                   </div>
 
 
-                  <div class="col-md-12">
-                    <div class="card">
-                      <div class="header">
-                        <h2>
-                          Información de la cuenta<small>
-                          </small>
-                        </h2>
-                        <ul class="header-dropdown m-r--5">
-                          <li class="dropdown">
-                            <!-- <a
-                                href="javascript:void(0);"
-                                class="dropdown-toggle"
-                                data-toggle="dropdown"
-                                role="button"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                                ><i class="zmdi zmdi-more-vert"></i
-                              ></a>-->
-                            <ul class="dropdown-menu pull-right">
-                              <li>
-                                <a href="javascript:void(0);" class="waves-effect waves-block">Action</a>
-                              </li>
-                              <li>
-                                <a href="javascript:void(0);" class="waves-effect waves-block">Another action</a>
-                              </li>
-                              <li>
-                                <a href="javascript:void(0);" class="waves-effect waves-block">Something else here</a>
-                              </li>
-                            </ul>
-                          </li>
-                        </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <div class="form-line">
+                        <input type="text" class="form-control" placeholder="Usuario" />
                       </div>
-                      <div class="body">
-                        <div class="row clearfix">
-                          <div class="col-sm-12">
-                            <div class="form-group">
-                              <div class="form-line">
-                                <input type="text" class="form-control" placeholder="Usuario" />
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-sm-6">
-                            <div class="form-group">
-                              <div class="form-line">
-                                <input type="text" class="form-control" placeholder="Contraseña" />
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-sm-6">
-                            <div class="form-group">
-                              <div class="form-line">
-                                <input type="text" class="form-control" placeholder="Confirmar Contraseña" />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-              </form>
-            </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <div class="form-line">
+                        <input type="text" class="form-control" placeholder="Contraseña" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <div class="form-line">
+                        <input type="text" class="form-control" placeholder="Confirmar Contraseña" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- <div class="col-lg-12 col-md-12 col-sm-12">
+                  <div class="dz-message">
+                    <div class="drag-icon-cph">
+                      <i class="material-icons">touch_app</i>
+                    </div>
+                    <h3>
+                      Arrastre un archivo aquí o haga click para subirlo.
+                    </h3>
+                    <em><strong></strong></em>
+                  </div>
+                  <div class="fallback">
+                    <input name="file" type="file" multiple />
+                  </div>
+                </div> -->
+
+                <div class="col-sm-12">
+                  <button type="submit" class="btn btn-raised g-bg-cyan">
+                    Enviar
+                  </button>
+                  <a href="anadir-doctor" class="btn btn-raised">
+                    Cancelar
+                  </a>
+                </div>
+              </div>
+            </form>
+
+
+
           </div>
         </div>
-
-        <div class="col-lg-12 col-md-12 col-sm-12">
-          <form action="/" id="frmFileUpload" class="dropzone" method="post" enctype="multipart/form-data">
-            <div class="dz-message">
-              <div class="drag-icon-cph">
-                <i class="material-icons">touch_app</i>
-              </div>
-              <h3>
-                Arrastre un archivo aquí o haga click para subirlo.
-              </h3>
-              <em><strong></strong></em>
-            </div>
-            <div class="fallback">
-              <input name="file" type="file" multiple />
-            </div>
-          </form>
-        </div>
-        <div class="col-sm-12">
-          <div class="form-group"></div>
-        </div>
-
-        <div class="col-sm-12">
-          <button type="submit" class="btn btn-raised g-bg-cyan">
-            Enviar
-          </button>
-          <button type="submit" class="btn btn-raised">
-            Cancelar
-          </button>
-        </div>
       </div>
-    </div>
-    </div>
-    </div>
     </div>
 
     </div>

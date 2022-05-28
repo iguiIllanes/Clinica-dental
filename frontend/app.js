@@ -125,8 +125,6 @@ app.get('/doctor-iniciar-sesion', function(req, res){
 });
 
 
-
-
 app.post('/auth', async (req, res) => { // para iniciar sesion
     username  = req.body.username
     password = req.body.password
@@ -174,6 +172,15 @@ app.get('/medicoiniciarsesion', function(req, res){
 app.get('/pagos-paciente', function(req, res){
     res.render('patient-invoice');
 });
+
+
+
+//añadiendo app.get para add patient
+app.get('/anadir-paciente', function(req, res){
+    res.render('add-patient');
+});
+
+
 
 
 app.get('/agenda-doctor', function(req, res){

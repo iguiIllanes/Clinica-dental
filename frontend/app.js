@@ -211,5 +211,11 @@ app.get('/about', function(req, res) {
     res.render('pages/about');
 });
 
+// para cerrar sesion
+app.get('/cerrar-sesion', function(req, res){
+    req.session.destroy();
+    res.redirect('/');
+});
+
 app.listen(8080);
 console.log('8080 is the magic port');

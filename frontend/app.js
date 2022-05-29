@@ -186,7 +186,7 @@ app.get('/anadir-paciente', function(req, res){ // -> add-patient.ejs
     res.render('add-patient');
 });
 
-app.get('/agenda-doctor', function(req, res){ // -> doctor->schedule.ejs
+app.get('/agenda-doctor', function(req, res){ // -> doctor-schedule.ejs
     res.render('doctor-schedule');
 });
 

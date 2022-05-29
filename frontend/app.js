@@ -110,7 +110,7 @@ app.get('/doctor-panel-de-control', function(req,res){ // -> paciente-menu.ejs
                 const apellido = usuario.id_persona.apellido;
                 const id_doctor = usuario.id_persona.id_persona;
                 const cal = (await calendario.getCalendario(id_doctor)) == null ? "" : await calendario.getCalendario(id_doctor);
-                res.render('paciente-menu',{ // pasamos los datos de paciente a paciente-menu
+                res.render('doctor-schedule',{ // pasamos los datos de paciente a paciente-menu
                     nombre: "Dr. "+nombre,
                     apellido: apellido,
                     id_doctor: id_doctor,

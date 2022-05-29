@@ -499,13 +499,7 @@
                                     <input type="datetime-local" class="datepicker form-control" placeholder="Año de nacimiento">
                                 </div>
                             </div>
-                            <strong>Hora</strong>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="time" class="datepicker form-control" placeholder="Año de nacimiento">
-                                </div>
-                            </div>
-
+                            
                             <strong>Paciente</strong>
                             <br><br>
                             <select class="form-control show-tick">
@@ -533,7 +527,11 @@
                         id="change-view-week">Esta Semana</button>
                         <button class="btn btn-raised btn-default btn-sm m-r-0 m-t-0"
                         id="change-view-month">Este Mes</button>
-                        <div id="calendar"></div>
+                        <div id="calendar">
+                            <p id="calendar-data">
+                                <%= calendario %>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>

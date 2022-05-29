@@ -67,7 +67,7 @@ app.use(express.static('public'));
 
 app.get('/', function(req, res) {
     if(req.session.loggedIn) { // para verificar si se inicio sesion
-        if(req.sesion.isDoctor){ // para verificar si es doctor //TODO VER LA VARIABLE DE sesion de doctor en login doctor
+        if(req.session.isDoctor){ // para verificar si es doctor //TODO VER LA VARIABLE DE sesion de doctor en login doctor
             res.redirect('/doctor-panel-de-control');
         }else{
             res.redirect('/paciente-panel-de-control');

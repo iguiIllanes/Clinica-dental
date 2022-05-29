@@ -75,12 +75,7 @@
 <!-- #Float icon -->
 <!-- Morphing Search  -->
 <div id="morphsearch" class="morphsearch">
-    <form class="morphsearch-form">
-        <div class="form-group m-0">
-            <input value="" type="search" placeholder="Explore Swift..." class="form-control morphsearch-input" />
-            <button class="morphsearch-submit" type="submit">Buscar</button>
-        </div>
-    </form>
+    
     <div class="morphsearch-content">
         <div class="dummy-column">
             <h2>People</h2>
@@ -240,19 +235,16 @@
             <div class="admin-action-info"> <span>Bienvenido</span>
                 <h3>Dr. John</h3>
                 <ul>
-                    
-                    <li><a data-placement="bottom" title="Go to Profile" href="profile.html"><i class="zmdi zmdi-account"></i></a></li>                    
-                    <li><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="zmdi zmdi-settings"></i></a></li>
                     <li><a data-placement="bottom" title="Full Screen" href="sign-in.html" ><i class="zmdi zmdi-sign-in"></i></a></li>
                 </ul>
             </div>
             <div class="quick-stats">
-                <h5>Reporte del día</h5>
+               <!-- <h5>Reporte del día</h5>
                 <ul>
                     <li><span>16<i>Paciente</i></span></li>
                     <li><span>20<i>Pendientes</i></span></li>
                     <li><span>04<i>Visitas</i></span></li>
-                </ul>
+                </ul>-->
             </div>
         </div>
         <!-- #User Info --> 
@@ -348,7 +340,6 @@
             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#settings">Setting</a></li> -->
         </ul>
         <div class="tab-content">
-            <!--
             <div role="tabpanel" class="tab-pane in active in active" id="skins">
                 <ul class="demo-choose-skin">
                     <li data-theme="red">
@@ -380,7 +371,7 @@
                         <span>Blush</span> </li>
                 </ul>
             </div>
-            <div role="tabpanel" class="tab-pane" id="chat">
+             <!--<div role="tabpanel" class="tab-pane" id="chat">
                 <div class="demo-settings">
                     <div class="search">
                         <div class="input-group">
@@ -439,7 +430,7 @@
                         </li>
                     </ul>
                 </div>
-            </div>-->
+            </div>
             <div role="tabpanel" class="tab-pane" id="settings">
                 <div class="demo-settings">
                     <p>GENERAL SETTINGS</p>
@@ -494,7 +485,7 @@
                         </li>
                     </ul>
                 </div>
-            </div>
+            </div>-->
         </div>
     </aside>
     <!-- #END# Right Sidebar --> 
@@ -504,23 +495,11 @@
     <div class="container-fluid">
         <div class="block-header">
             <h2>Añadir paciente</h2>
-            <small class="text-muted">Binevenido a Odontología especializada</small>
+            <small class="text-muted">Bienvenido a Odontología especializada</small>
         </div>
         <div class="row clearfix">
 			<div class="col-lg-12 col-md-12 col-sm-12">
-				<div class="card">
-					<div class="header">
-						<h2>Información del paciente</h2>
-						<ul class="header-dropdown m-r--5">
-							<li class="dropdown"> <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="zmdi zmdi-more-vert"></i></a>
-								<ul class="dropdown-menu pull-right">
-									<li><a href="javascript:void(0);" class=" waves-effect waves-block">Action</a></li>
-									<li><a href="javascript:void(0);" class=" waves-effect waves-block">Another action</a></li>
-									<li><a href="javascript:void(0);" class=" waves-effect waves-block">Something else here</a></li>
-								</ul>
-							</li>
-						</ul>
-					</div>
+				<form>
 					<div class="body">
                         <div class="row clearfix">
                             <div class="col-lg-4 col-sm-12">
@@ -537,6 +516,15 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                  <div class="form-line">
+                                    <input type="text" class="form-control" placeholder="C.I." />
+                                  </div>
+                                </div>
+                            </div>                            
+
                             <div class="col-lg-4 col-sm-12">
                                 <div class="form-group">
                                     <div class="form-line">
@@ -544,8 +532,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row clearfix">                            
+
+
                             <div class="col-lg-3 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <div class="form-line">
@@ -553,6 +541,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-lg-3 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <div class="form-line">
@@ -560,13 +549,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" placeholder="Enfermedades de base">
-                                    </div>
-                                </div>
-                            </div>                            
+                        </div>
+                        <div class="row clearfix">                            
+                            
                             <div class="col-lg-3 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <div class="form-line">
@@ -574,36 +559,67 @@
                                     </div>
                                 </div>
                             </div>
+                            
+                            <div class="col-lg-5 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" placeholder="Enfermedades de base">
+                                    </div>
+                                </div>
+                            </div>                            
+                            
+
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" placeholder="Alergias">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" placeholder="Usuario">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" placeholder="Contraseña">
+                                    </div>
+                                </div>
+                            </div> 
+                            <div class="col-lg-6 col-md-6 col-sm-12">                               
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" class="datetimepicker form-control" placeholder="Confirmar contraseña">
+                                    </div>
+                                </div>                               
+                            </div>
+
+
+
                         </div>
+
+
+                        <button type="submit" class="btn btn-raised g-bg-cyan">Enviar</button>
+                        <a href="anadir-paciente" class="btn btn-raised">
+                            Cancelar
+                        </a>
+                        
+
+
+                        <!-- El arrastrar imagen
                         <div class="row clearfix">
                             <div class="col-md-12">
                                 <div class="card">
-                                    <div class="header">
-                                        <h2>Información de la cuenta <small>Usuario y contraseña</small> </h2>						
-                                    </div>
+                                   <form></form> 
                                     <div class="body">
                                         <div class="row clearfix">
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <div class="form-group">
-                                                    <div class="form-line">
-                                                        <input type="text" class="form-control" placeholder="Nombre del paciente">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <div class="form-group">
-                                                    <div class="form-line">
-                                                        <input type="text" class="form-control" placeholder="Contraseña">
-                                                    </div>
-                                                </div>
-                                            </div> 
-                                            <div class="col-lg-6 col-md-6 col-sm-12">                               
-                                                <div class="form-group">
-                                                    <div class="form-line">
-                                                        <input type="text" class="datetimepicker form-control" placeholder="Confirmar contraseña">
-                                                    </div>
-                                                </div>                               
-                                            </div>
+                                            
                                             <div class="col-sm-12">
                                                 <div class="row clearfix">
                                                     <div class="col-lg-12 col-md-12 col-sm-12">
@@ -618,15 +634,18 @@
                                                         </form>
                                                     </div>
                                                 </div>
-                                                <button type="submit" class="btn btn-raised g-bg-cyan">Enviar</button>
-                                                <button type="submit" class="btn btn-raised">Cancelar</button>
+                                                <br>
+                                                
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>        
+                        </div>   -->     
                     </div>
+                </form>
+
+                
 				</div>
 			</div>
 		</div> 

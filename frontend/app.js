@@ -65,9 +65,9 @@ app.set('view engine', 'ejs');
 // para los estilos
 app.use(express.static('public'));
 
-app.get('/', function(req, res) {
+app.get('/', function(req, res) { // -> paneles de control
     if(req.session.loggedIn) { // para verificar si se inicio sesion
-        if(req.sesion.isDoctor){ // para verificar si es doctor //TODO VER LA VARIABLE DE sesion de doctor en login doctor
+        if(req.session.isDoctor){ // para verificar si es doctor //TODO VER LA VARIABLE DE sesion de doctor en login doctor
             res.redirect('/doctor-panel-de-control');
         }else{
             res.redirect('/paciente-panel-de-control');
@@ -78,53 +78,62 @@ app.get('/', function(req, res) {
 });
 
 // panel de control paciente
-app.get('/paciente-panel-de-control', function(req, res) {
+app.get('/paciente-panel-de-control', function(req, res) { // -> paciente-menu.ejs
+    if(req.session.loggedIn) { // comprueba si ya hay una sesion iniciada
+        apiRequest("http://127.0.0.1:8000/api/pacientes/"+req.session.username, (err, response, body) => {
+            if(!err){
+                const usuario = JSON.parse(body); // asignamos el JSON a paciente
+                const nombre = usuario.id_persona.nombre; // accedemos al contenido de paciente
+                const apellido = usuario.id_persona.apellido;
+    
+                res.render('paciente-menu',{ // pasamos los datos de paciente a paciente-menu
+                    nombre: nombre,
+                    apellido: apellido,
+                });
+            }else{
+                res.send("Algo ocurrio con la conexion al API. Intenta mas tarde.")
+            }
+        });
+    }else{
+        res.redirect('/paciente-iniciar-sesion');
+    }
     // aqui empezamos con el consumo de la api en /api/pacientes/
-    apiRequest("http://127.0.0.1:8000/api/pacientes/"+req.session.username, (err, response, body) => {
-        if(!err){
-            const usuario = JSON.parse(body); // asignamos el JSON a paciente
-            const nombre = usuario.id_persona.nombre; // accedemos al contenido de paciente
-            const apellido = usuario.id_persona.apellido;
-
-            res.render('paciente-menu',{ // pasamos los datos de paciente a paciente-menu
-                nombre: nombre,
-                apellido: apellido,
-            });
-        }else{
-            res.send("Algo ocurrio con la conexion al API. Intenta mas tarde.")
-        }
-    })
 });
 
-app.get('/doctor-panel-de-control', function(req,res){
-    // aqui empezamos con el consumo de la api en /api/pacientes/
-    apiRequest("http://127.0.0.1:8000/api/medicos/"+req.session.username, async (err, response, body) => {
-        if(!err){
-            const usuario = JSON.parse(body); // asignamos el JSON a paciente
-            const nombre = usuario.id_persona.nombre; // accedemos al contenido de paciente
-            const apellido = usuario.id_persona.apellido;
-            const id_doctor = usuario.id_persona.id_persona;
-            const cal = await calendario.getCalendario(id_doctor);
-            res.render('paciente-menu',{ // pasamos los datos de paciente a paciente-menu
-                nombre: "Dr. "+nombre,
-                apellido: apellido,
-                id_doctor: id_doctor,
-                calendario: cal,
-            });
-        }else{
-            res.send("Algo ocurrio con la conexion al API. Intenta mas tarde.")
-        }
-    })
+app.get('/doctor-panel-de-control', function(req,res){ // -> paciente-menu.ejs
+    if(req.session.loggedIn){ // comprueba si la sesion ya fue iniciada
+        // aqui empezamos con el consumo de la api en /api/medicos/
+        apiRequest("http://127.0.0.1:8000/api/medicos/"+req.session.username, async (err, response, body) => {
+            if(!err){
+                const usuario = JSON.parse(body); // asignamos el JSON a paciente
+                const nombre = usuario.id_persona.nombre; // accedemos al contenido de paciente
+                const apellido = usuario.id_persona.apellido;
+                const id_doctor = usuario.id_persona.id_persona;
+                const cal = (await calendario.getCalendario(id_doctor)) == null ? "" : await calendario.getCalendario(id_doctor);
+                res.render('doctor-schedule',{ // pasamos los datos de paciente a paciente-menu
+                    nombre: "Dr. "+nombre,
+                    apellido: apellido,
+                    id_doctor: id_doctor,
+                    calendario: cal,
+                });
+            }else{
+                res.send("Algo ocurrio con la conexion al API. Intenta mas tarde.")
+            }
+        })
+    }else{
+        res.redirect('/doctor-iniciar-sesion');
+    }
+
 });
 
 // inciar sesion paciente
-app.get('/paciente-iniciar-sesion', function(req, res){
+app.get('/paciente-iniciar-sesion', function(req, res){ //-> sign-in-paciente.ejs
     req.session.isDoctor = false; // para la autenticacion
     res.render('sign-in-paciente');
 });
 
 //iniciar sesion doctor
-app.get('/doctor-iniciar-sesion', function(req, res){
+app.get('/doctor-iniciar-sesion', function(req, res){ // -> sign-in-doctor.ejs
     req.session.isDoctor = true; // para la autenticacion
     res.render('sign-in-doctor');
 });
@@ -151,49 +160,37 @@ app.post('/auth', async (req, res) => { // para iniciar sesion
     connection.execSql(sqlRequest);
 })
 
-app.get('/info-doctores', function(req, res){
+app.get('/info-doctores', function(req, res){ // -> doctors.ejs
     res.render('doctors');
 });
 
 
-app.get('/historial-paciente', function(req, res){
+app.get('/historial-paciente', function(req, res){ // -> patient-profile.ejs
     res.render('patient-profile');
 });
 
-app.get('/agendarcita', function(req, res){
+app.get('/agendarcita', function(req, res){ // -> book-appointment.ejs
     res.render('book-appointment');
 });
 
 
-app.get('/anadirpago', function(req, res){
+app.get('/anadirpago', function(req, res){ // -> add-payments.ejs
     res.render('add-payments');
 });
 
-
-app.get('/medicoiniciarsesion', function(req, res){
-    res.render('sign-in-doctor');
-});
-
-app.get('/pagos-paciente', function(req, res){
+app.get('/pagos-paciente', function(req, res){ // -> patient-invoice.ejs
     res.render('patient-invoice');
 });
 
-
-
-//añadiendo app.get para add patient
-app.get('/anadir-paciente', function(req, res){
+app.get('/anadir-paciente', function(req, res){ // -> add-patient.ejs
     res.render('add-patient');
 });
 
-
-
-
-app.get('/agenda-doctor', function(req, res){
+app.get('/agenda-doctor', function(req, res){ // -> doctor-schedule.ejs
     res.render('doctor-schedule');
 });
 
-
-app.get('/pagos', function(req, res){
+app.get('/pagos', function(req, res){ // -> 
     res.render('payments');
 });
 
@@ -206,9 +203,10 @@ app.get('/perfil-doctor', function(req, res){
     res.render('profile');
 });
 
-// about page
-app.get('/about', function(req, res) {
-    res.render('pages/about');
+// para cerrar sesion
+app.get('/cerrar-sesion', function(req, res){
+    req.session.destroy();
+    res.redirect('/');
 });
 
 app.listen(8080);

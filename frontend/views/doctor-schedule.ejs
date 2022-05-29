@@ -266,7 +266,7 @@
                 </li>
                 <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-balance-wallet"></i><span>Pagos</span> </a>
                     <ul class="ml-menu">
-                        <li> <a href="payments.html">Rewgistros de Pagos</a></li>
+                        <li> <a href="payments.html">Registros de Pagos</a></li>
                         <li> <a href="add-payments.html">Añadir pago</a></li>
                         <li> <a href="patient-invoice.html">Pagos del paciente</a></li>
                     </ul>
@@ -495,13 +495,7 @@
                                     <input type="datetime-local" class="datepicker form-control" placeholder="Año de nacimiento">
                                 </div>
                             </div>
-                            <strong>Hora</strong>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="time" class="datepicker form-control" placeholder="Año de nacimiento">
-                                </div>
-                            </div>
-
+                            
                             <strong>Paciente</strong>
                             <br><br>
                             <select class="form-control show-tick">
@@ -529,7 +523,11 @@
                         id="change-view-week">Esta Semana</button>
                         <button class="btn btn-raised btn-default btn-sm m-r-0 m-t-0"
                         id="change-view-month">Este Mes</button>
-                        <div id="calendar"></div>
+                        <div id="calendar">
+                            <p id="calendar-data">
+                                <%= calendario %>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>

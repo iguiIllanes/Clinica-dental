@@ -1,5 +1,4 @@
 const apiRequest = require("request");
-const fs = require("fs");
 
 function generarCalendario(id_doctor){
     return new Promise((resolve, reject) =>{
@@ -8,7 +7,11 @@ function generarCalendario(id_doctor){
                 citas = JSON.stringify(JSON.parse(body)); // asignamos el JSON a pacientes
                 resolve(JSON.stringify(body));
             } else {
-                console.log(err)
+                if(err == null){
+                    resolve("");
+                }else{
+                    console.log("algo mas aparte del error ha pasado :O");
+                }
             }
         });
     })

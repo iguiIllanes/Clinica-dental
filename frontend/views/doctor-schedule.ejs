@@ -540,10 +540,9 @@
                                     <option value=""><strong>Seleccione una opción</strong></option>
                                     <%for(var i=0; i < numPacientes; i++){%>
                                         <option value="<%= pacientes[i]['id_persona']['id_persona'] %>">
-                                            <%= pacientes[i]['id_persona']['nombre'] + " " +
-                                                pacientes[i]['id_persona']['apellido'] %>
+                                            <%= pacientes[i]['id_persona']['apellido'] + " " + pacientes[i]['id_persona']['nombre']%>
                                         </option>
-                                        <%}%>
+                                    <%}%>
                                 </select>
                                 <br><br>
 

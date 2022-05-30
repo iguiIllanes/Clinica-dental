@@ -264,6 +264,10 @@ app.get('/perfil-doctor', function (req, res) {
     res.render('profile');
 });
 
+app.get('/registrate', function (req, res){
+    res.render('sign-up');
+});
+
 // para cerrar sesion
 app.get('/cerrar-sesion', function (req, res) {
     req.session.destroy();

@@ -44,22 +44,24 @@
       <i class="mfb-component__main-icon--active zmdi zmdi-close"></i>
     </a>
     <ul class="mfb-component__list">
-      <li>
-        <a href="doctor-schedule.html" data-mfb-label="Doctor Schedule" class="mfb-component__button--child bg-blue">
-          <i class="zmdi zmdi-calendar mfb-component__child-icon"></i>
-        </a>
-      </li>
-      <li>
-        <a href="patients.html" data-mfb-label="Patients List" class="mfb-component__button--child bg-orange">
-          <i class="zmdi zmdi-account-o mfb-component__child-icon"></i>
-        </a>
-      </li>
+        <li>
+            <a href="/doctor-panel-de-control" data-mfb-label="Citas"
+                class="mfb-component__button--child bg-blue">
+                <i class="zmdi zmdi-calendar mfb-component__child-icon"></i>
+            </a>
+        </li>
+        <li>
+            <a href="/info-medicos" data-mfb-label="Información Doctor"
+                class="mfb-component__button--child bg-orange">
+                <i class="zmdi zmdi-account-o mfb-component__child-icon"></i>
+            </a>
+        </li>
 
-      <li>
-        <a href="payments.html" data-mfb-label="Payments" class="mfb-component__button--child bg-purple">
-          <i class="zmdi zmdi-balance-wallet mfb-component__child-icon"></i>
-        </a>
-      </li>
+        <li>
+            <a href="/historial-paciente" data-mfb-label="Historial Medico" class="mfb-component__button--child bg-purple">
+                <i class="zmdi zmdi-balance-wallet mfb-component__child-icon"></i>
+            </a>
+        </li>
     </ul>
   </li>
 </ul>
@@ -71,7 +73,8 @@
 <!-- Top Bar -->
 <nav class="navbar clearHeader">
     <div class="col-12">
-        <div class="navbar-header"> <a href="javascript:void(0);" class="bars"></a> <a class="navbar-brand" href="index.html">Odontología Especializada</a> </div>
+        <div class="navbar-header"> <a href="javascript:void(0);" class="bars"></a> <a class="navbar-brand"
+            href="doctor-panel-de-control">Odontología Especializada</a> </div>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="zmdi zmdi-settings"></i></a></li>
         </ul>
@@ -87,7 +90,7 @@
             <div class="admin-action-info"> <span>Bienvenido</span>
                 <h3>Dr. John</h3>
                 <ul>
-                    <li><a data-placement="bottom" title="Full Screen" href="cerrar-sesion" ><i class="zmdi zmdi-sign-in"></i></a></li>
+                    <li><a data-placement="bottom" title="Cerrar Sesion" href="cerrar-sesion" ><i class="zmdi zmdi-sign-in"></i></a></li>
                 </ul>
             </div>
             <div class="quick-stats">
@@ -97,31 +100,27 @@
         <!-- Menu -->
         <div class="menu">
             <ul class="list">
-                <li class="header">Menú de navegación</li>
-             <!--   <li><a href="index.html"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>  -->                                     
-                <li><a href="/" class="menu-toggle"><i class="zmdi zmdi-calendar-check"></i><span>Cita</span> </a>
+                <li class="header">Menú de navegación </li>
+                <!--<li><a href="index.html"><i class="zmdi zmdi-home"></i><span>Panel de control</span></a></li>  -->                                             
+                <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-calendar-check"></i><span>Citas</span> </a>
                     <ul class="ml-menu">
-                        <li><a href="/paciente-panel-de-control">Agenda del Doctor</a></li>
-
+                        <li><a href="doctor-panel-de-control">Agenda del Doctor</a></li>
+                        <!-- <li><a href="agendarcita">Agendar Cita a un Paciente</a></li> --> -->
                     </ul>
-               <!--     <ul class="ml-menu">
-                        <li><a href="doctor-schedule.html">Agenda del doctor</a></li>
-                        <li><a href="book-appointment.html">Agendar cita del paciente</a></li>
-                    </ul>-->
                 </li>
                 <li class="active open"><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account-add"></i><span>Doctores</span> </a>
                     <ul class="ml-menu">
-                        <li class="active"><a href="info-doctores">Información Doctores</a></li>
-                    <!--    <li><a href="add-doctor.html">Añadir Doctor</a></li>                        
-                        <li><a href="profile.html">Perfil Doctor</a></li>-->
+                        <li class="active"><a href="info-medicos">Información Doctores</a></li>
+                        <!-- <li><a href="add-doctor.html">Añadir Doctor</a></li>                        -->
+                      <!--  <li><a href="profile.html">Perfil Doctor </a></li>-->
                     </ul>
                 </li>
                 <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account-o"></i><span>Pacientes</span> </a>
                     <ul class="ml-menu">
-                    <!--    <li><a href="patients.html">Pacientes</a></li>
-                        <li><a href="add-patient.html">Añadir Paciente</a></li>            -->           
-                        <li><a href="historial">Historial Médico</a></li>
-                    <!--    <li><a href="patient-invoice.html">Historial Pagos</a></li> -->
+                     <!--   <li><a href="patients.html">Pacientes</a></li>-->
+                        <li><a href="anadir_paciente">Añadir Pacientes</a></li>                       
+                        <li><a href="historial-paciente">Historial médico</a></li>
+                    <!--    <li><a href="patient-invoice.html">Pagos del paciente</a></li> -->
                     </ul>
                 </li>
                 <!--
@@ -362,7 +361,7 @@
     
                                 <div class="">
                                     <h4 class="m-b-5 m-t-20"><%= medicos[i]['id_persona']['nombre'] %> <br> <%= medicos[i]['id_persona']['apellido'] %> </h4>
-                                    <p class="text-muted">Dentista</p>
+                                    <p class="text-muted">Odontólogo</p>
                                 </div>
                             </div>
                         </div>

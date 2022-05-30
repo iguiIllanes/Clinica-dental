@@ -44,22 +44,24 @@
       <i class="mfb-component__main-icon--active zmdi zmdi-close"></i>
     </a>
     <ul class="mfb-component__list">
-      <li>
-        <a href="doctor-schedule.html" data-mfb-label="Doctor Schedule" class="mfb-component__button--child bg-blue">
-          <i class="zmdi zmdi-calendar mfb-component__child-icon"></i>
-        </a>
-      </li>
-      <li>
-        <a href="patients.html" data-mfb-label="Patients List" class="mfb-component__button--child bg-orange">
-          <i class="zmdi zmdi-account-o mfb-component__child-icon"></i>
-        </a>
-      </li>
+        <li>
+            <a href="/doctor-panel-de-control" data-mfb-label="Citas"
+                class="mfb-component__button--child bg-blue">
+                <i class="zmdi zmdi-calendar mfb-component__child-icon"></i>
+            </a>
+        </li>
+        <li>
+            <a href="/info-medicos" data-mfb-label="Información Doctor"
+                class="mfb-component__button--child bg-orange">
+                <i class="zmdi zmdi-account-o mfb-component__child-icon"></i>
+            </a>
+        </li>
 
-      <li>
-        <a href="payments.html" data-mfb-label="Payments" class="mfb-component__button--child bg-purple">
-          <i class="zmdi zmdi-balance-wallet mfb-component__child-icon"></i>
-        </a>
-      </li>
+        <li>
+            <a href="/historial-paciente" data-mfb-label="Historial Medico" class="mfb-component__button--child bg-purple">
+                <i class="zmdi zmdi-balance-wallet mfb-component__child-icon"></i>
+            </a>
+        </li>
     </ul>
   </li>
 </ul>
@@ -113,7 +115,8 @@
 <!-- Top Bar -->
 <nav class="navbar clearHeader">
     <div class="col-12">
-        <div class="navbar-header"> <a href="javascript:void(0);" class="bars"></a> <a class="navbar-brand" href="index.html">Odontología Especializada</a> </div>
+        <div class="navbar-header"> <a href="javascript:void(0);" class="bars"></a> <a class="navbar-brand"
+            href="doctor-panel-de-control">Odontología Especializada</a> </div>
         <ul class="nav navbar-nav navbar-right">
             <!-- Notifications -->
             
@@ -134,7 +137,7 @@
             <div class="admin-action-info"> <span>Bienvenido</span>
                 <h3>Dr. John</h3>
                 <ul>
-                    <li><a data-placement="bottom" title="Full Screen" href="sign-in.html" ><i class="zmdi zmdi-sign-in"></i></a></li>
+                    <li><a data-placement="bottom" title="Cerrar Sesion" href="sign-in.html" ><i class="zmdi zmdi-sign-in"></i></a></li>
                 </ul>
             </div>
             <div class="quick-stats">
@@ -150,21 +153,27 @@
         <!-- Menu -->
         <div class="menu">
             <ul class="list">
-                <li class="header">Menú de navegación</li>                                             
+                <li class="header">Menú de navegación </li>
+                <!--<li><a href="index.html"><i class="zmdi zmdi-home"></i><span>Panel de control</span></a></li>  -->                                             
                 <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-calendar-check"></i><span>Citas</span> </a>
-                <!--    <ul class="ml-menu">
-                        <li><a href="doctor-schedule.html">Agenda del Doctor</a></li>
-                        <li><a href="book-appointment.html">Agendar Cita a un Paciente</a></li>
-                    </ul>-->
+                    <ul class="ml-menu">
+                        <li><a href="doctor-panel-de-control">Agenda del Doctor</a></li>
+                        <!-- <li><a href="agendarcita">Agendar Cita a un Paciente</a></li> --> -->
+                    </ul>
                 </li>
                 <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account-add"></i><span>Doctores</span> </a>
                     <ul class="ml-menu">
-                        <li><a href="doctors.html">Información Doctores</a></li>
+                        <li><a href="info-medicos">Información Doctores</a></li>
+                        <!-- <li><a href="add-doctor.html">Añadir Doctor</a></li>                        -->
+                      <!--  <li><a href="profile.html">Perfil Doctor </a></li>-->
                     </ul>
                 </li>
-                <li  class="active open"><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account-o"></i><span>Patients</span> </a>
-                    <ul class="ml-menu">                      
-                        <li class="active"><a href="patient-profile.html">Historial Médico</a></li>
+                <li class="active open"><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account-o"></i><span>Pacientes</span> </a>
+                    <ul class="ml-menu">
+                     <!--   <li><a href="patients.html">Pacientes</a></li>-->
+                        <li><a href="anadir_paciente">Añadir Pacientes</a></li>                       
+                        <li class="active"><a href="historial-paciente">Historial médico</a></li>
+                    <!--    <li><a href="patient-invoice.html">Pagos del paciente</a></li> -->
                     </ul>
                 </li>
             <!--    <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-balance-wallet"></i><span>Pagos</span> </a>
@@ -356,8 +365,8 @@
                     </div>
                     <div class="body">
                         <div class="form-group drop-custum">
-                            <select class="form-control show-tick">
-                               <option value="">Pacientes</option>
+                            <select name="id_paciente" class="form-control show-tick">
+                                <option value=""><strong>Seleccione un paciente</strong></option>
                                <option value="10">Masculino</option>
                                <option value="20">Femenino</option>
                            </select>
@@ -435,9 +444,10 @@
                             </tbody>
                         </table>
                         <div class="col-sm-12">
-                            <button type="submit" class="btn btn-raised g-bg-cyan">
-                              Añadir historial
-                            </button>
+                            <button type="submit" class="btn btn-raised g-bg-cyan">Añadir Historial</button>
+                            <a href="anadir-paciente" class="btn btn-raised">
+                                Cancelar
+                            </a>
                         </div>
                     </div>
                 </div>

@@ -90,12 +90,11 @@ app.get('/paciente-panel-de-control', function (req, res) { // -> paciente-menu.
         apiRequest("http://127.0.0.1:8000/api/pacientes/" + req.session.username, async (err, response, body) => {
             if (!err) {
                 const usuario = JSON.parse(body); // asignamos el JSON a paciente
-                const id_paciente = usuario.id_persona.id_persona; 
+                const id_paciente = usuario.id_persona.id_persona;
                 const nombre = usuario.id_persona.nombre; // accedemos al contenido de paciente
                 const apellido = usuario.id_persona.apellido;
                 const cal = (await calendarioPaciente.getCalendario(id_paciente)) == null ? "" : await calendarioPaciente.getCalendario(id_paciente);
                 const medicosJSON = await medicos.getMedicos();
-                console.log(medicosJSON);
                 res.render('paciente-menu', { // pasamos los datos de paciente a paciente-menu
                     nombre: nombre,
                     apellido: apellido,
@@ -115,7 +114,7 @@ app.get('/paciente-panel-de-control', function (req, res) { // -> paciente-menu.
     // aqui empezamos con el consumo de la api en /api/pacientes/
 });
 
-app.post('/paciente-panel-de-control', function (req, res){
+app.post('/paciente-panel-de-control', function (req, res) {
     id_doctor = req.body.id_doctor;
     id_paciente = req.body.id_paciente;
     fecha_reserva = req.body.fecha_reserva;
@@ -128,9 +127,9 @@ app.post('/paciente-panel-de-control', function (req, res){
         url: 'http://127.0.0.1:8000/api/citas/',
         body: `id_doctor=${id_doctor}&id_paciente=${id_paciente}&fecha_reserva=${fecha_reserva}&fecha_consulta=${fecha_consulta}`,
     }, function (error, response, body) {
-        if(!error){
+        if (!error) {
             res.redirect('/paciente-panel-de-control');
-        }else{
+        } else {
             res.send('Algo ocurrio. Por favor intenta mas tarde.');
         }
     });
@@ -179,9 +178,9 @@ app.post('/doctor-panel-de-control', function (req, res) {
         url: 'http://127.0.0.1:8000/api/citas/',
         body: `id_doctor=${id_doctor}&id_paciente=${id_paciente}&fecha_reserva=${fecha_reserva}&fecha_consulta=${fecha_consulta}`,
     }, function (error, response, body) {
-        if(!error){
+        if (!error) {
             res.redirect('/doctor-panel-de-control');
-        }else{
+        } else {
             res.send('Algo ocurrio. Por favor intenta mas tarde.');
         }
     });
@@ -204,28 +203,27 @@ app.post('/auth', async (req, res) => { // para iniciar sesion
     username = req.body.username
     password = req.body.password
 
-    const query = "SELECT usuario, password FROM " + (req.session.isDoctor ? "api_medico" : "api_paciente") + " WHERE usuario = '" + username + "' AND password = '" + password + "'";
-
+    const query = "SELECT usuario, password" + (req.session.isDoctor ? ", contratado " : " ") + "FROM " + (req.session.isDoctor ? "api_medico" : "api_paciente") + " WHERE usuario = '" + username + "' AND password = '" + password + "'";
     sqlRequest = new Request(query, function (err, rowCount) {
         if (err) { // si falla algo
             res.send("Algo paso. Por favor intenta mas tarde.")
         } else if (rowCount <= 0) { // si el registro con esos datos no existe
             res.redirect('password-incorrecto');
-        } else if (rowCount > 0) { // si el query es correcto
-            if(req.session.isDoctor){
-                const verificarContrato = "SELECT contratado from api_medico WHERE usuario = '" + username + "' AND password = '" + password + "' AND contratado = 1";
-                verifcarContratoRequest = new Request(verificarContrato, (error, filas)=>{
-                    if(error){
-                        res.send("Algo paso. Por favor intenta mas tarde.");
-                    }else if(filas <= 0){
-                        res.redirect('/cuenta-removida');
-                    }
-                });
-            }
-            req.session.loggedIn = true;
-            req.session.username = username;
-            res.redirect(req.session.isDoctor ? '/doctor-panel-de-control' : '/paciente-panel-de-control');
+        } 
+        // else if (rowCount > 0) { // si el query es correcto
+        //     req.session.loggedIn = true;
+        //     req.session.username = username;
+        //     res.redirect(req.session.isDoctor ? '/doctor-panel-de-control' : '/paciente-panel-de-control');
+        // }
+    });
+
+    sqlRequest.on('row', function (columns) {
+        req.session.loggedIn = true;
+        req.session.username = username;
+        if (req.session.isDoctor && !(columns[2]['value'])) {
+            res.redirect('/cuenta-removida');
         }
+        res.redirect(req.session.isDoctor ? '/doctor-panel-de-control' : '/paciente-panel-de-control');
     });
 
     connection.execSql(sqlRequest);
@@ -234,7 +232,7 @@ app.post('/auth', async (req, res) => { // para iniciar sesion
 app.get('/info-doctores', async function (req, res) { // -> doctors.ejs
 
     medicosJSON = await medicos.getMedicos();
-    res.render('doctors',{
+    res.render('doctors', {
         medicos: medicosJSON,
     });
 });
@@ -278,11 +276,11 @@ app.get('/perfil-doctor', function (req, res) {
     res.render('profile');
 });
 
-app.get('/registrate', function (req, res){
+app.get('/registrate', function (req, res) {
     res.render('sign-up');
 });
 
-app.post('/registrate', function (req, res){
+app.post('/registrate', function (req, res) {
     nombre = req.body.nombre;
     apellido = req.body.apellido;
     ci = req.body.ci;
@@ -295,22 +293,9 @@ app.post('/registrate', function (req, res){
     password = req.body.password;
     conf_password = req.body.conf_password;
 
-
-    console.log(nombre);
-    console.log(apellido);
-    console.log(ci);
-    console.log(telefono);
-    console.log(fecha_nacimiento);
-    console.log(correo_paciente);
-    console.log(enfermedades_base);
-    console.log(alergias);
-    console.log(usuario);
-    console.log(password);
-
-
-    if(!(conf_password == password)){
+    if (!(conf_password == password)) {
         res.send("Las contraseñas no coinciden");
-    }else{
+    } else {
         apiRequest.post({
             headers: {
                 'content-type': 'application/x-www-form-urlencoded'
@@ -318,9 +303,9 @@ app.post('/registrate', function (req, res){
             url: 'http://127.0.0.1:8000/api/pacientes/',
             body: `nombre=${nombre}&apellido=${apellido}&ci=${ci}&telefono=${telefono}&fecha_nacimiento=${fecha_nacimiento}&correo_paciente=${correo_paciente}&enfermedades_base=${enfermedades_base}&alergias=${alergias}&usuario=${usuario}&password=${password}`,
         }, function (error, response, body) {
-            if(!error){
+            if (!error) {
                 res.send('Usuario creado exitosamente.');
-            }else{
+            } else {
                 res.send('Algo ocurrio. Por favor intenta mas tarde.');
             }
         });
@@ -329,11 +314,11 @@ app.post('/registrate', function (req, res){
 
 });
 
-app.get('/password-incorrecto', function (req, res){
+app.get('/password-incorrecto', function (req, res) {
     res.render('404');
 });
 
-app.get('/cuenta-removida', function (req, res){
+app.get('/cuenta-removida', function (req, res) {
     res.render('cuenta-removida');
 });
 

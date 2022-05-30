@@ -199,7 +199,9 @@ app.get('/doctor-iniciar-sesion', function (req, res) { // -> sign-in-doctor.ejs
 });
 
 
-app.post('/auth', async (req, res) => { // para iniciar sesion
+app.post('/auth', (req, res) => { // para iniciar sesion
+    isValidDoctor = true;
+
     username = req.body.username
     password = req.body.password
 
@@ -209,21 +211,19 @@ app.post('/auth', async (req, res) => { // para iniciar sesion
             res.send("Algo paso. Por favor intenta mas tarde.")
         } else if (rowCount <= 0) { // si el registro con esos datos no existe
             res.redirect('password-incorrecto');
-        } 
-        // else if (rowCount > 0) { // si el query es correcto
-        //     req.session.loggedIn = true;
-        //     req.session.username = username;
-        //     res.redirect(req.session.isDoctor ? '/doctor-panel-de-control' : '/paciente-panel-de-control');
-        // }
+        } else if (rowCount > 0 && isValidDoctor) {
+            req.session.loggedIn = true;
+            req.session.username = username;
+            res.redirect(req.session.isDoctor ? '/doctor-panel-de-control' : '/paciente-panel-de-control');
+        }else{
+            res.redirect('/cuenta-removida');
+        }
     });
 
     sqlRequest.on('row', function (columns) {
-        req.session.loggedIn = true;
-        req.session.username = username;
         if (req.session.isDoctor && !(columns[2]['value'])) {
-            res.redirect('/cuenta-removida');
+            isValidDoctor = false;
         }
-        res.redirect(req.session.isDoctor ? '/doctor-panel-de-control' : '/paciente-panel-de-control');
     });
 
     connection.execSql(sqlRequest);

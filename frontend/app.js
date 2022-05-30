@@ -16,12 +16,13 @@ const calendarioPaciente = require("./calendario-paciente");
 
 const pacientes = require("./pacientes");
 const medicos = require("./medicos");
+const getUserData = require("./getUserData");
 
 var app = express();
 
 
 const date = new Date();
-const fechaActual = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+const fechaActual = date.getFullYear() + "-" + ((date.getMonth() + 1 < 10) ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1)) + "-" + ((date.getDate() < 10) ? "0" + date.getDate() : date.getDate());
 
 // para la configuracion de session
 app.use(session({
@@ -71,6 +72,12 @@ app.set('view engine', 'ejs');
 
 // para los estilos
 app.use(express.static('public'));
+
+function checkSession(req, res){
+    if(! req.session.loggedIn){
+        res.redirect('/');
+    }
+}
 
 app.get('/', function (req, res) { // -> paneles de control
     if (req.session.loggedIn) { // para verificar si se inicio sesion
@@ -215,7 +222,7 @@ app.post('/auth', (req, res) => { // para iniciar sesion
             req.session.loggedIn = true;
             req.session.username = username;
             res.redirect(req.session.isDoctor ? '/doctor-panel-de-control' : '/paciente-panel-de-control');
-        }else{
+        } else {
             res.redirect('/cuenta-removida');
         }
     });
@@ -230,50 +237,88 @@ app.post('/auth', (req, res) => { // para iniciar sesion
 });
 
 app.get('/info-doctores', async function (req, res) { // -> doctors.ejs
-
+    checkSession(req,res);
     medicosJSON = await medicos.getMedicos();
+    userData = await getUserData.getUserData(req.session.username, req.session.isDoctor);
     res.render('doctors', {
+        nombre: await userData['id_persona']['nombre'],
         medicos: medicosJSON,
     });
 });
 
 
-app.get('/historial-paciente', function (req, res) { // -> patient-profile.ejs
-    res.render('patient-profile');
+app.get('/historial-paciente', async function (req, res) { // -> patient-profile.ejs
+    checkSession(req,res);
+    userData = await getUserData.getUserData(req.session.username, req.session.isDoctor);
+    res.render('patient-profile', {
+        nombre: await userData['id_persona']['nombre'],
+    });
 });
 
-app.get('/agendarcita', function (req, res) { // -> book-appointment.ejs
-    res.render('book-appointment');
-});
-
-
-app.get('/anadirpago', function (req, res) { // -> add-payments.ejs
-    res.render('add-payments');
-});
-
-app.get('/pagos-paciente', function (req, res) { // -> patient-invoice.ejs
-    res.render('patient-invoice');
-});
-
-app.get('/anadir-paciente', function (req, res) { // -> add-patient.ejs
-    res.render('add-patient');
-});
-
-app.get('/agenda-doctor', function (req, res) { // -> doctor-schedule.ejs
-    res.render('doctor-schedule');
-});
-
-app.get('/pagos', function (req, res) { // -> 
-    res.render('payments');
+app.get('/agendarcita', async function (req, res) { // -> book-appointment.ejs
+    checkSession(req,res);
+    userData = await getUserData.getUserData(req.session.username, req.session.isDoctor);
+    res.render('book-appointment', {
+        nombre: await userData['id_persona']['nombre'],
+    });
 });
 
 
-app.get('/anadir-doctor', function (req, res) {
-    res.render('add-doctor');
+app.get('/anadirpago', async function (req, res) { // -> add-payments.ejs
+    checkSession(req,res);
+    userData = await getUserData.getUserData(req.session.username, req.session.isDoctor);
+    res.render('add-payments', {
+        nombre: await userData['id_persona']['nombre'],
+    });
 });
 
-app.get('/perfil-doctor', function (req, res) {
-    res.render('profile');
+app.get('/pagos-paciente', async function (req, res) { // -> patient-invoice.ejs
+    checkSession(req,res);
+    userData = await getUserData.getUserData(req.session.username, req.session.isDoctor);
+    res.render('patient-invoice', {
+        nombre: await userData['id_persona']['nombre'],
+    });
+});
+
+app.get('/anadir-paciente', async function (req, res) { // -> add-patient.ejs
+    checkSession(req,res);
+    userData = await getUserData.getUserData(req.session.username, req.session.isDoctor);
+    res.render('add-patient', {
+        nombre: await userData['id_persona']['nombre'],
+    });
+});
+
+app.get('/agenda-doctor', async function (req, res) { // -> doctor-schedule.ejs
+    checkSession(req,res);
+    userData = await getUserData.getUserData(req.session.username, req.session.isDoctor);
+    res.render('doctor-schedule', {
+        nombre: await userData['id_persona']['nombre'],
+    });
+});
+
+app.get('/pagos', async function (req, res) { // -> 
+    checkSession(req,res);
+    userData = await getUserData.getUserData(req.session.username, req.session.isDoctor);
+    res.render('payments', {
+        nombre: await userData['id_persona']['nombre'],
+    });
+});
+
+
+app.get('/anadir-doctor', async function (req, res) {
+    checkSession(req,res);
+    userData = await getUserData.getUserData(req.session.username, req.session.isDoctor);
+    res.render('add-doctor', {
+        nombre: await userData['id_persona']['nombre'],
+    });
+});
+
+app.get('/perfil-doctor', async function (req, res) {
+    checkSession(req,res);
+    userData = await getUserData.getUserData(req.session.username, req.session.isDoctor);
+    res.render('profile',{
+        nombre: await userData['id_persona']['nombre'],
+    });
 });
 
 app.get('/registrate', function (req, res) {
@@ -315,16 +360,18 @@ app.post('/registrate', function (req, res) {
 });
 
 app.get('/password-incorrecto', function (req, res) {
+    checkSession(req,res);
     res.render('404');
 });
 
 app.get('/cuenta-removida', function (req, res) {
+    checkSession(req,res);
     res.render('cuenta-removida');
 });
 
 // para cerrar sesion
 app.get('/cerrar-sesion', function (req, res) {
-    req.session.destroy();
+    req.session.destroy();async 
     res.redirect('/');
 });
 

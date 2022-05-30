@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-<title>Odontología especializada</title>
+<title>Odontología Especializada</title>
 <link rel="icon" href="favicon.ico" type="image/x-icon">
 <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
@@ -53,22 +53,24 @@
       <i class="mfb-component__main-icon--active zmdi zmdi-close"></i>
     </a>
     <ul class="mfb-component__list">
-      <li>
-        <a href="doctor-schedule.html" data-mfb-label="Doctor Schedule" class="mfb-component__button--child bg-blue">
-          <i class="zmdi zmdi-calendar mfb-component__child-icon"></i>
-        </a>
-      </li>
-      <li>
-        <a href="patients.html" data-mfb-label="Patients List" class="mfb-component__button--child bg-orange">
-          <i class="zmdi zmdi-account-o mfb-component__child-icon"></i>
-        </a>
-      </li>
+        <li>
+            <a href="/doctor-panel-de-control" data-mfb-label="Citas"
+                class="mfb-component__button--child bg-blue">
+                <i class="zmdi zmdi-calendar mfb-component__child-icon"></i>
+            </a>
+        </li>
+        <li>
+            <a href="/info-medicos" data-mfb-label="Información Doctor"
+                class="mfb-component__button--child bg-orange">
+                <i class="zmdi zmdi-account-o mfb-component__child-icon"></i>
+            </a>
+        </li>
 
-      <li>
-        <a href="payments.html" data-mfb-label="Payments" class="mfb-component__button--child bg-purple">
-          <i class="zmdi zmdi-balance-wallet mfb-component__child-icon"></i>
-        </a>
-      </li>
+        <li>
+            <a href="/historial-paciente" data-mfb-label="Historial Medico" class="mfb-component__button--child bg-purple">
+                <i class="zmdi zmdi-balance-wallet mfb-component__child-icon"></i>
+            </a>
+        </li>
     </ul>
   </li>
 </ul>
@@ -122,7 +124,8 @@
 <!-- Top Bar -->
 <nav class="navbar clearHeader">
     <div class="col-12">
-        <div class="navbar-header"> <a href="javascript:void(0);" class="bars"></a> <a class="navbar-brand" href="index.html">Odontologia Especializada</a> </div>
+        <div class="navbar-header"> <a href="javascript:void(0);" class="bars"></a> <a class="navbar-brand"
+            href="doctor-panel-de-control">Odontología Especializada</a> </div>
         <ul class="nav navbar-nav navbar-right">
             <!-- Notifications 
             <li class="dropdown"> <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"><i class="zmdi zmdi-notifications"></i> <span class="label-count">7</span> </a>
@@ -235,7 +238,7 @@
             <div class="admin-action-info"> <span>Bienvenido</span>
                 <h3>Dr. John</h3>
                 <ul>
-                    <li><a data-placement="bottom" title="Full Screen" href="sign-in.html" ><i class="zmdi zmdi-sign-in"></i></a></li>
+                    <li><a data-placement="bottom" title="Cerrar Sesion" href="doctor-iniciar-sesion" ><i class="zmdi zmdi-sign-in"></i></a></li>
                 </ul>
             </div>
             <div class="quick-stats">
@@ -255,22 +258,22 @@
                 <!--<li><a href="index.html"><i class="zmdi zmdi-home"></i><span>Panel de control</span></a></li>  -->                                             
                 <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-calendar-check"></i><span>Citas</span> </a>
                     <ul class="ml-menu">
-                       <!-- <li><a href="doctor-schedule.html">Agenda del Doctor</a></li>
-                        <li><a href="book-appointment.html">Agendar Cita a un Paciente</a></li> -->
+                        <li><a href="doctor-panel-de-control">Agenda del Doctor</a></li>
+                        <!-- <li><a href="agendarcita">Agendar Cita a un Paciente</a></li> --> -->
                     </ul>
                 </li>
                 <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account-add"></i><span>Doctores</span> </a>
                     <ul class="ml-menu">
-                        <li><a href="doctors.html">Información Doctores</a></li>
-                        <li><a href="add-doctor.html">Añadir Doctor</a></li>                       
+                        <li><a href="info-medicos">Información Doctores</a></li>
+                        <!-- <li><a href="add-doctor.html">Añadir Doctor</a></li>                        -->
                       <!--  <li><a href="profile.html">Perfil Doctor </a></li>-->
                     </ul>
                 </li>
                 <li class="active open"><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account-o"></i><span>Pacientes</span> </a>
                     <ul class="ml-menu">
                      <!--   <li><a href="patients.html">Pacientes</a></li>-->
-                        <li class="active"><a href="add-patient.html">Añadir Pacientes</a></li>                       
-                        <li><a href="patient-profile.html">Historial médico</a></li>
+                        <li class="active"><a href="anadir_paciente">Añadir Pacientes</a></li>                       
+                        <li><a href="historial-paciente">Historial médico</a></li>
                     <!--    <li><a href="patient-invoice.html">Pagos del paciente</a></li> -->
                     </ul>
                 </li>
@@ -495,24 +498,24 @@
     <div class="container-fluid">
         <div class="block-header">
             <h2>Añadir paciente</h2>
-            <small class="text-muted">Bienvenido a Odontología especializada</small>
+            <small class="text-muted">Bienvenido a Odontología Especializada</small>
         </div>
         <div class="row clearfix">
 			<div class="col-lg-12 col-md-12 col-sm-12">
-				<form>
+				<form action="anadir_paciente" method="POST">
 					<div class="body">
                         <div class="row clearfix">
                             <div class="col-lg-4 col-sm-12">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" class="form-control" placeholder="Nombres">
+                                        <input type="text" class="form-control" name="nombre" placeholder="Nombres"  required> 
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-sm-12">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" class="form-control" placeholder="Apellidos">
+                                        <input type="text" class="form-control" name="apellido" placeholder="Apellidos"  required> 
                                     </div>
                                 </div>
                             </div>
@@ -520,7 +523,7 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                   <div class="form-line">
-                                    <input type="text" class="form-control" placeholder="C.I." />
+                                    <input type="text" class="form-control" name="ci" placeholder="C.I."  required> 
                                   </div>
                                 </div>
                             </div>                            
@@ -528,7 +531,7 @@
                             <div class="col-lg-4 col-sm-12">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" class="form-control" placeholder="Teléfono">
+                                        <input type="text" class="form-control" name="telefono" placeholder="Teléfono"  required>
                                     </div>
                                 </div>
                             </div>
@@ -537,68 +540,98 @@
                             <div class="col-lg-3 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" class="datepicker form-control" placeholder="Año de nacimiento">
+                                        <input  type="date" class="datepicker form-control" name="fecha_nacimiento" placeholder="Fecha de nacimiento" required> 
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-lg-3 col-md-6 col-sm-12">
                                 <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" name="correo_paciente"  placeholder="Correo electrónico"  required> 
+                                    </div>
+                                </div>
+                                <!-- <div class="form-group">
                                     <div class="form-line">
                                         <input type="text" class="form-control" placeholder="Edad">
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <div class="row clearfix">                            
                             
                             <div class="col-lg-3 col-md-6 col-sm-12">
+                                <!-- <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" name="correo_paciente"  placeholder="Correo electrónico">
+                                    </div>
+                                </div> -->
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" class="form-control" placeholder="Correo electrónico">
+                                        <input type="text" class="form-control"  name="enfermedades_base" placeholder="Enfermedades de base"  required>
                                     </div>
                                 </div>
                             </div>
                             
                             <div class="col-lg-5 col-md-6 col-sm-12">
+                                <!-- <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control"  name="enfermedades_base" placeholder="Enfermedades de base">
+                                    </div>
+                                </div> -->
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" class="form-control" placeholder="Enfermedades de base">
+                                        <input type="text" class="form-control" name="alergias" placeholder="Alergias"  required> 
                                     </div>
                                 </div>
                             </div>                            
                             
 
                             <div class="col-lg-4 col-md-6 col-sm-12">
+                                <!-- <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" name="alergias" placeholder="Alergias">
+                                    </div>
+                                </div> -->
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" class="form-control" placeholder="Alergias">
+                                        <input type="text" class="form-control" name="usuario" placeholder="Usuario"  required> 
                                     </div>
                                 </div>
                             </div>
 
 
                             <div class="col-lg-6 col-md-6 col-sm-12">
+                                <!-- <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" name="usuario" placeholder="Usuario">
+                                    </div>
+                                </div> -->
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" class="form-control" placeholder="Usuario">
+                                        <input type="text" class="form-control" name="password" placeholder="Contraseña"  required> 
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12">
+                                <!-- <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" name="password" placeholder="Contraseña">
+                                    </div>
+                                </div> -->
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" class="form-control" placeholder="Contraseña">
+                                        <input type="text" class="form-control" name="conf_password" placeholder="Confirmar contraseña"  required> 
                                     </div>
-                                </div>
+                                </div> 
                             </div> 
-                            <div class="col-lg-6 col-md-6 col-sm-12">                               
+                            <!-- <div class="col-lg-6 col-md-6 col-sm-12">                               
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" class="datetimepicker form-control" placeholder="Confirmar contraseña">
+                                        <input type="text" class="form-control" name="conf_password" placeholder="Confirmar contraseña">
                                     </div>
                                 </div>                               
-                            </div>
+                            </div> -->
 
 
 

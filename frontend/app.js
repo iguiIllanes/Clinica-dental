@@ -11,7 +11,7 @@ const { request } = require('express');
 
 const apiRequest = require("request");
 
-const calendario = require("./calendario");
+const calendario = require("./calendario-medico");
 const pacientes = require("./pacientes");
 
 var app = express();

@@ -13,7 +13,9 @@ const apiRequest = require("request");
 
 const calendarioMedico = require("./calendario-medico");
 const calendarioPaciente = require("./calendario-paciente");
+
 const pacientes = require("./pacientes");
+const medicos = require("./medicos");
 
 var app = express();
 
@@ -92,11 +94,16 @@ app.get('/paciente-panel-de-control', function (req, res) { // -> paciente-menu.
                 const nombre = usuario.id_persona.nombre; // accedemos al contenido de paciente
                 const apellido = usuario.id_persona.apellido;
                 const cal = (await calendarioPaciente.getCalendario(id_paciente)) == null ? "" : await calendarioPaciente.getCalendario(id_paciente);
-
+                const medicosJSON = await medicos.getMedicos();
+                console.log(medicosJSON);
                 res.render('paciente-menu', { // pasamos los datos de paciente a paciente-menu
                     nombre: nombre,
                     apellido: apellido,
+                    id_paciente: id_paciente,
                     calendario: cal,
+                    medicos: medicosJSON,
+                    numMedicos: medicosJSON.length,
+                    fecha: fechaActual
                 });
             } else {
                 res.send("Algo ocurrio con la conexion al API. Intenta mas tarde.")
@@ -106,6 +113,27 @@ app.get('/paciente-panel-de-control', function (req, res) { // -> paciente-menu.
         res.redirect('/paciente-iniciar-sesion');
     }
     // aqui empezamos con el consumo de la api en /api/pacientes/
+});
+
+app.post('/paciente-panel-de-control', function (req, res){
+    id_doctor = req.body.id_doctor;
+    id_paciente = req.body.id_paciente;
+    fecha_reserva = req.body.fecha_reserva;
+    fecha_consulta = req.body.fecha_consulta;
+
+    apiRequest.post({
+        headers: {
+            'content-type': 'application/x-www-form-urlencoded'
+        },
+        url: 'http://127.0.0.1:8000/api/citas/',
+        body: `id_doctor=${id_doctor}&id_paciente=${id_paciente}&fecha_reserva=${fecha_reserva}&fecha_consulta=${fecha_consulta}`,
+    }, function (error, response, body) {
+        if(!error){
+            res.redirect('/paciente-panel-de-control');
+        }else{
+            res.send('Algo ocurrio. Por favor intenta mas tarde.');
+        }
+    });
 });
 
 app.get('/doctor-panel-de-control', function (req, res) { // -> paciente-menu.ejs
@@ -135,7 +163,6 @@ app.get('/doctor-panel-de-control', function (req, res) { // -> paciente-menu.ej
     } else {
         res.redirect('/doctor-iniciar-sesion');
     }
-
 });
 
 app.post('/doctor-panel-de-control', function (req, res) {

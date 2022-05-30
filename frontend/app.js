@@ -376,6 +376,11 @@ app.get('/password-incorrecto', function (req, res){
     res.render('404');
 });
 
+
+app.get('/cuenta-removida', function (req, res){
+    res.render('cuenta-removida');
+});
+
 // para cerrar sesion
 app.get('/cerrar-sesion', function (req, res) {
     req.session.destroy();

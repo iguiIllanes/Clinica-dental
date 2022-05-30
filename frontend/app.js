@@ -208,10 +208,20 @@ app.post('/auth', async (req, res) => { // para iniciar sesion
 
     sqlRequest = new Request(query, function (err, rowCount) {
         if (err) { // si falla algo
-            res.send("Algo paso. Porfavor intenta mas tarde.")
+            res.send("Algo paso. Por favor intenta mas tarde.")
         } else if (rowCount <= 0) { // si el registro con esos datos no existe
             res.redirect('password-incorrecto');
         } else if (rowCount > 0) { // si el query es correcto
+            if(req.session.isDoctor){
+                const verificarContrato = "SELECT contratado from api_medico WHERE usuario = '" + username + "' AND password = '" + password + "' AND contratado = 1";
+                verifcarContratoRequest = new Request(verificarContrato, (error, filas)=>{
+                    if(error){
+                        res.send("Algo paso. Por favor intenta mas tarde.");
+                    }else if(filas <= 0){
+                        res.redirect('/cuenta-removida');
+                    }
+                });
+            }
             req.session.loggedIn = true;
             req.session.username = username;
             res.redirect(req.session.isDoctor ? '/doctor-panel-de-control' : '/paciente-panel-de-control');
@@ -219,7 +229,7 @@ app.post('/auth', async (req, res) => { // para iniciar sesion
     });
 
     connection.execSql(sqlRequest);
-})
+});
 
 app.get('/info-doctores', async function (req, res) { // -> doctors.ejs
 
@@ -321,6 +331,10 @@ app.post('/registrate', function (req, res){
 
 app.get('/password-incorrecto', function (req, res){
     res.render('404');
+});
+
+app.get('/cuenta-removida', function (req, res){
+    res.render('cuenta-removida');
 });
 
 // para cerrar sesion

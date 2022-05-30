@@ -11,7 +11,8 @@ const { request } = require('express');
 
 const apiRequest = require("request");
 
-const calendario = require("./calendario-medico");
+const calendarioMedico = require("./calendario-medico");
+const calendarioPaciente = require("./calendario-paciente");
 const pacientes = require("./pacientes");
 
 var app = express();
@@ -84,15 +85,18 @@ app.get('/', function (req, res) { // -> paneles de control
 // panel de control paciente
 app.get('/paciente-panel-de-control', function (req, res) { // -> paciente-menu.ejs
     if (req.session.loggedIn) { // comprueba si ya hay una sesion iniciada
-        apiRequest("http://127.0.0.1:8000/api/pacientes/" + req.session.username, (err, response, body) => {
+        apiRequest("http://127.0.0.1:8000/api/pacientes/" + req.session.username, async (err, response, body) => {
             if (!err) {
                 const usuario = JSON.parse(body); // asignamos el JSON a paciente
+                const id_paciente = usuario.id_persona.id_persona; 
                 const nombre = usuario.id_persona.nombre; // accedemos al contenido de paciente
                 const apellido = usuario.id_persona.apellido;
+                const cal = (await calendarioPaciente.getCalendario(id_paciente)) == null ? "" : await calendarioPaciente.getCalendario(id_paciente);
 
                 res.render('paciente-menu', { // pasamos los datos de paciente a paciente-menu
                     nombre: nombre,
                     apellido: apellido,
+                    calendario: cal,
                 });
             } else {
                 res.send("Algo ocurrio con la conexion al API. Intenta mas tarde.")
@@ -113,7 +117,7 @@ app.get('/doctor-panel-de-control', function (req, res) { // -> paciente-menu.ej
                 const nombre = usuario.id_persona.nombre; // accedemos al contenido de paciente
                 const apellido = usuario.id_persona.apellido;
                 const id_doctor = usuario.id_persona.id_persona;
-                const cal = (await calendario.getCalendario(id_doctor)) == null ? "" : await calendario.getCalendario(id_doctor);
+                const cal = (await calendarioMedico.getCalendario(id_doctor)) == null ? "" : await calendarioMedico.getCalendario(id_doctor);
                 const pacientesJSON = await pacientes.getPacientes();
                 res.render('doctor-schedule', { // pasamos los datos de paciente a paciente-menu
                     nombre: "Dr. " + nombre,

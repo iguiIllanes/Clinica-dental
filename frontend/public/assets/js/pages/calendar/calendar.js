@@ -1,37 +1,13 @@
 const fecha = new Date(); // para la fecha
-
-const eventColors = [
-	'b-l b-2x b-greensea',
-	'bg-cyan',
-	'b-l b-2x b-lightred',
-	'b-l b-2x b-success',
-	'b-l b-2x b-primary',
-	'b-l b-2x b-amethyst',
-	'b-l b-2x b-drank'
-];
-
 var calendario = (document.getElementById("calendar-data").innerText); //recupera calendario de HTML
+document.getElementById("calendar-data").innerHTML = " "; // borra calendario de HTML
+
 var isCalendarioEmpty = false;
 if(calendario.length == 0){
 	isCalendarioEmpty = true;
 }else{
-	calendario = calendario.replace('\\','');
-	document.getElementById("calendar-data").innerHTML = " "; // borra calendario de HTML
-	var finalCalendario = calendario.replace(/\\/g,""); //quita los backslashes de la cadena
-	finalCalendario = eval(finalCalendario.slice(1,-1)); // quita los elementos del principio y final, luego convierte a JSON
-	var calendarioParsed = [];
-	
-	for(var i=0; i<finalCalendario.length; i++) { // itera sobre el JSON para formatear una nueva lista para el calendario
-		console.log(finalCalendario[i]);
-		calendarioParsed[i] = {
-			title: finalCalendario[i]['id_paciente']['nombre'],
-			start: finalCalendario[i]['fecha_consulta'],
-			className:eventColors[Math.floor(Math.random() * 7)]
-		};
-	}
+	var calendarioParsed = eval(calendario); // convierte a JSON
 }
-
-
 
 "use strict";
 $('#calendar').fullCalendar({

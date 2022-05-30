@@ -23,6 +23,8 @@ from .views import (
 
     MedicoCitasApiView,
 
+    PacienteCitasApiView,
+
     TarjetasListApiView,
     TarjetasDetailApiView,
 
@@ -79,6 +81,8 @@ urlpatterns = [
     path ('citas/<int:id_cita>/',CitasDetailApiView.as_view()),
 
     path ('citas/medico/<int:id_medico>/',MedicoCitasApiView.as_view()),
+
+    path ('citas/paciente/<int:id_paciente>', PacienteCitasApiView.as_view()),
     
     path ('tarjetas/',TarjetasListApiView.as_view()),
     path ('tarjetas/<int:id_tarjeta>/',TarjetasDetailApiView.as_view()),

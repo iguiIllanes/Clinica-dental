@@ -208,35 +208,44 @@
                     <ul class="demo-choose-skin">
                         <li data-theme="red">
                             <div class="red"></div>
-                            <span>Red</span> </li>
+                            <span>Red</span>
+                        </li>
                         <li data-theme="purple">
                             <div class="purple"></div>
-                            <span>Purple</span> </li>
+                            <span>Purple</span>
+                        </li>
                         <li data-theme="blue">
                             <div class="blue"></div>
-                            <span>Blue</span> </li>
+                            <span>Blue</span>
+                        </li>
                         <li data-theme="cyan" class="active">
                             <div class="cyan"></div>
-                            <span>Cyan</span> </li>
+                            <span>Cyan</span>
+                        </li>
                         <li data-theme="green">
                             <div class="green"></div>
-                            <span>Green</span> </li>
+                            <span>Green</span>
+                        </li>
                         <li data-theme="deep-orange">
                             <div class="deep-orange"></div>
-                            <span>Deep Orange</span> </li>
+                            <span>Deep Orange</span>
+                        </li>
                         <li data-theme="blue-grey">
                             <div class="blue-grey"></div>
-                            <span>Blue Grey</span> </li>
+                            <span>Blue Grey</span>
+                        </li>
                         <li data-theme="black">
                             <div class="black"></div>
-                            <span>Black</span> </li>
+                            <span>Black</span>
+                        </li>
                         <li data-theme="blush">
                             <div class="blush"></div>
-                            <span>Blush</span> </li>
+                            <span>Blush</span>
+                        </li>
                     </ul>
                 </div>
-            
-          <!--      <div role="tabpanel" class="tab-pane" id="chat">
+
+                <!--      <div role="tabpanel" class="tab-pane" id="chat">
                     <div class="demo-settings">
                         <div class="search">
                             <div class="input-group">
@@ -354,7 +363,7 @@
                 </div>-->
             </div>
         </aside>
-        <!-- #END# Right Sidebar -->  
+        <!-- #END# Right Sidebar -->
     </section>
     </section>
 
@@ -363,37 +372,60 @@
             <div class="row">
                 <div class="col-md-12 col-lg-4 col-xl-3">
                     <div class="card m-t-20">
-                        <div class="body">
-                            <strong>Agendar una Cita</strong><br><br><br>
-                            <strong>Fecha</strong>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="datetime-local" class="datepicker form-control"
-                                        placeholder="Año de nacimiento">
+                        <form action="paciente-panel-de-control" method="POST">
+                            <div class="body">
+                                <h3>
+                                    <strong>Agendar una Cita</strong>
+                                </h3>
+                                <br>
+                                <input type="hidden" name="fecha_reserva" value="<%= fecha %>">
+                                <input type="hidden" name="id_paciente" value="<%= id_paciente %>">
+                                <strong>Fecha</strong>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input name="fecha_consulta" type="datetime-local" class="datepicker form-control"
+                                            placeholder="Fecha de reserva" min="<%= fecha %>" step="3600">
+                                    </div>
                                 </div>
-                            </div>
-                            <strong>Hora</strong>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="time" class="datepicker form-control" placeholder="Año de nacimiento">
+                                <strong>Doctor</strong>
+                                <select name="id_doctor" class="form-control show-tick">
+                                    <option value=""><strong>Seleccione una opción</strong></option>
+                                    <% for(var i =0; i < numMedicos; i++ ){ %>
+                                        <option value="<%= medicos[i]['id_persona']['id_persona'] %>"><%= "Dr"+" "+medicos[i]['id_persona']['apellido'] + " " + medicos[i]['id_persona']['nombre'] %></option>x
+                                    <% } %>
+                                </select>
+                                <br><br>
+                                
+                                <strong>Pago de la Reserva</strong><br>
+                                <small>Se le debitará 100 bs</small><br>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="number" class="form-control" placeholder="Número de la tarjeta">
+                                    </div>
                                 </div>
+    
+    
+                                <strong>Fecha de Expiración</strong>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="date" class="datepicker form-control" placeholder="">
+                                    </div>
+                                </div>
+    
+    
+                                <strong>Código de Seguridad</strong><br>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="number" class="form-control" placeholder="CVC">
+                                    </div>
+                                </div>
+    
+                                <button type="submit" class="btn btn-raised g-bg-cyan">Reservar</button>
+                                <a href="paciente-panel-de-control" class="btn btn-raised">
+                                    Cancelar
+                                </a>
                             </div>
-
-                            <strong>Doctor</strong>
-                            <br><br>
-                            <select class="form-control show-tick">
-                                <!--Colgar aqu'i las especialidades del medico-->
-                                <option value=""><strong>Seleccione una opción</strong></option>
-                                <option value="10">Chris</option>
-                                <option value="20">Ale</option>
-                            </select>
-                            <br><br>
-
-                            <button type="submit" class="btn btn-raised g-bg-cyan">Enviar</button>
-                            <a href="paciente-menu.html" class="btn btn-raised">
-                                Cancelar
-                            </a>
-                        </div>
+                        </form>
                     </div>
                 </div>
                 <div class="col-md-12 col-lg-8 col-xl-9">

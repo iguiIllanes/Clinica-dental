@@ -230,12 +230,26 @@ app.get('/info-doctores', async function (req, res) { // -> doctors.ejs
 });
 
 
+app.get('/info-medicos', async function (req, res) { // -> info doctores.ejs
+
+    medicosJSON = await medicos.getMedicos();
+    res.render('informacion-doctores',{
+        medicos: medicosJSON,
+    });
+});
+
+
 app.get('/historial-paciente', function (req, res) { // -> patient-profile.ejs
     res.render('patient-profile');
 });
 
 app.get('/agendarcita', function (req, res) { // -> book-appointment.ejs
     res.render('book-appointment');
+});
+
+
+app.get('/historial', function (req, res) { // -> historial paciente.ejs
+    res.render('historial-paciente');
 });
 
 

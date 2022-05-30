@@ -252,6 +252,9 @@ app.get('/historial', function (req, res) { // -> historial paciente.ejs
     res.render('historial-paciente');
 });
 
+app.get('/historialpaciente', function (req, res) { // -> historial-medico-paciente.ejs
+    res.render('historial-medico-paciente');
+});
 
 app.get('/anadirpago', function (req, res) { // -> add-payments.ejs
     res.render('add-payments');

@@ -1,120 +1,140 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=Edge">
-<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-<title>Odontología especializada</title>
-<link rel="icon" href="favicon.ico" type="image/x-icon">
-<link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
-<link href="assets/plugins/fullcalendar/fullcalendar.min.css" rel="stylesheet">
-<link href="assets/css/main.css" rel="stylesheet">
-<!-- Custom Css -->
-<!-- Swift Themes. You can choose a theme from css/themes instead of get all themes -->
-<link href="assets/css/themes/all-themes.css" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>Odontología especializada</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+    <link href="assets/plugins/fullcalendar/fullcalendar.min.css" rel="stylesheet">
+    <link href="assets/css/main.css" rel="stylesheet">
+    <!-- Custom Css -->
+    <!-- Swift Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link href="assets/css/themes/all-themes.css" rel="stylesheet" />
 </head>
 
 <body class="theme-cyan">
-<!-- Page Loader -->
-<div class="page-loader-wrapper">
-    <div class="loader">
-        <div class="preloader">
-            <div class="spinner-layer pl-red">
-                <div class="circle-clipper left">
-                    <div class="circle"></div>
-                </div>
-                <div class="circle-clipper right">
-                    <div class="circle"></div>
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+        <div class="loader">
+            <div class="preloader">
+                <div class="spinner-layer pl-red">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
                 </div>
             </div>
+            <p>Por favor espere...</p>
         </div>
-        <p>Por favor espere...</p>
     </div>
-</div>
-<!-- #END# Page Loader --> 
-<!-- Overlay For Sidebars -->
-<div class="overlay"></div>
-<!-- #END# Overlay For Sidebars -->
-<!-- #Float icon -->
-<ul id="f-menu" class="mfb-component--br mfb-zoomin" data-mfb-toggle="hover">
-  <li class="mfb-component__wrap">
-    <a href="#" class="mfb-component__button--main g-bg-cyan">
-      <i class="mfb-component__main-icon--resting zmdi zmdi-plus"></i>
-      <i class="mfb-component__main-icon--active zmdi zmdi-close"></i>
-    </a>
-    <ul class="mfb-component__list">
-      <li>
-        <a href="doctor-schedule.html" data-mfb-label="Doctor Schedule" class="mfb-component__button--child bg-blue">
-          <i class="zmdi zmdi-calendar mfb-component__child-icon"></i>
-        </a>
-      </li>
-      <li>
-        <a href="patients.html" data-mfb-label="Patients List" class="mfb-component__button--child bg-orange">
-          <i class="zmdi zmdi-account-o mfb-component__child-icon"></i>
-        </a>
-      </li>
+    <!-- #END# Page Loader -->
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div>
+    <!-- #END# Overlay For Sidebars -->
+    <!-- #Float icon -->
+    <ul id="f-menu" class="mfb-component--br mfb-zoomin" data-mfb-toggle="hover">
+        <li class="mfb-component__wrap">
+            <a href="#" class="mfb-component__button--main g-bg-cyan">
+                <i class="mfb-component__main-icon--resting zmdi zmdi-plus"></i>
+                <i class="mfb-component__main-icon--active zmdi zmdi-close"></i>
+            </a>
+            <ul class="mfb-component__list">
+                <li>
+                    <a href="doctor-schedule.html" data-mfb-label="Doctor Schedule"
+                        class="mfb-component__button--child bg-blue">
+                        <i class="zmdi zmdi-calendar mfb-component__child-icon"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="patients.html" data-mfb-label="Patients List"
+                        class="mfb-component__button--child bg-orange">
+                        <i class="zmdi zmdi-account-o mfb-component__child-icon"></i>
+                    </a>
+                </li>
 
-      <li>
-        <a href="payments.html" data-mfb-label="Payments" class="mfb-component__button--child bg-purple">
-          <i class="zmdi zmdi-balance-wallet mfb-component__child-icon"></i>
-        </a>
-      </li>
+                <li>
+                    <a href="payments.html" data-mfb-label="Payments" class="mfb-component__button--child bg-purple">
+                        <i class="zmdi zmdi-balance-wallet mfb-component__child-icon"></i>
+                    </a>
+                </li>
+            </ul>
+        </li>
     </ul>
-  </li>
-</ul>
-<!-- #Float icon -->
-<!-- Morphing Search  -->
-<div id="morphsearch" class="morphsearch">
-    <div class="morphsearch-content">
-        <div class="dummy-column">
-            <h2>People</h2>
-            <a class="dummy-media-object" href="#"> <img class="round" src="assets/images/xs/avatar1.jpg" alt=""/>
-            <h3>Sara Soueidan</h3>
-            </a> <a class="dummy-media-object" href="#"> <img class="round" src="assets/images/xs/avatar2.jpg" alt=""/>
-            <h3>Rachel Smith</h3>
-            </a> <a class="dummy-media-object" href="#"> <img class="round" src="assets/images/xs/avatar3.jpg" alt=""/>
-            <h3>Peter Finlan</h3>
-            </a> <a class="dummy-media-object" href="#"> <img class="round" src="assets/images/xs/avatar4.jpg" alt=""/>
-            <h3>Patrick Cox</h3>
-            </a> <a class="dummy-media-object" href="#"> <img class="round" src="assets/images/xs/avatar5.jpg" alt=""/>
-            <h3>Tim Holman</h3>
-            </a></div>
-        <div class="dummy-column">
-            <h2>Popular</h2>
-            <a class="dummy-media-object" href="#"> <img class="round" src="assets/images/xs/avatar5.jpg" alt=""/>
-            <h3>Sara Soueidan</h3>
-            </a> <a class="dummy-media-object" href="#"> <img class="round" src="assets/images/xs/avatar4.jpg" alt=""/>
-            <h3>Rachel Smith</h3>
-            </a> <a class="dummy-media-object" href="#"> <img class="round" src="assets/images/xs/avatar1.jpg" alt=""/>
-            <h3>Peter Finlan</h3>
-            </a> <a class="dummy-media-object" href="#"> <img class="round" src="assets/images/xs/avatar2.jpg" alt=""/>
-            <h3>Patrick Cox</h3>
-            </a> <a class="dummy-media-object" href="#"> <img class="round" src="assets/images/xs/avatar3.jpg" alt=""/>
-            <h3>Tim Holman</h3>
-            </a> </div>
-        <div class="dummy-column">
-            <h2>Recent</h2>
-            <a class="dummy-media-object" href="#"> <img class="round" src="assets/images/xs/avatar1.jpg" alt=""/>
-            <h3>Sara Soueidan</h3>
-            </a> <a class="dummy-media-object" href="#"> <img class="round" src="assets/images/xs/avatar5.jpg" alt=""/>
-            <h3>Rachel Smith</h3>
-            </a> <a class="dummy-media-object" href="#"> <img class="round" src="assets/images/xs/avatar1.jpg" alt=""/>
-            <h3>Peter Finlan</h3>
-            </a> <a class="dummy-media-object" href="#"> <img class="round" src="assets/images/xs/avatar4.jpg" alt=""/>
-            <h3>Patrick Cox</h3>
-            </a> <a class="dummy-media-object" href="#"> <img class="round" src="assets/images/xs/avatar2.jpg" alt=""/>
-            <h3>Tim Holman</h3>
-            </a></div>
+    <!-- #Float icon -->
+    <!-- Morphing Search  -->
+    <div id="morphsearch" class="morphsearch">
+        <div class="morphsearch-content">
+            <div class="dummy-column">
+                <h2>People</h2>
+                <a class="dummy-media-object" href="#"> <img class="round" src="assets/images/xs/avatar1.jpg" alt="" />
+                    <h3>Sara Soueidan</h3>
+                </a> <a class="dummy-media-object" href="#"> <img class="round" src="assets/images/xs/avatar2.jpg"
+                        alt="" />
+                    <h3>Rachel Smith</h3>
+                </a> <a class="dummy-media-object" href="#"> <img class="round" src="assets/images/xs/avatar3.jpg"
+                        alt="" />
+                    <h3>Peter Finlan</h3>
+                </a> <a class="dummy-media-object" href="#"> <img class="round" src="assets/images/xs/avatar4.jpg"
+                        alt="" />
+                    <h3>Patrick Cox</h3>
+                </a> <a class="dummy-media-object" href="#"> <img class="round" src="assets/images/xs/avatar5.jpg"
+                        alt="" />
+                    <h3>Tim Holman</h3>
+                </a>
+            </div>
+            <div class="dummy-column">
+                <h2>Popular</h2>
+                <a class="dummy-media-object" href="#"> <img class="round" src="assets/images/xs/avatar5.jpg" alt="" />
+                    <h3>Sara Soueidan</h3>
+                </a> <a class="dummy-media-object" href="#"> <img class="round" src="assets/images/xs/avatar4.jpg"
+                        alt="" />
+                    <h3>Rachel Smith</h3>
+                </a> <a class="dummy-media-object" href="#"> <img class="round" src="assets/images/xs/avatar1.jpg"
+                        alt="" />
+                    <h3>Peter Finlan</h3>
+                </a> <a class="dummy-media-object" href="#"> <img class="round" src="assets/images/xs/avatar2.jpg"
+                        alt="" />
+                    <h3>Patrick Cox</h3>
+                </a> <a class="dummy-media-object" href="#"> <img class="round" src="assets/images/xs/avatar3.jpg"
+                        alt="" />
+                    <h3>Tim Holman</h3>
+                </a>
+            </div>
+            <div class="dummy-column">
+                <h2>Recent</h2>
+                <a class="dummy-media-object" href="#"> <img class="round" src="assets/images/xs/avatar1.jpg" alt="" />
+                    <h3>Sara Soueidan</h3>
+                </a> <a class="dummy-media-object" href="#"> <img class="round" src="assets/images/xs/avatar5.jpg"
+                        alt="" />
+                    <h3>Rachel Smith</h3>
+                </a> <a class="dummy-media-object" href="#"> <img class="round" src="assets/images/xs/avatar1.jpg"
+                        alt="" />
+                    <h3>Peter Finlan</h3>
+                </a> <a class="dummy-media-object" href="#"> <img class="round" src="assets/images/xs/avatar4.jpg"
+                        alt="" />
+                    <h3>Patrick Cox</h3>
+                </a> <a class="dummy-media-object" href="#"> <img class="round" src="assets/images/xs/avatar2.jpg"
+                        alt="" />
+                    <h3>Tim Holman</h3>
+                </a>
+            </div>
+        </div>
+        <!-- /morphsearch-content -->
+        <span class="morphsearch-close"></span>
     </div>
-    <!-- /morphsearch-content --> 
-    <span class="morphsearch-close"></span> </div>
-<!-- Top Bar -->
-<nav class="navbar clearHeader">
-    <div class="col-12">
-        <div class="navbar-header"> <a href="javascript:void(0);" class="bars"></a> <a class="navbar-brand" href="index.html">Odontología <br />Especializada</a> </div>
-        <ul class="nav navbar-nav navbar-right">
-            <!-- Notifications 
+    <!-- Top Bar -->
+    <nav class="navbar clearHeader">
+        <div class="col-12">
+            <div class="navbar-header"> <a href="javascript:void(0);" class="bars"></a> <a class="navbar-brand"
+                    href="index.html">Odontología <br />Especializada</a> </div>
+            <ul class="nav navbar-nav navbar-right">
+                <!-- Notifications 
             <li class="dropdown"> <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"><i class="zmdi zmdi-notifications"></i> <span class="label-count">7</span> </a>
                 <ul class="dropdown-menu">
                     <li class="header">NOTIFICATIONS</li>
@@ -211,41 +231,49 @@
                 </ul>
             </li>
             #END# Tasks -->
-            <li><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="zmdi zmdi-settings"></i></a></li>
-        </ul>
-    </div>
-</nav>
-<!-- #Top Bar -->
-<section> 
-    <!-- Left Sidebar -->
-    <aside id="leftsidebar" class="sidebar"> 
-        <!-- User Info -->
-        <div class="user-info">
-            <div class="admin-image"> <img src="assets/images/random-avatar7.jpg" alt=""> </div>
-            <div class="admin-action-info"> <span>Bienvenido</span>
-                <h3>Dr. John</h3>
-                <ul>
-                    <li><a data-placement="bottom" title="Full Screen" href="sign-in.html" ><i class="zmdi zmdi-sign-in"></i></a></li>
-                </ul>
-            </div>
-            <div class="quick-stats">
-            <!--    <h5>Reporte del día</h5>
-                <ul>
-                    <li><span>16<i>Pacientes</i></span></li>
-                    <li><span>20<i>Pendientes</i></span></li>
-                    <li><span>04<i>Visitas</i></span></li>
-                </ul>-->
-            </div>
+                <li><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i
+                            class="zmdi zmdi-settings"></i></a></li>
+            </ul>
         </div>
-        <!-- #User Info --> 
-        <!-- Menu -->
-        <div class="menu">
-            <ul class="list">
-                <li class="header">Menú de navegación</li>
-            <!--    <li><a href="index.html"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>   -->                                          
-                <li class="active open"><a href="doctor-schedule.html" class="menu-toggle"><i class="zmdi zmdi-calendar-check"></i><span>Citas</span> </a>
-                    <ul class="ml-menu">
-                       <!-- <li class="active"><a href="doctor-schedule.html">Calendario del Doctor</a></li>
+    </nav>
+    <!-- #Top Bar -->
+    <section>
+        <!-- Left Sidebar -->
+        <aside id="leftsidebar" class="sidebar">
+            <!-- User Info -->
+            <div class="user-info">
+                <div class="admin-image"> <img src="assets/images/random-avatar7.jpg" alt=""> </div>
+                <div class="admin-action-info"> <span>Bienvenido</span>
+                    <h3><%= nombre %></h3>
+                    <ul>
+
+                        <li><a data-placement="bottom" title="Go to Profile" href="profile.html"><i
+                                    class="zmdi zmdi-account"></i></a></li>
+                        <li><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i
+                                    class="zmdi zmdi-settings"></i></a></li>
+                        <li><a data-placement="bottom" title="Full Screen" href="sign-in.html"><i
+                                    class="zmdi zmdi-sign-in"></i></a></li>
+                    </ul>
+                </div>
+                <div class="quick-stats">
+                    <h5>Reporte del día</h5>
+                    <ul>
+                        <li><span>16<i>Pacientes</i></span></li>
+                        <li><span>20<i>Pendientes</i></span></li>
+                        <li><span>04<i>Visitas</i></span></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- #User Info -->
+            <!-- Menu -->
+            <div class="menu">
+                <ul class="list">
+                    <li class="header">Menú de navegación</li>
+                    <!--    <li><a href="index.html"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>   -->
+                    <li class="active open"><a href="javascript:void(0);" class="menu-toggle"><i
+                                class="zmdi zmdi-calendar-check"></i><span>Citas</span> </a>
+                        <ul class="ml-menu">
+                            <!-- <li class="active"><a href="doctor-schedule.html">Calendario del Doctor</a></li>
                         <li><a href="book-appointment.html">Reservar Cita</a></li>-->
                     </ul>
                 </li>
@@ -316,16 +344,17 @@
                 <li> <a href="javascript:void(0);"><i class="zmdi zmdi-chart-donut col-blue"></i><span>Information</span> </a> </li>
             </ul>
         </div>-->
-        <!-- #Menu -->
-    </aside>
-    <!-- #END# Left Sidebar --> 
-    <!-- Right Sidebar -->
-    <aside id="rightsidebar" class="right-sidebar">
-        <ul class="nav nav-tabs tab-nav-right" role="tablist">
-            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#skins">Skins</a></li>
-         <!--   <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#chat">Chat</a></li>
+                    <!-- #Menu -->
+        </aside>
+        <!-- #END# Left Sidebar -->
+        <!-- Right Sidebar -->
+        <aside id="rightsidebar" class="right-sidebar">
+            <ul class="nav nav-tabs tab-nav-right" role="tablist">
+                <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#skins">Skins</a></li>
+                <!--   <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#chat">Chat</a></li>
             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#settings">Setting</a></li>-->
-        </ul>
+            </ul>
+            <!--
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane in active in active" id="skins">
                 <ul class="demo-choose-skin">
@@ -359,7 +388,7 @@
                 </ul>
             </div>
         
-           <!-- <div role="tabpanel" class="tab-pane" id="chat">
+           - <div role="tabpanel" class="tab-pane" id="chat">
                 <div class="demo-settings">
                     <div class="search">
                         <div class="input-group">
@@ -474,74 +503,90 @@
                         </li>
                     </ul>
                 </div>
-            </div>-->
-        </div>
-    </aside>
-    <!-- #END# Right Sidebar --> 
-</section>
+            </div>
+            </div>
+        </aside>-->
+        <!-- #END# Right Sidebar -->
+    </section>
 
-<section class="content page-calendar">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12 col-lg-4 col-xl-3">
-                <div class="card m-t-20">
-                    <div class="body">
-                        <strong>Agendar una Cita</strong><br><br><br>
-                            <strong>Fecha</strong>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="datetime-local" class="datepicker form-control" placeholder="Año de nacimiento">
+    <section class="content page-calendar">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 col-lg-4 col-xl-3">
+                    <div class="card m-t-20">
+                        <form method="POST" action="doctor-panel-de-control">
+                            <div class="body">
+                                <h3><strong>Agendar una Cita</strong></h3>
+                                <br>
+                                <input type="hidden" name="id_doctor" value="<%= id_doctor %>">
+                                <input type="hidden" name="fecha_reserva" value="<%= fecha %>">
+
+                                <strong>Fecha</strong>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="datetime-local" class="datepicker form-control"
+                                            placeholder="Fecha de la consulta" name="fecha_consulta" min="<%%>" max="2015-04-24 10:00" step="3600">
+                                    </div>
                                 </div>
+
+                                <strong>Paciente</strong>
+                                <br><br>
+                                <select name="id_paciente" class="form-control show-tick">
+                                    <option value=""><strong>Seleccione una opción</strong></option>
+                                    <%for(var i=0; i < numPacientes; i++){%>
+                                        <option value="<%= pacientes[i]['id_persona']['id_persona'] %>">
+                                            <%= pacientes[i]['id_persona']['apellido'] + " " + pacientes[i]['id_persona']['nombre']%>
+                                        </option>
+                                    <%}%>
+                                </select>
+                                <br><br>
+
+                                <button type="submit" class="btn btn-raised g-bg-cyan">Enviar</button>
+                                <a href="doctor-panel-de-control" class="btn btn-raised">
+                                    Cancelar
+                                </a>
                             </div>
-                            
-                            <strong>Paciente</strong>
-                            <br><br>
-                            <select class="form-control show-tick">
-                                <!--Colgar aqu'i las especialidades del medico-->
-                                <option value=""><strong>Seleccione una opción</strong></option>
-                                <option value="10">Chris</option>
-                                <option value="20">Ale</option>
-                            </select>
-                            <br><br>
-                       
-                            <button type="submit" class="btn btn-raised g-bg-cyan">Enviar</button>
-                            <a href="doctor-schedule.html" class="btn btn-raised">
-                                Cancelar
-                            </a>
-                        
+                        </form>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-12 col-lg-8 col-xl-9">
-                <div class="card m-t-20">
-                    <div class="body">
-                        <button class="btn btn-raised btn-success btn-sm m-r-0 m-t-0"
-                        id="change-view-day">Hoy</button>
-                        <button class="btn btn-raised btn-default btn-sm m-r-0 m-t-0"
-                        id="change-view-week">Esta Semana</button>
-                        <button class="btn btn-raised btn-default btn-sm m-r-0 m-t-0"
-                        id="change-view-month">Este Mes</button>
-                        <div id="calendar">
-                            <p id="calendar-data">
-                                <%= calendario %>
-                            </p>
+                <div class="col-md-12 col-lg-8 col-xl-9">
+                    <div class="card m-t-20">
+                        <div class="body">
+                            <button class="btn btn-raised btn-success btn-sm m-r-0 m-t-0"
+                                id="change-view-day">Hoy</button>
+                            <button class="btn btn-raised btn-default btn-sm m-r-0 m-t-0" id="change-view-week">Esta
+                                Semana</button>
+                            <button class="btn btn-raised btn-default btn-sm m-r-0 m-t-0" id="change-view-month">Este
+                                Mes</button>
+                            <div id="calendar">
+                                <p id="calendar-data">
+                                    <%= calendario %>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<div class="color-bg"></div>
-<!-- Jquery Core Js --> 
-<script src="assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js -->
-<script src="assets/bundles/morphingsearchscripts.bundle.js"></script> <!-- morphing search Js --> 
-<script src="assets/bundles/vendorscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js --> 
+    </section>
+    <div class="color-bg"></div>
+    <!-- Jquery Core Js -->
+    <script src="assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js -->
+    <script src="assets/bundles/morphingsearchscripts.bundle.js"></script> <!-- morphing search Js -->
+    <script src="assets/bundles/vendorscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js -->
 
-<script src="assets/bundles/fullcalendarscripts.bundle.js"></script><!--/ calender javascripts --> 
+    <script src="assets/bundles/fullcalendarscripts.bundle.js"></script>
+    <!--/ calender javascripts -->
 
-<script src="assets/bundles/mainscripts.bundle.js"></script><!-- Custom Js -->
-<script src="assets/bundles/morphingscripts.bundle.js"></script><!-- morphing search page js --> 
-<script src="assets/js/pages/calendar/calendar.js"></script>
+    <script src="assets/bundles/mainscripts.bundle.js"></script><!-- Custom Js -->
+    <script src="assets/bundles/morphingscripts.bundle.js"></script><!-- morphing search page js -->
+    <script src="assets/js/pages/calendar/calendar.js"></script>
+
+    <script type="text/javascript">
+        $(".datepicker").datepicker({
+            format: "yyyy/mm/dd",
+        });
+    </script>
 </body>
+
 </html>

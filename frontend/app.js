@@ -134,6 +134,7 @@ app.get('/doctor-panel-de-control', function (req, res) { // -> paciente-menu.ej
 
 });
 
+
 app.post('/doctor-panel-de-control', function (req, res) {
     id_doctor = req.body.id_doctor;
     id_paciente = req.body.id_paciente;

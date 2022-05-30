@@ -21,94 +21,88 @@
     <div class="theme-bg">
         <div class="container">
             <div class="row">
-                <div class="col">
-                    
-                </div>
-                <div class="card text" id="card">
-                    <h1 class="title"><span>Odontología Especializada</span>Registrate <span class="msg">Registra una nueva
-                            cuenta</span></h1>
-                    <div class="col-12">
-                        <form id="sign_up" class="col-12" method="POST">
-                            <div class="row">
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" name="nombre" placeholder="Nombres" required autofocus>
+                <form action="registrate" method="POST">
+                    <div class="card text" id="card">
+                        <h1 class="title"><span>Odontología Especializada</span>Registrate <span class="msg">Registra una nueva
+                                cuenta</span></h1>
+                        <div class="col-12">
+                            <form id="sign_up" class="col-12" method="POST">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="nombre" placeholder="Nombres" required autofocus>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="apellido" placeholder="Apellidos" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="ci" placeholder="C.I." required>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" name="apellido" placeholder="Apellidos" required>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="telefono" placeholder="Teléfono" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <input type="date" name="fecha_nacimiento" required> 
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="correo_paciente" placeholder="Correo Electrónico" required>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" name="ci" placeholder="C.I." required>
+            
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="enfermedades_base" placeholder="Enfermedades base" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="alergias" placeholder="Alergias" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="usuario" placeholder="Nombre de Usuario" required>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" name="telefono" placeholder="Teléfono" required>
+            
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" name="password" minlength="6" placeholder="Contraseña" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" name="conf_password" minlength="6" placeholder="Confirmar Contraseña" required>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" name="edad" placeholder="Edad" required>
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <input type="date" name="fecha_nacimiento" required> 
-                                    </div>
-                                </div>
-                            </div>
         
-                            <div class="row">
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" name="correo" placeholder="Correo Electrónico" required>
-                                    </div>
+                                <div class="text-center">
+                                    <input type="submit" class="btn btn-raised g-bg-cyan waves-effect" value="Regístrate">
                                 </div>
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" name="enfermedades_base" placeholder="Enfermedades base" required>
-                                    </div>
+                                <div class="m-t-10 m-b--5 align-center">
+                                    <a href="/">Ya tienes una cuenta?</a>
                                 </div>
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" name="alergias" placeholder="Alergias" required>
-                                    </div>
-                                </div>
-                            </div>
-        
-                            <div class="row">
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" name="usuario" placeholder="Nombre de Usuario" required>
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <input type="password" class="form-control" name="password" minlength="6" placeholder="Contraseña" required>
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <input type="password" class="form-control" name="conf_password" minlength="6" placeholder="Confirmar Contraseña" required>
-                                    </div>
-                                </div>
-                            </div>
-    
-                            <div class="text-center">
-                                <a href="#" class="btn btn-raised g-bg-cyan waves-effect">Regístrate</a>
-                            </div>
-                            <div class="m-t-10 m-b--5 align-center">
-                                <a href="/">Ya tienes una cuenta?</a>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
             <!-- <div class="card-top"></div> -->
         </div>

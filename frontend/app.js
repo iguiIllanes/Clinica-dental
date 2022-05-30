@@ -247,7 +247,7 @@ app.get('/pagos-paciente', function (req, res) { // -> patient-invoice.ejs
     res.render('patient-invoice');
 });
 
-app.get('/anadir-paciente', function (req, res) { // -> add-patient.ejs
+app.get('/anadir_paciente', function (req, res) { // -> add-patient.ejs
     res.render('add-patient');
 });
 
@@ -272,6 +272,11 @@ app.get('/registrate', function (req, res){
     res.render('sign-up');
 });
 
+
+app.get('/anadir-paciente', function (req, res){
+    res.render('add-patient');
+});
+
 app.post('/registrate', function (req, res){
     nombre = req.body.nombre;
     apellido = req.body.apellido;
@@ -286,16 +291,16 @@ app.post('/registrate', function (req, res){
     conf_password = req.body.conf_password;
 
 
-    console.log(nombre);
-    console.log(apellido);
-    console.log(ci);
-    console.log(telefono);
-    console.log(fecha_nacimiento);
-    console.log(correo_paciente);
-    console.log(enfermedades_base);
-    console.log(alergias);
-    console.log(usuario);
-    console.log(password);
+    // console.log(nombre);
+    // console.log(apellido);
+    // console.log(ci);
+    // console.log(telefono);
+    // console.log(fecha_nacimiento);
+    // console.log(correo_paciente);
+    // console.log(enfermedades_base);
+    // console.log(alergias);
+    // console.log(usuario);
+    // console.log(password);
 
 
     if(!(conf_password == password)){
@@ -318,6 +323,54 @@ app.post('/registrate', function (req, res){
 
 
 });
+
+app.post('/anadir_paciente', function (req, res){
+    nombre = req.body.nombre;
+    apellido = req.body.apellido;
+    ci = req.body.ci;
+    telefono = req.body.telefono;
+    fecha_nacimiento = req.body.fecha_nacimiento;
+    correo_paciente = req.body.correo_paciente;
+    enfermedades_base = req.body.enfermedades_base;
+    alergias = req.body.alergias;
+    usuario = req.body.usuario;
+    password = req.body.password;
+    conf_password = req.body.conf_password;
+
+
+    // console.log(nombre);
+    // console.log(apellido);
+    // console.log(ci);
+    // console.log(telefono);
+    // console.log(fecha_nacimiento);
+    // console.log(correo_paciente);
+    // console.log(enfermedades_base);
+    // console.log(alergias);
+    // console.log(usuario);
+    // console.log(password);
+
+
+    if(!(conf_password == password)){
+        res.send("Las contraseñas no coinciden");
+    }else{
+        apiRequest.post({
+            headers: {
+                'content-type': 'application/x-www-form-urlencoded'
+            },
+            url: 'http://127.0.0.1:8000/api/pacientes/',
+            body: `nombre=${nombre}&apellido=${apellido}&ci=${ci}&telefono=${telefono}&fecha_nacimiento=${fecha_nacimiento}&correo_paciente=${correo_paciente}&enfermedades_base=${enfermedades_base}&alergias=${alergias}&usuario=${usuario}&password=${password}`,
+        }, function (error, response, body) {
+            if(!error){
+                res.send('Usuario creado exitosamente.');
+            }else{
+                res.send('Algo ocurrio. Por favor intenta mas tarde.');
+            }
+        });
+    }
+
+
+});
+
 
 app.get('/password-incorrecto', function (req, res){
     res.render('404');

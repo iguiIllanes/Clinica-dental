@@ -7,8 +7,8 @@ class Persona(models.Model):
     apellido = models.CharField(max_length=255)
     telefono = models.IntegerField()
     fecha_nacimiento = models.DateField()
-    class Meta:
-        unique_together = ["ci","nombre", "apellido", "fecha_nacimiento"]
+    # class Meta:
+    #     unique_together = ["ci","nombre", "apellido", "fecha_nacimiento"]
     def __str__(self):
         return str(self.id_persona) + " " + self.nombre +  " " + self.apellido
 

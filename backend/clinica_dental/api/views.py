@@ -90,20 +90,34 @@ class PacientesListApiView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
     def post(self, request, *args, **kwargs):
-        data = {
-            "id_persona": request.data.get("id_persona"),
-            "correo_paciente": request.data.get("correo_paciente"),
-            "usuario": request.data.get("usuario"),
-            "password": request.data.get("password"),
-            "alergias": request.data.get("alergias"),
-            "enfermedades_base": request.data.get("enfermedades_base"),
+
+        persona = {
+            "ci":request.data.get("ci"),
+            "nombre": request.data.get("nombre"),
+            "apellido": request.data.get("apellido"),
+            "telefono": request.data.get("telefono"),
+            "fecha_nacimiento": request.data.get("fecha_nacimiento")
         }
 
-        serializer = PacienteSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
+        persona_serializer = PersonaSerializer(data=persona)
+        if persona_serializer.is_valid():
+            persona_serializer.save()
+            data = {
+                "id_persona": persona_serializer.data["id_persona"],
+                "correo_paciente": request.data.get("correo_paciente"),
+                "usuario": request.data.get("usuario"),
+                "password": request.data.get("password"),
+                "alergias": request.data.get("alergias"),
+                "enfermedades_base": request.data.get("enfermedades_base"),
+            }
+
+            paciente_serializer = PacienteSerializer(data=data)        
+            if paciente_serializer.is_valid():
+                paciente_serializer.save()
+                return Response(paciente_serializer.data, status=status.HTTP_201_CREATED)
+            return Response(paciente_serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
+        return Response(persona_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+   
 
 class PacientesDetailApiView(APIView):
     def get_paciente(self, usuario):

@@ -43,7 +43,6 @@ class MedicoEspecialidadSerializer(serializers.ModelSerializer):
         return response   
 
 class PacienteSerializer(serializers.ModelSerializer):
-    #id_persona = PersonaSerializer()
     class Meta:
         model = Paciente
         fields = ('id_persona', 'correo_paciente', 'usuario', 'password', 'alergias', 'enfermedades_base')

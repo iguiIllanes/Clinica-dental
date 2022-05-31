@@ -244,13 +244,34 @@ app.get('/info-doctores', async function (req, res) { // -> doctors.ejs
         nombre: await userData['id_persona']['nombre'],
         medicos: medicosJSON,
     });
+
+    
 });
 
+app.get('/info-medicos', async function (req, res) { // -> doctors.ejs
+    checkSession(req,res);
+    medicosJSON = await medicos.getMedicos();
+    userData = await getUserData.getUserData(req.session.username, req.session.isDoctor);
+    res.render('informacion-doctores', {
+        nombre: await userData['id_persona']['nombre'],
+        medicos: medicosJSON,
+    });
+
+    
+});
 
 app.get('/historial-paciente', async function (req, res) { // -> patient-profile.ejs
     checkSession(req,res);
     userData = await getUserData.getUserData(req.session.username, req.session.isDoctor);
     res.render('patient-profile', {
+        nombre: await userData['id_persona']['nombre'],
+    });
+});
+
+app.get('/historial', async function (req, res) { // -> patient-profile.ejs
+    checkSession(req,res);
+    userData = await getUserData.getUserData(req.session.username, req.session.isDoctor);
+    res.render('historial-paciente', {
         nombre: await userData['id_persona']['nombre'],
     });
 });

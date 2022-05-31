@@ -100,7 +100,7 @@
                 <div class="admin-action-info"> <span>Bienvenido</span>
                     <h3><%= nombre_usuario %></h3>
                     <ul>
-                        <li><a data-placement="bottom" title="Cerrar Sesion" href="sign-in.html"><i
+                        <li><a data-placement="bottom" title="Cerrar Sesion" href="doctor-iniciar-sesion"><i
                                     class="zmdi zmdi-sign-in"></i></a></li>
                     </ul>
                 </div>
@@ -231,8 +231,8 @@
                                         <option value="" selected><strong>Seleccione un paciente</strong></option>
                                         <%for(var i=0; i < pacientes.length; i++) {%>
                                             <option value="<%= pacientes[i]['id_persona']['id_persona'] %>">
-                                                <%= pacientes[i]['id_persona']['nombre'] + " " +
-                                                    pacientes[i]['id_persona']['apellido'] %>
+                                                <%= pacientes[i]['id_persona']['apellido'] + " " +
+                                                    pacientes[i]['id_persona']['nombre'] %>
                                             </option>
                                             <% } %>
                                     </select>
@@ -310,8 +310,8 @@
                                         <% for (var i = 0; i < consultas.length; i++) { %>
                                             <tr>
                                                 <td><%= consultas[i]['id_Cita']['fecha_consulta'].substring(0,10) %></td>
-                                                <td><%= consultas[i]['id_Servicio']['nombre_servicio'] %></td>
                                                 <td><%= consultas[i]['Descripcion'] %></td>
+                                                <td><%= consultas[i]['id_Servicio']['nombre_servicio'] %></td>
                                                 <td><%= consultas[i]['MontoTotal'] %></td>
                                             </tr>
                                         <% } %>

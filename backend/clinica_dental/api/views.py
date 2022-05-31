@@ -1,6 +1,8 @@
 import json
 import re
 
+from datetime import datetime
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, permissions
@@ -779,6 +781,23 @@ class ConsultasUsuarioDetailApiView(APIView): #TODO corregir esto para poder hac
             )
 
         Serializer = ConsultaSerializer(consultas_instance, many=True)
+        return Response(Serializer.data, status=status.HTTP_200_OK)
+
+class ConsultasCitasDetailApiView(APIView): #TODO corregir esto para poder hacer get en historial-paciente
+    def get_citas(self, id_paciente, id_doctor):
+        try:
+            return Cita.objects.filter(id_paciente=id_paciente).filter(id_doctor=id_doctor).filter(fecha_consulta__date=datetime.today().strftime('%Y-%m-%d'))
+        except Cita.DoesNotExist:
+            return None
+
+    def get(self, request, id_paciente,id_doctor, *args, **kwargs):
+        citas_instance = self.get_citas(id_paciente,id_doctor)        
+        if not citas_instance:
+            return Response(
+                {"res": "Object with that id does not exists"},
+                status=status.HTTP_400_BAD_REQUEST
+            )    
+        Serializer = CitaSerializer(citas_instance, many=True)
         return Response(Serializer.data, status=status.HTTP_200_OK)
 
 class  PagosConsultasListApiView(APIView):

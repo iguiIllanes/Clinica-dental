@@ -371,7 +371,7 @@ app.get('/cuenta-removida', function (req, res) {
 
 // para cerrar sesion
 app.get('/cerrar-sesion', function (req, res) {
-    req.session.destroy();async 
+    req.session.destroy();
     res.redirect('/');
 });
 

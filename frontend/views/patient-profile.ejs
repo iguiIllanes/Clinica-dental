@@ -1,313 +1,369 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=Edge">
-<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-<title>Odontoligía Especializada</title>
-<link rel="icon" href="favicon.ico" type="image/x-icon">
-<link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
-<link href="assets/css/main.css" rel="stylesheet">
-<!-- Custom Css -->
 
-<!-- Swift Themes. You can choose a theme from css/themes instead of get all themes -->
-<link href="assets/css/themes/all-themes.css" rel="stylesheet" />
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>Odontoligía Especializada</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+    <link href="assets/css/main.css" rel="stylesheet">
+    <!-- Custom Css -->
+
+    <!-- Swift Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link href="assets/css/themes/all-themes.css" rel="stylesheet" />
 </head>
 
 <body class="theme-cyan">
-<!-- Page Loader -->
-<div class="page-loader-wrapper">
-    <div class="loader">
-        <div class="preloader">
-            <div class="spinner-layer pl-red">
-                <div class="circle-clipper left">
-                    <div class="circle"></div>
-                </div>
-                <div class="circle-clipper right">
-                    <div class="circle"></div>
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+        <div class="loader">
+            <div class="preloader">
+                <div class="spinner-layer pl-red">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
                 </div>
             </div>
+            <p>Por favor espere...</p>
         </div>
-        <p>Por favor espere...</p>
     </div>
-</div>
-<!-- #END# Page Loader --> 
-<!-- Overlay For Sidebars -->
-<div class="overlay"></div>
-<!-- #END# Overlay For Sidebars -->
-<!-- #Float icon -->
-<ul id="f-menu" class="mfb-component--br mfb-zoomin" data-mfb-toggle="hover">
-  <li class="mfb-component__wrap">
-    <a href="#" class="mfb-component__button--main g-bg-cyan">
-      <i class="mfb-component__main-icon--resting zmdi zmdi-plus"></i>
-      <i class="mfb-component__main-icon--active zmdi zmdi-close"></i>
-    </a>
-    <ul class="mfb-component__list">
-        <li>
-            <a href="/doctor-panel-de-control" data-mfb-label="Citas"
-                class="mfb-component__button--child bg-blue">
-                <i class="zmdi zmdi-calendar mfb-component__child-icon"></i>
+    <!-- #END# Page Loader -->
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div>
+    <!-- #END# Overlay For Sidebars -->
+    <!-- #Float icon -->
+    <ul id="f-menu" class="mfb-component--br mfb-zoomin" data-mfb-toggle="hover">
+        <li class="mfb-component__wrap">
+            <a href="#" class="mfb-component__button--main g-bg-cyan">
+                <i class="mfb-component__main-icon--resting zmdi zmdi-plus"></i>
+                <i class="mfb-component__main-icon--active zmdi zmdi-close"></i>
             </a>
-        </li>
-        <li>
-            <a href="/info-medicos" data-mfb-label="Información Doctor"
-                class="mfb-component__button--child bg-orange">
-                <i class="zmdi zmdi-account-o mfb-component__child-icon"></i>
-            </a>
-        </li>
+            <ul class="mfb-component__list">
+                <li>
+                    <a href="/doctor-panel-de-control" data-mfb-label="Citas"
+                        class="mfb-component__button--child bg-blue">
+                        <i class="zmdi zmdi-calendar mfb-component__child-icon"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="/info-medicos" data-mfb-label="Información Doctor"
+                        class="mfb-component__button--child bg-orange">
+                        <i class="zmdi zmdi-account-o mfb-component__child-icon"></i>
+                    </a>
+                </li>
 
-        <li>
-            <a href="/historial-paciente" data-mfb-label="Historial Medico" class="mfb-component__button--child bg-purple">
-                <i class="zmdi zmdi-balance-wallet mfb-component__child-icon"></i>
-            </a>
+                <li>
+                    <a href="/historial-paciente" data-mfb-label="Historial Medico"
+                        class="mfb-component__button--child bg-purple">
+                        <i class="zmdi zmdi-balance-wallet mfb-component__child-icon"></i>
+                    </a>
+                </li>
+            </ul>
         </li>
     </ul>
-  </li>
-</ul>
-<!-- #Float icon -->
-<!-- Morphing Search  -->
-<div id="morphsearch" class="morphsearch">
+    <!-- #Float icon -->
+    <!-- Morphing Search  -->
+    <div id="morphsearch" class="morphsearch">
 
-    <!-- /morphsearch-content --> 
-    <span class="morphsearch-close"></span> </div>
-<!-- Top Bar -->
-<nav class="navbar clearHeader">
-    <div class="col-12">
-        <div class="navbar-header"> <a href="javascript:void(0);" class="bars"></a> <a class="navbar-brand"
-            href="doctor-panel-de-control">Odontología Especializada</a> </div>
-        <ul class="nav navbar-nav navbar-right">
-            <!-- Notifications -->
-            
-            <!-- Tasks -->
-            
-            <!-- #END# Tasks -->
-            <li><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="zmdi zmdi-settings"></i></a></li>
-        </ul>
+        <!-- /morphsearch-content -->
+        <span class="morphsearch-close"></span>
     </div>
-</nav>
-<!-- #Top Bar -->
-<section> 
-    <!-- Left Sidebar -->
-    <aside id="leftsidebar" class="sidebar"> 
-        <!-- User Info -->
-        <div class="user-info">
-            <div class="admin-image"> <img src="assets/images/random-avatar7.jpg" alt=""> </div>
-            <div class="admin-action-info"> <span>Bienvenido</span>
-                <h3>Dr. John</h3>
-                <ul>
-                    <li><a data-placement="bottom" title="Cerrar Sesion" href="sign-in.html" ><i class="zmdi zmdi-sign-in"></i></a></li>
-                </ul>
-            </div>
-            <div class="quick-stats">
-               <!-- <h5>REPORTE DEL DÍA</h5>
+    <!-- Top Bar -->
+    <nav class="navbar clearHeader">
+        <div class="col-12">
+            <div class="navbar-header"> <a href="javascript:void(0);" class="bars"></a> <a class="navbar-brand"
+                    href="doctor-panel-de-control">Odontología Especializada</a> </div>
+            <ul class="nav navbar-nav navbar-right">
+                <!-- Notifications -->
+
+                <!-- Tasks -->
+
+                <!-- #END# Tasks -->
+                <li><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i
+                            class="zmdi zmdi-settings"></i></a></li>
+            </ul>
+        </div>
+    </nav>
+    <!-- #Top Bar -->
+    <section>
+        <!-- Left Sidebar -->
+        <aside id="leftsidebar" class="sidebar">
+            <!-- User Info -->
+            <div class="user-info">
+                <div class="admin-image"> <img src="assets/images/random-avatar7.jpg" alt=""> </div>
+                <div class="admin-action-info"> <span>Bienvenido</span>
+                    <h3><%= nombre_usuario %></h3>
+                    <ul>
+                        <li><a data-placement="bottom" title="Cerrar Sesion" href="sign-in.html"><i
+                                    class="zmdi zmdi-sign-in"></i></a></li>
+                    </ul>
+                </div>
+                <div class="quick-stats">
+                    <!-- <h5>REPORTE DEL DÍA</h5>
                 <ul>
                     <li><span>1<i>Pacientes</i></span></li>
                     <li><span>20<i>Pendientes</i></span></li>
                     <li><span>04<i>Visitas</i></span></li>
                 </ul>-->
+                </div>
             </div>
-        </div>
-        <!-- #User Info --> 
-        <!-- Menu -->
-        <div class="menu">
-            <ul class="list">
-                <li class="header">Menú de navegación </li>
-                <!--<li><a href="index.html"><i class="zmdi zmdi-home"></i><span>Panel de control</span></a></li>  -->                                             
-                <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-calendar-check"></i><span>Citas</span> </a>
-                    <ul class="ml-menu">
-                        <li><a href="doctor-panel-de-control">Agenda del Doctor</a></li>
-                    </ul>
-                </li>
-                <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account-add"></i><span>Doctores</span> </a>
-                    <ul class="ml-menu">
-                        <li><a href="info-medicos">Información Doctores</a></li>
-                        <!-- <li><a href="add-doctor.html">Añadir Doctor</a></li>                        -->
-                      <!--  <li><a href="profile.html">Perfil Doctor </a></li>-->
-                    </ul>
-                </li>
-                <li class="active open"><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account-o"></i><span>Pacientes</span> </a>
-                    <ul class="ml-menu">
-                     <!--   <li><a href="patients.html">Pacientes</a></li>-->
-                        <li><a href="anadir-paciente">Añadir Pacientes</a></li>                       
-                        <li class="active"><a href="historial-paciente">Historial médico</a></li>
-                    <!--    <li><a href="patient-invoice.html">Pagos del paciente</a></li> -->
-                    </ul>
-                </li>
-            <!--    <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-balance-wallet"></i><span>Pagos</span> </a>
+            <!-- #User Info -->
+            <!-- Menu -->
+            <div class="menu">
+                <ul class="list">
+                    <li class="header">Menú de navegación </li>
+                    <!--<li><a href="index.html"><i class="zmdi zmdi-home"></i><span>Panel de control</span></a></li>  -->
+                    <li><a href="javascript:void(0);" class="menu-toggle"><i
+                                class="zmdi zmdi-calendar-check"></i><span>Citas</span> </a>
+                        <ul class="ml-menu">
+                            <li><a href="doctor-panel-de-control">Agenda del Doctor</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="javascript:void(0);" class="menu-toggle"><i
+                                class="zmdi zmdi-account-add"></i><span>Doctores</span> </a>
+                        <ul class="ml-menu">
+                            <li><a href="info-medicos">Información Doctores</a></li>
+                            <!-- <li><a href="add-doctor.html">Añadir Doctor</a></li>                        -->
+                            <!--  <li><a href="profile.html">Perfil Doctor </a></li>-->
+                        </ul>
+                    </li>
+                    <li class="active open"><a href="javascript:void(0);" class="menu-toggle"><i
+                                class="zmdi zmdi-account-o"></i><span>Pacientes</span> </a>
+                        <ul class="ml-menu">
+                            <!--   <li><a href="patients.html">Pacientes</a></li>-->
+                            <li><a href="anadir-paciente">Añadir Pacientes</a></li>
+                            <li class="active"><a href="historial-paciente">Historial médico</a></li>
+                            <!--    <li><a href="patient-invoice.html">Pagos del paciente</a></li> -->
+                        </ul>
+                    </li>
+                    <!--    <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-balance-wallet"></i><span>Pagos</span> </a>
                     <ul class="ml-menu">
                         <li> <a href="payments.html">Registro de Pagos</a></li>
                         <li> <a href="add-payments.html">Añadir Pago</a></li>
                         <li> <a href="patient-invoice.html">Pagos del Paciente</a></li>
                     </ul>
                 </li>-->
-                
-            </ul>
-        </div>
-        <!-- #Menu -->
-    </aside>
-    <!-- #END# Left Sidebar --> 
-    <!-- Right Sidebar -->
-    <aside id="rightsidebar" class="right-sidebar">
-        <ul class="nav nav-tabs tab-nav-right" role="tablist">
-            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#skins">Skins</a></li>
-        <!--    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#chat">Chat</a></li>
-            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#settings">Setting</a></li>-->
-        </ul>
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane in active in active" id="skins">
-                <ul class="demo-choose-skin">
-                    <li data-theme="red">
-                        <div class="red"></div>
-                        <span>Red</span> </li>
-                    <li data-theme="purple">
-                        <div class="purple"></div>
-                        <span>Purple</span> </li>
-                    <li data-theme="blue">
-                        <div class="blue"></div>
-                        <span>Blue</span> </li>
-                    <li data-theme="cyan" class="active">
-                        <div class="cyan"></div>
-                        <span>Cyan</span> </li>
-                    <li data-theme="green">
-                        <div class="green"></div>
-                        <span>Green</span> </li>
-                    <li data-theme="deep-orange">
-                        <div class="deep-orange"></div>
-                        <span>Deep Orange</span> </li>
-                    <li data-theme="blue-grey">
-                        <div class="blue-grey"></div>
-                        <span>Blue Grey</span> </li>
-                    <li data-theme="black">
-                        <div class="black"></div>
-                        <span>Black</span> </li>
-                    <li data-theme="blush">
-                        <div class="blush"></div>
-                        <span>Blush</span> </li>
+
                 </ul>
             </div>
-        </div>
-    </aside>
-    <!-- #END# Right Sidebar --> 
-</section>
-
-<section class="content profile-page">
-    <div class="container-fluid">
-        <div class="block-header">
-            <h2> HISTORIAL MÉDICO</h2>
-            <small class="text-muted">Bienvenido a Odontología Especializada</small>
-        </div>        
-        <div class="row clearfix">
-            <div class="col-lg-4 col-md-12 col-sm-12">
-               <!-- <div class=" card patient-profile">
-                    <img src="assets/images/image-1.jpg" class="img-fluid" alt="">                              
-                </div>-->
-                <div class="card">
-                    <div class="header">
-                        <h2>Acerca del Paciente</h2>
-                    </div>
-                    <div class="body">
-                        <div class="form-group drop-custum">
-                            <select name="id_paciente" class="form-control show-tick">
-                                <option value=""><strong>Seleccione un paciente</strong></option>
-                               <option value="10">Masculino</option>
-                               <option value="20">Femenino</option>
-                           </select>
-                        </div>
-                        <div class="col-sm-12">
-                            <button type="submit" class="btn btn-raised g-bg-cyan">
-                              Buscar
-                            </button>
-                        </div>
-                        <strong>Nombres</strong>
-                        <p>Angel David</p>
-                        <strong>Apellidos</strong>
-                        <p>UI UX Design</p>
-                        <strong>Correo</strong>
-                        <p>will.smith@info.com</p>
-                        <strong>Teléfono</strong>
-                        <p>+123 456 789</p>
-                        <strong>Alergias</strong>
-                        <p>+123 456 789</p>
-                        <strong>Enfermedades Base</strong>
-                        <p>+123 456 789</p>
-                        <hr>
-                       
-                    </div>
+            <!-- #Menu -->
+        </aside>
+        <!-- #END# Left Sidebar -->
+        <!-- Right Sidebar -->
+        <aside id="rightsidebar" class="right-sidebar">
+            <ul class="nav nav-tabs tab-nav-right" role="tablist">
+                <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#skins">Skins</a></li>
+                <!--    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#chat">Chat</a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#settings">Setting</a></li>-->
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane in active in active" id="skins">
+                    <ul class="demo-choose-skin">
+                        <li data-theme="red">
+                            <div class="red"></div>
+                            <span>Red</span>
+                        </li>
+                        <li data-theme="purple">
+                            <div class="purple"></div>
+                            <span>Purple</span>
+                        </li>
+                        <li data-theme="blue">
+                            <div class="blue"></div>
+                            <span>Blue</span>
+                        </li>
+                        <li data-theme="cyan" class="active">
+                            <div class="cyan"></div>
+                            <span>Cyan</span>
+                        </li>
+                        <li data-theme="green">
+                            <div class="green"></div>
+                            <span>Green</span>
+                        </li>
+                        <li data-theme="deep-orange">
+                            <div class="deep-orange"></div>
+                            <span>Deep Orange</span>
+                        </li>
+                        <li data-theme="blue-grey">
+                            <div class="blue-grey"></div>
+                            <span>Blue Grey</span>
+                        </li>
+                        <li data-theme="black">
+                            <div class="black"></div>
+                            <span>Black</span>
+                        </li>
+                        <li data-theme="blush">
+                            <div class="blush"></div>
+                            <span>Blush</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
-             <div class="row clearfix">
-            <div class="col-lg-12 col-md-12 col-sm-12">
-                <div class="card">
-                    <div class="header">
-                        <h2>Odontoligía Especializada</h2>
-                        <ul class="header-dropdown">
-                        <!--    <li class="dropdown"> <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="zmdi zmdi-more-vert"></i></a>
+        </aside>
+        <!-- #END# Right Sidebar -->
+    </section>
+
+    <section class="content profile-page">
+        <div class="container-fluid">
+            <div class="block-header">
+                <h2> HISTORIAL MÉDICO</h2>
+                <small class="text-muted">Bienvenido a Odontología Especializada</small>
+            </div>
+            <div class="row clearfix">
+                <div class="col-lg-4 col-md-12 col-sm-12">
+                    <!-- <div class=" card patient-profile">
+                    <img src="assets/images/image-1.jpg" class="img-fluid" alt="">                              
+                </div>-->
+                    <div class="card">
+                        <div class="header">
+                            <h2>Acerca del Paciente</h2>
+                        </div>
+                        <div class="body">
+
+                            <form action="historial-paciente" method="POST">
+                                <div class="form-group drop-custum">
+                                    <select name="id_persona" class="form-control show-tick">
+                                        <option value="" selected><strong>Seleccione un paciente</strong></option>
+                                        <%for(var i=0; i < pacientes.length; i++) {%>
+                                            <option value="<%= pacientes[i]['id_persona']['id_persona'] %>">
+                                                <%= pacientes[i]['id_persona']['nombre'] + " " +
+                                                    pacientes[i]['id_persona']['apellido'] %>
+                                            </option>
+                                            <% } %>
+                                    </select>
+                                </div>
+                                <div class="col-sm-12">
+                                    <button type="submit" class="btn btn-raised g-bg-cyan">
+                                        Buscar Paciente
+                                    </button>
+                                </div>
+                            </form>
+
+                            <!-- Datos paciente -->
+                            <br>
+                            <strong>Nombres</strong>
+                            <p><%= nombre %></p>
+                            <strong>Apellidos</strong>
+                            <p><%= apellido %></p>
+                            <strong>Correo</strong>
+                            <p><%= correo %></p>
+                            <strong>Teléfono</strong>
+                            <p><%= telefono %></p>
+                            <strong>Alergias</strong>
+                            <ul>
+                                <% if(alergias.length > 1){ %>
+                                    <% for(var i=0; i < alergias.length; i++){ %>
+                                        <li><%= alergias[i] %></li>
+                                    <% } %>
+                                <% }else{ %>
+                                    <li><%= alergias[0] %></li>
+                                <% } %>
+
+                            </ul>
+                            <strong>Enfermedades Base</strong>
+                            <ul>
+                                <% if(enfermedades_base.length > 1){ %>
+                                    <% for(var i=0; i < enfermedades_base.length; i++){ %>
+                                        <li><%= enfermedades_base[i] %></li>
+                                    <% } %>
+                                <% }else{ %>
+                                    <li><%= enfermedades_base[0] %></li>
+                                <% } %>
+                            </ul>
+                            <br>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="card">
+                            <div class="header">
+                                <h2>Registro de Consultas</h2>
+                                <ul class="header-dropdown">
+                                    <!--    <li class="dropdown"> <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="zmdi zmdi-more-vert"></i></a>
                                 <ul class="dropdown-menu pull-right">
                                     <li><a href="javascript:void(0);">Action</a></li>
                                     <li><a href="javascript:void(0);">Another action</a></li>
                                     <li><a href="javascript:void(0);">Something else here</a></li>
                                 </ul>
                             </li>-->
-                        </ul>
-                    </div>
-                    <div class="body table-responsive">
-                        <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
-                            <thead>
-                                <tr>
-                                    <th>Fecha</th>
-                                    <th>Descripción</th>
-                                    <th>Servicio</th>
-                                    <th>Monto Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>27-05-2022</td>
-                                    <td>Curación de dientes</td>
-                                    <td>Consulta</td>
-                                    <td>$1000,000</td>
-                                </tr>
-                                <tr>
-                                    <td>27-05-2022</td>
-                                    <td>Curación de dientes</td>
-                                    <td>Consulta</td>
-                                    <td>$1000,800</td>
-                                </tr>
-                                <tr>
-                                    <td>27-05-2022</td>
-                                    <td>Curación de dientes</td>
-                                    <td>Consulta</td>
-                                    <td>$1000,800</td>
-                                </tr>
-                                <tr>
-                                    <td>27-05-2022</td>
-                                    <td>Curación de dientes</td>
-                                    <td>Consulta</td>
-                                    <td>$1000,800</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="col-sm-12">
-                            <a href="historial" type="submit" class="btn btn-raised g-bg-cyan">Añadir Registro</a>
-                            <a href="historial-paciente" class="btn btn-raised">
-                                Cancelar
-                            </a>
+                                </ul>
+                            </div>
+                            <div class="body table-responsive historial-container">
+                                <table
+                                    class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Fecha</th>
+                                            <th>Descripción</th>
+                                            <th>Servicio</th>
+                                            <th>Monto Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% for (var i = 0; i < consultas.length; i++) { %>
+                                            <tr>
+                                                <td><%= consultas[i]['id_Cita']['fecha_consulta'].substring(0,10) %></td>
+                                                <td><%= consultas[i]['id_Servicio']['nombre_servicio'] %></td>
+                                                <td><%= consultas[i]['Descripcion'] %></td>
+                                                <td><%= consultas[i]['MontoTotal'] %></td>
+                                            </tr>
+                                        <% } %>
+
+                                        <tr>
+                                            <td>
+                                                <input name="fecha" type="text" class="form-control input-style"
+                                                    value="<%= fecha %>" disabled>
+                                            </td>
+                                            <td>
+                                                <input name="descripcion" type="text" class="form-control input-style"
+                                                    id="exampleInputEmail1" aria-describedby="Introduce la descripción" placeholder="Descripción">
+                                            </td>
+                                            <td>
+                                                <select name="id_servicio" class="form-control show-tick">
+                                                    <option value="" selected><strong>Seleccione un servicio</strong></option>
+                                                    <% for(var i=0; i < servicios.length; i++) {%>
+                                                        <option value="<%= servicios[i]['id_servicio'] %>">
+                                                            <%= servicios[i]['nombre_servicio'] %>
+                                                        </option>
+                                                    <% } %>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control input-style"
+                                                    name="MontoTotal" aria-describedby="Introduzca el precio" placeholder="precio">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="col-sm-12">
+                                    <a href="historial" type="submit" class="btn btn-raised g-bg-cyan">Añadir
+                                        Registro</a>
+                                    <a href="historial-paciente" class="btn btn-raised">
+                                        Cancelar
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
-    </div>
-</section>
-<div class="color-bg"></div>
-<!-- Jquery Core Js --> 
-<script src="assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js -->
-<script src="assets/bundles/morphingsearchscripts.bundle.js"></script> <!-- morphing search Js --> 
-<script src="assets/bundles/vendorscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js --> 
+    </section>
+    <div class="color-bg"></div>
+    <!-- Jquery Core Js -->
+    <script src="assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js -->
+    <script src="assets/bundles/morphingsearchscripts.bundle.js"></script> <!-- morphing search Js -->
+    <script src="assets/bundles/vendorscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js -->
 
-<script src="assets/bundles/mainscripts.bundle.js"></script><!-- Custom Js -->
-<script src="assets/bundles/morphingscripts.bundle.js"></script><!-- morphing search page js --> 
+    <script src="assets/bundles/mainscripts.bundle.js"></script><!-- Custom Js -->
+    <script src="assets/bundles/morphingscripts.bundle.js"></script><!-- morphing search page js -->
 </body>
+
 </html>

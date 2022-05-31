@@ -37,6 +37,7 @@ from .views import (
 
     ConsultasListApiView,
     ConsultasDetailApiView,
+    ConsultasUsuarioDetailApiView,
 
     PagosConsultasListApiView,
     PagosConsultasDetailApiView,
@@ -97,6 +98,7 @@ urlpatterns = [
 
     path ('consultas/',ConsultasListApiView.as_view()),
     path ('consultas/<int:id_consulta>/',ConsultasDetailApiView.as_view()),
+    path ('consultas/<str:usuario>', ConsultasUsuarioDetailApiView.as_view()),
 
     path ('pagos_consultas/',PagosConsultasListApiView.as_view()),
     path ('pagos_consultas/<int:id_pago_consulta>/',PagosConsultasDetailApiView.as_view()),

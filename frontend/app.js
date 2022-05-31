@@ -17,6 +17,8 @@ const calendarioPaciente = require("./calendario-paciente");
 const pacientes = require("./pacientes");
 const medicos = require("./medicos");
 const getUserData = require("./getUserData");
+const servicios = require("./servicios");
+const consultas = require("./consultas");
 
 var app = express();
 
@@ -73,8 +75,8 @@ app.set('view engine', 'ejs');
 // para los estilos
 app.use(express.static('public'));
 
-function checkSession(req, res){
-    if(! req.session.loggedIn){
+function checkSession(req, res) {
+    if (!req.session.loggedIn) {
         res.redirect('/');
     }
 }
@@ -237,7 +239,7 @@ app.post('/auth', (req, res) => { // para iniciar sesion
 });
 
 app.get('/info-doctores', async function (req, res) { // -> doctors.ejs
-    checkSession(req,res);
+    checkSession(req, res);
     medicosJSON = await medicos.getMedicos();
     userData = await getUserData.getUserData(req.session.username, req.session.isDoctor);
     res.render('doctors', {
@@ -245,11 +247,11 @@ app.get('/info-doctores', async function (req, res) { // -> doctors.ejs
         medicos: medicosJSON,
     });
 
-    
+
 });
 
 app.get('/info-medicos', async function (req, res) { // -> doctors.ejs
-    checkSession(req,res);
+    checkSession(req, res);
     medicosJSON = await medicos.getMedicos();
     userData = await getUserData.getUserData(req.session.username, req.session.isDoctor);
     res.render('informacion-doctores', {
@@ -257,19 +259,83 @@ app.get('/info-medicos', async function (req, res) { // -> doctors.ejs
         medicos: medicosJSON,
     });
 
-    
+
 });
 
 app.get('/historial-paciente', async function (req, res) { // -> patient-profile.ejs
-    checkSession(req,res);
+    checkSession(req, res);
+    pacientesJSON = await pacientes.getPacientes();
     userData = await getUserData.getUserData(req.session.username, req.session.isDoctor);
+    serviciosJSON = await servicios.getServicios();
+    // consultasJSON = await consultas.getConsultas();
     res.render('patient-profile', {
-        nombre: await userData['id_persona']['nombre'],
+        nombre_usuario: userData['id_persona']['nombre'],
+        nombre: "Nombre del Paciente",
+        apellido: "Apellido del Paciente",
+        correo: "Correo del Paciente",
+        telefono: "Telefono del Paciente",
+        alergias: [
+            "Alergias del Paciente"
+        ],
+        enfermedades_base: [
+            "Enfermedades base del Paciente"
+        ],
+        pacientes: pacientesJSON,
+        fecha: fechaActual,
+        servicios: serviciosJSON,
+        consultas: [
+            {
+                "id_Cita": {
+                    "fecha_consulta": "2022-05-31T01:29:00Z"
+                },
+                "Descripcion": "Descripcion Consulta",
+                "MontoTotal": 2022.5,
+                "id_Servicio": {
+                    "nombre_servicio": "Nombre de servicio"
+                }
+            }
+        ],
+    });
+});
+
+app.post('/historial-paciente', function (req, res) {
+
+    id_persona = req.body.id_persona;
+
+    apiRequest("http://127.0.0.1:8000/api/pacientes/" + id_persona, async (err, response, body) => {
+        if (!err) {
+            const paciente = JSON.parse(body); // asignamos el JSON a paciente
+            const nombre = paciente.id_persona.nombre; // accedemos al contenido de paciente
+            const apellido = paciente.id_persona.apellido;
+            const correo = paciente.correo_paciente;
+            const telefono = paciente.id_persona.telefono;
+            const alergias = paciente.alergias;
+            const enfermedades_base = paciente.enfermedades_base;
+            const pacientesJSON = await pacientes.getPacientes();
+            const serviciosJSON = await servicios.getServicios();
+            const consultasJSON = await consultas.getConsultas(); //TODO pasar parametro de usuario
+            const userData = await getUserData.getUserData(req.session.username, req.session.isDoctor);
+            res.render('patient-profile', { // pasamos los datos de paciente a paciente-menu
+                nombre_usuario: userData['id_persona']['nombre'],
+                nombre: nombre,
+                apellido: apellido,
+                correo: correo,
+                telefono: telefono,
+                alergias: alergias.split(';'),
+                enfermedades_base: enfermedades_base.split(';'),
+                pacientes: pacientesJSON,
+                fecha: fechaActual,
+                servicios: serviciosJSON,
+                consultas: consultasJSON,
+            });
+        } else {
+            res.send("Algo ocurrio con la conexion al API. Intenta mas tarde.")
+        }
     });
 });
 
 app.get('/historial', async function (req, res) { // -> patient-profile.ejs
-    checkSession(req,res);
+    checkSession(req, res);
     userData = await getUserData.getUserData(req.session.username, req.session.isDoctor);
     res.render('historial-paciente', {
         nombre: await userData['id_persona']['nombre'],
@@ -277,7 +343,7 @@ app.get('/historial', async function (req, res) { // -> patient-profile.ejs
 });
 
 app.get('/agendarcita', async function (req, res) { // -> book-appointment.ejs
-    checkSession(req,res);
+    checkSession(req, res);
     userData = await getUserData.getUserData(req.session.username, req.session.isDoctor);
     res.render('book-appointment', {
         nombre: await userData['id_persona']['nombre'],
@@ -286,7 +352,7 @@ app.get('/agendarcita', async function (req, res) { // -> book-appointment.ejs
 
 
 app.get('/anadirpago', async function (req, res) { // -> add-payments.ejs
-    checkSession(req,res);
+    checkSession(req, res);
     userData = await getUserData.getUserData(req.session.username, req.session.isDoctor);
     res.render('add-payments', {
         nombre: await userData['id_persona']['nombre'],
@@ -294,7 +360,7 @@ app.get('/anadirpago', async function (req, res) { // -> add-payments.ejs
 });
 
 app.get('/pagos-paciente', async function (req, res) { // -> patient-invoice.ejs
-    checkSession(req,res);
+    checkSession(req, res);
     userData = await getUserData.getUserData(req.session.username, req.session.isDoctor);
     res.render('patient-invoice', {
         nombre: await userData['id_persona']['nombre'],
@@ -302,7 +368,7 @@ app.get('/pagos-paciente', async function (req, res) { // -> patient-invoice.ejs
 });
 
 app.get('/anadir-paciente', async function (req, res) { // -> add-patient.ejs
-    checkSession(req,res);
+    checkSession(req, res);
     userData = await getUserData.getUserData(req.session.username, req.session.isDoctor);
     res.render('add-patient', {
         nombre: await userData['id_persona']['nombre'],
@@ -310,7 +376,7 @@ app.get('/anadir-paciente', async function (req, res) { // -> add-patient.ejs
 });
 
 app.get('/agenda-doctor', async function (req, res) { // -> doctor-schedule.ejs
-    checkSession(req,res);
+    checkSession(req, res);
     userData = await getUserData.getUserData(req.session.username, req.session.isDoctor);
     res.render('doctor-schedule', {
         nombre: await userData['id_persona']['nombre'],
@@ -318,7 +384,7 @@ app.get('/agenda-doctor', async function (req, res) { // -> doctor-schedule.ejs
 });
 
 app.get('/pagos', async function (req, res) { // -> 
-    checkSession(req,res);
+    checkSession(req, res);
     userData = await getUserData.getUserData(req.session.username, req.session.isDoctor);
     res.render('payments', {
         nombre: await userData['id_persona']['nombre'],
@@ -327,7 +393,7 @@ app.get('/pagos', async function (req, res) { // ->
 
 
 app.get('/anadir-doctor', async function (req, res) {
-    checkSession(req,res);
+    checkSession(req, res);
     userData = await getUserData.getUserData(req.session.username, req.session.isDoctor);
     res.render('add-doctor', {
         nombre: await userData['id_persona']['nombre'],
@@ -335,9 +401,9 @@ app.get('/anadir-doctor', async function (req, res) {
 });
 
 app.get('/perfil-doctor', async function (req, res) {
-    checkSession(req,res);
+    checkSession(req, res);
     userData = await getUserData.getUserData(req.session.username, req.session.isDoctor);
-    res.render('profile',{
+    res.render('profile', {
         nombre: await userData['id_persona']['nombre'],
     });
 });
@@ -381,12 +447,12 @@ app.post('/registrate', function (req, res) {
 });
 
 app.get('/password-incorrecto', function (req, res) {
-    checkSession(req,res);
+    checkSession(req, res);
     res.render('404');
 });
 
 app.get('/cuenta-removida', function (req, res) {
-    checkSession(req,res);
+    checkSession(req, res);
     res.render('cuenta-removida');
 });
 

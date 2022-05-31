@@ -751,6 +751,24 @@ class ConsultasDetailApiView(APIView):
             status=status.HTTP_200_OK
         )
 
+class ConsultasUsuarioDetailApiView(APIView): #TODO corregir esto para poder hacer get en historial-paciente
+    def get_consulta(self, usuario):
+        try:
+            return Consulta.objects.get(usuario=usuario)
+        except Consulta.DoesNotExist:
+            return None
+
+    def get(self, request, usuario, *args, **kwargs):
+        consulta_instance = self.get_consulta(usuario)
+        if not consulta_instance:
+            return Response(
+                {"res": "Object with that id does not exists"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        serializer = ConsultaSerializer(consulta_instance)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
 class  PagosConsultasListApiView(APIView):
     def get(self, request, *args, **kwargs):
         pagos_consultas = PagosConsulta.objects.all()

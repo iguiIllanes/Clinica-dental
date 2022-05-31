@@ -137,7 +137,34 @@ app.post('/paciente-panel-de-control', function (req, res) {
         body: `id_doctor=${id_doctor}&id_paciente=${id_paciente}&fecha_reserva=${fecha_reserva}&fecha_consulta=${fecha_consulta}`,
     }, function (error, response, body) {
         if (!error) {
-            res.redirect('/paciente-panel-de-control');
+            apiRequest("http://127.0.0.1:8000/api/pacientes/" + req.session.username, async (err, response, body) => {
+                if (!err) {
+                    const usuario = JSON.parse(body); // asignamos el JSON a paciente
+                    const id_paciente = usuario.id_persona.id_persona;
+                    const nombre = usuario.id_persona.nombre; // accedemos al contenido de paciente
+                    const apellido = usuario.id_persona.apellido;
+                    const cal = (await calendarioPaciente.getCalendario(id_paciente)) == null ? "" : await calendarioPaciente.getCalendario(id_paciente);
+                    const medicosJSON = await medicos.getMedicos();
+                    res.render('paciente-menu', { // pasamos los datos de paciente a paciente-menu
+                        nombre: nombre,
+                        apellido: apellido,
+                        id_paciente: id_paciente,
+                        calendario: cal,
+                        medicos: medicosJSON,
+                        numMedicos: medicosJSON.length,
+                        fecha: fechaActual,
+                        alert: true,
+                        alertTitle: "Registro",
+                        alertMessage: "Registro exitoso!",
+                        alertIcon: 'info',
+                        showConfirmButton: false,
+                        time: 1500,
+                        ruta: '' // vacio porque redirige a la ruta '/'
+                    });
+                } else {
+                    res.send('Algo ocurrio con el API. Por favor intenta mas tarde.');
+                }
+            });
         } else {
             res.send('Algo ocurrio. Por favor intenta mas tarde.');
         }
@@ -269,7 +296,7 @@ app.get('/historial-paciente', async function (req, res) { // -> patient-profile
     serviciosJSON = await servicios.getServicios();
     // consultasJSON = await consultas.getConsultas();
     res.render('patient-profile', {
-        nombre_usuario: userData['id_persona']['nombre'],
+        // nombre_usuario: userData['id_persona']['nombre'],
         nombre: "Nombre del Paciente",
         apellido: "Apellido del Paciente",
         correo: "Correo del Paciente",
@@ -321,8 +348,8 @@ app.post('/historial-paciente', function (req, res) {
                 apellido: apellido,
                 correo: correo,
                 telefono: telefono,
-                alergias: alergias.split(';'),
-                enfermedades_base: enfermedades_base.split(';'),
+                alergias: alergias.split(','),
+                enfermedades_base: enfermedades_base.split(','),
                 pacientes: pacientesJSON,
                 fecha: fechaActual,
                 servicios: serviciosJSON,
@@ -436,7 +463,15 @@ app.post('/registrate', function (req, res) {
             body: `nombre=${nombre}&apellido=${apellido}&ci=${ci}&telefono=${telefono}&fecha_nacimiento=${fecha_nacimiento}&correo_paciente=${correo_paciente}&enfermedades_base=${enfermedades_base}&alergias=${alergias}&usuario=${usuario}&password=${password}`,
         }, function (error, response, body) {
             if (!error) {
-                res.send('Usuario creado exitosamente.');
+                res.render('sign-up', {
+                    alert: true,
+                    alertTitle: "Registro",
+                    alertMessage: "Registro exitoso!",
+                    alertIcon: 'success',
+                    showConfirmButton: false,
+                    time: 1500,
+                    ruta: '' // vacio porque redirige a la ruta '/'
+                });
             } else {
                 res.send('Algo ocurrio. Por favor intenta mas tarde.');
             }
@@ -447,7 +482,7 @@ app.post('/registrate', function (req, res) {
 });
 
 app.get('/password-incorrecto', function (req, res) {
-    checkSession(req, res);
+    // checkSession(req, res); // hay que quitar esto o ver una forma de que funcione sin esto
     res.render('404');
 });
 

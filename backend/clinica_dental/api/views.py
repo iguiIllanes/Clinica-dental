@@ -119,7 +119,7 @@ class PacientesListApiView(APIView):
         return Response(persona_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
    
 
-class PacientesDetailApiView(APIView):
+class PacientesUsuarioDetailApiView(APIView):
     def get_paciente(self, usuario):
         try:
             return Paciente.objects.get(usuario = usuario)
@@ -128,6 +128,24 @@ class PacientesDetailApiView(APIView):
     
     def get(self, request, usuario, *args, **kwargs):
         paciente_instance = self.get_paciente(usuario)
+        if not paciente_instance:
+            return Response(
+                {"res": "Object with that id does not exists"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        serializer = PacienteSerializer(paciente_instance)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+class PacientesIdDetailApiView(APIView):
+    def get_paciente(self, id_persona):
+        try:
+            return Paciente.objects.get(id_persona = id_persona)
+        except Paciente.DoesNotExist:
+            return None
+    
+    def get(self, request, id_persona, *args, **kwargs):
+        paciente_instance = self.get_paciente(id_persona)
         if not paciente_instance:
             return Response(
                 {"res": "Object with that id does not exists"},
@@ -732,6 +750,24 @@ class ConsultasDetailApiView(APIView):
             {"res": "Object deleted!"},
             status=status.HTTP_200_OK
         )
+
+class ConsultasUsuarioDetailApiView(APIView): #TODO corregir esto para poder hacer get en historial-paciente
+    def get_consulta(self, usuario):
+        try:
+            return Consulta.objects.get(usuario=usuario)
+        except Consulta.DoesNotExist:
+            return None
+
+    def get(self, request, usuario, *args, **kwargs):
+        consulta_instance = self.get_consulta(usuario)
+        if not consulta_instance:
+            return Response(
+                {"res": "Object with that id does not exists"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        serializer = ConsultaSerializer(consulta_instance)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 class  PagosConsultasListApiView(APIView):
     def get(self, request, *args, **kwargs):

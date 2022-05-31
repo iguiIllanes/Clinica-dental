@@ -7,7 +7,8 @@ from .views import (
     PersonasDetailApiView,
 
     PacientesListApiView,
-    PacientesDetailApiView,
+    PacientesIdDetailApiView,
+    PacientesUsuarioDetailApiView,
 
     MedicosListApiView,
     MedicosDetailApiView,
@@ -36,6 +37,7 @@ from .views import (
 
     ConsultasListApiView,
     ConsultasDetailApiView,
+    ConsultasUsuarioDetailApiView,
 
     PagosConsultasListApiView,
     PagosConsultasDetailApiView,
@@ -66,7 +68,8 @@ urlpatterns = [
     path ('personas/<int:persona_id>/', PersonasDetailApiView.as_view()),
 
     path ('pacientes/', PacientesListApiView.as_view()),
-    path ('pacientes/<str:usuario>/', PacientesDetailApiView.as_view()),
+    path ('pacientes/<int:id_persona>', PacientesIdDetailApiView.as_view()),
+    path ('pacientes/<str:usuario>/', PacientesUsuarioDetailApiView.as_view()),
 
     path ('medicos/',MedicosListApiView.as_view()),
     path ('medicos/<str:usuario>/',MedicosDetailApiView.as_view()),
@@ -95,6 +98,7 @@ urlpatterns = [
 
     path ('consultas/',ConsultasListApiView.as_view()),
     path ('consultas/<int:id_consulta>/',ConsultasDetailApiView.as_view()),
+    path ('consultas/<str:usuario>', ConsultasUsuarioDetailApiView.as_view()),
 
     path ('pagos_consultas/',PagosConsultasListApiView.as_view()),
     path ('pagos_consultas/<int:id_pago_consulta>/',PagosConsultasDetailApiView.as_view()),

@@ -83,7 +83,7 @@ function checkSession(req, res) {
 
 app.get('/', function (req, res) { // -> paneles de control
     if (req.session.loggedIn) { // para verificar si se inicio sesion
-        if (req.session.isDoctor) { // para verificar si es doctor //TODO VER LA VARIABLE DE sesion de doctor en login doctor
+        if (req.session.isDoctor) { // para verificar si es doctor //TODO -> DONE,creo | VER LA VARIABLE DE sesion de doctor en login doctor
             res.redirect('/doctor-panel-de-control');
         } else {
             res.redirect('/paciente-panel-de-control');
@@ -153,9 +153,11 @@ app.post('/paciente-panel-de-control', function (req, res) {
                         medicos: medicosJSON,
                         numMedicos: medicosJSON.length,
                         fecha: fechaActual,
+
+                        //para SweetAlerts
                         alert: true,
-                        alertTitle: "Registro",
-                        alertMessage: "Registro exitoso!",
+                        alertTitle: "Reservación",
+                        alertMessage: "Reservación exitosa!",
                         alertIcon: 'info',
                         showConfirmButton: false,
                         time: 1500,
@@ -215,7 +217,36 @@ app.post('/doctor-panel-de-control', function (req, res) {
         body: `id_doctor=${id_doctor}&id_paciente=${id_paciente}&fecha_reserva=${fecha_reserva}&fecha_consulta=${fecha_consulta}`,
     }, function (error, response, body) {
         if (!error) {
-            res.redirect('/doctor-panel-de-control');
+            apiRequest("http://127.0.0.1:8000/api/medicos/" + req.session.username, async (err, response, body) => {
+                if (!err) {
+                    const usuario = JSON.parse(body); // asignamos el JSON a paciente
+                    const nombre = usuario.id_persona.nombre; // accedemos al contenido de paciente
+                    const apellido = usuario.id_persona.apellido;
+                    const id_doctor = usuario.id_persona.id_persona;
+                    const cal = (await calendarioMedico.getCalendario(id_doctor)) == null ? "" : await calendarioMedico.getCalendario(id_doctor);
+                    const pacientesJSON = await pacientes.getPacientes();
+                    res.render('doctor-schedule', { // pasamos los datos de paciente a paciente-menu
+                        nombre: "Dr. " + nombre,
+                        apellido: apellido,
+                        id_doctor: id_doctor,
+                        calendario: cal,
+                        pacientes: pacientesJSON,
+                        numPacientes: pacientesJSON.length,
+                        fecha: fechaActual,
+
+                        // para Sweetalerts
+                        alert: true,
+                        alertTitle: "Reservación",
+                        alertMessage: "Reservación exitosa!",
+                        alertIcon: 'info',
+                        showConfirmButton: false,
+                        time: 1500,
+                        ruta: '' // vacio porque redirige a la ruta '/'
+                    });
+                } else {
+                    res.send("Algo ocurrio con la conexion al API. Intenta mas tarde.")
+                }
+            });
         } else {
             res.send('Algo ocurrio. Por favor intenta mas tarde.');
         }
@@ -296,7 +327,7 @@ app.get('/historial-paciente', async function (req, res) { // -> patient-profile
     serviciosJSON = await servicios.getServicios();
     // consultasJSON = await consultas.getConsultas();
     res.render('patient-profile', {
-        // nombre_usuario: userData['id_persona']['nombre'],
+        nombre_usuario: userData['id_persona']['nombre'],
         nombre: "Nombre del Paciente",
         apellido: "Apellido del Paciente",
         correo: "Correo del Paciente",

@@ -7,7 +7,8 @@ from .views import (
     PersonasDetailApiView,
 
     PacientesListApiView,
-    PacientesDetailApiView,
+    PacientesIdDetailApiView,
+    PacientesUsuarioDetailApiView,
 
     MedicosListApiView,
     MedicosDetailApiView,
@@ -66,7 +67,8 @@ urlpatterns = [
     path ('personas/<int:persona_id>/', PersonasDetailApiView.as_view()),
 
     path ('pacientes/', PacientesListApiView.as_view()),
-    path ('pacientes/<str:usuario>/', PacientesDetailApiView.as_view()),
+    path ('pacientes/<int:id_persona>', PacientesIdDetailApiView.as_view()),
+    path ('pacientes/<str:usuario>/', PacientesUsuarioDetailApiView.as_view()),
 
     path ('medicos/',MedicosListApiView.as_view()),
     path ('medicos/<str:usuario>/',MedicosDetailApiView.as_view()),

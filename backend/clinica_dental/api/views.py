@@ -783,7 +783,7 @@ class ConsultasUsuarioDetailApiView(APIView): #TODO corregir esto para poder hac
         Serializer = ConsultaSerializer(consultas_instance, many=True)
         return Response(Serializer.data, status=status.HTTP_200_OK)
 
-class ConsultasCitasDetailApiView(APIView): #TODO corregir esto para poder hacer get en historial-paciente
+class CitasDoctorPacienteFechaDetailApiView(APIView): #devuelve las citas de los medicos en base a un usuario, donde las fechas son iguales al dia del request
     def get_citas(self, id_paciente, id_doctor):
         print(datetime.today());
         try:

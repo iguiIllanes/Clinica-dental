@@ -12,6 +12,7 @@
     <link href="assets/plugins/fullcalendar/fullcalendar.min.css" rel="stylesheet">
     <link href="assets/css/main.css" rel="stylesheet">
     <link href="assets/css/themes/all-themes.css" rel="stylesheet" />
+    
 </head>
 
 <body class="theme-cyan">
@@ -102,7 +103,7 @@
                     <li class="active open"><a href="javascript:void(0);" class="menu-toggle"><i
                                 class="zmdi zmdi-calendar-check"></i><span>Citas</span> </a>
                         <ul class="ml-menu">
-                            <li><a href="/paciente-panel-de-control">Agendar una Cita</a></li>
+                            <li class="active"><a href="/paciente-panel-de-control">Agendar una Cita</a></li>
                         </ul>
 
                     </li>
@@ -117,7 +118,6 @@
                                 class="zmdi zmdi-account-o"></i><span>Paciente</span> </a>
                         <ul class="ml-menu">
                             <li><a href="historialPaciente">Historial Médico</a></li>
-                            <li><a href="pagos-paciente">Historial de Pagos</a></li>
                         </ul>
                     </li>
 
@@ -213,35 +213,46 @@
                                 
                                 <strong>Pago de la Reserva</strong><br>
                                 <small>Se le debitará 100 bs</small><br>
-                                <div class=" form-group">
+                            
+                                <div class="demo-container">
+                                    <div class="card-wrapper"></div>
+                            
+                                    <div class="form-container active">
+                                        <form action="">
+                                            <div class=" form-group">
                                                 <div class="form-line">
-                                                    <input type="number" class="form-control"
-                                                        placeholder="Número de la tarjeta">
-                                                </div>
-                            </div>
+                                                    <input placeholder="Número de la tarjeta" type="tel" name="number" class="form-control">
+                                                </div>                            
+                                            </div>
+                                            <div class=" form-group">
+                                                <div class="form-line">
+                                                    <input placeholder="Nombre" type="text" name="name" class="form-control">
+                                                </div>                            
+                                            </div>
+                                            <div class=" form-group">
+                                                <div class="form-line">
+                                                    <input placeholder="Fecha de Expiración" type="tel" name="expiry" class="form-control">
+                                                </div>                            
+                                            </div>
+                                            <div class=" form-group">
+                                                <div class="form-line">
+                                                    <input placeholder="Código de Seguridad"  type="number" name="cvc" class="form-control">
+                                                </div>                            
+                                            </div>
 
-
-                            <strong>Fecha de Expiración</strong>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="date" class="datepicker form-control" placeholder="">
+                                        </form>
+                                                                   
+                
+                                    </div>
                                 </div>
-                            </div>
-
-
-                            <strong>Código de Seguridad</strong><br>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="number" class="form-control" placeholder="CVC">
-                                </div>
-                            </div>
 
                             <button type="submit" class="btn btn-raised g-bg-cyan">Reservar</button>
                             <a href="paciente-panel-de-control" class="btn btn-raised">
                                 Cancelar
                             </a>
-                    </div>
-                    </form>
+                            </div>
+                        </form>
+
                 </div>
             </div>
             <div class="col-md-12 col-lg-8 col-xl-9">
@@ -274,6 +285,7 @@
     <script src="assets/bundles/morphingscripts.bundle.js"></script>
     <script src="assets/js/pages/calendar/calendar.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+    <script src="assets/js/pages/dist/card.js"></script>
     <% if(typeof alert !="undefined" ){ %>
         <script>
             Swal.fire({
@@ -285,6 +297,12 @@
             });
         </script>
      <% } %>
+     <script>
+        var c = new Card({
+            form: document.querySelector('form'),
+            container: '.card-wrapper'
+        });
+    </script>
 </body>
 
 </html>

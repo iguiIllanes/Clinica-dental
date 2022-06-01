@@ -495,6 +495,7 @@ app.get('/historialPaciente', async function (req, res) { // -> patient-profile.
                 const enfermedades_base = usuario.enfermedades_base;
                 const consultasJSON = await consultas.getConsultas(id_paciente)
                 const serviciosJSON = await servicios.getServicios();
+                
                 res.render('historial-medico-paciente', { // pasamos los datos de paciente a paciente-menu
                     nombre_usuario: nombre,
                     nombre: nombre,
@@ -506,7 +507,6 @@ app.get('/historialPaciente', async function (req, res) { // -> patient-profile.
                     fecha: fechaActual,
                     servicios: serviciosJSON,
                     consultas: consultasJSON,
-                    fichas: fichasJSON,
                 });
             } else {
                 res.send("Algo ocurrio con la conexion al API. Intenta mas tarde.")
@@ -677,3 +677,10 @@ app.get('/cerrar-sesion', function (req, res) {
 
 app.listen(8080);
 console.log('8080 is the magic port');
+
+app.get('/tarjeta', async function (req, res) { // -> patient-invoice.ejs
+    checkSession(req, res);
+    userData = await getUserData.getUserData(req.session.username, req.session.isDoctor);
+    res.redirect('tarjeta', {
+    });
+});

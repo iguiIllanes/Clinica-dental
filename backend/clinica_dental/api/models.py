@@ -73,6 +73,7 @@ class Cita(models.Model):
     id_doctor = models.ForeignKey(Medico, on_delete=models.CASCADE, null=True)
     fecha_reserva = models.DateField()
     fecha_consulta = models.DateTimeField()
+    #unique_together = ['id_doctor','fecha_consulta']
     def str(self) -> str:
         return self.id_cita + ' ' + self.id_paciente + ' ' + self.id_doctor
 

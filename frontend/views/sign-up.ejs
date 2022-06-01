@@ -105,7 +105,7 @@
                                     <input type="submit" class="btn btn-raised g-bg-cyan waves-effect" value="Regístrate">
                                 </div>
                                 <div class="m-t-10 m-b--5 align-center">
-                                    <a href="/">Ya tienes una cuenta?</a>
+                                    <a href="/paciente-iniciar-sesion">Ya tienes una cuenta?</a>
                                 </div>
                             </form>
                         </div>
@@ -120,8 +120,26 @@
 
     <script src="assets/bundles/libscripts.bundle.js"></script> 
     <script src="assets/bundles/vendorscripts.bundle.js"></script> 
+<<<<<<< HEAD
 
     <script src="assets/bundles/mainscripts.bundle.js"></script>
+=======
+    <script src="assets/bundles/mainscripts.bundle.js"></script><!-- Custom Js -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SweetAlert2 CDN -->
+    <% if(typeof alert != "undefined"){ %>
+        <script>
+            Swal.fire({
+                title: '<%= alertTitle %>',
+                text: '<%= alertMessage %>',
+                icon: '<%= alertIcon %>',
+                showConfirmButton: <%= showConfirmButton %>,
+                timer: <%= time %>
+            }).then(()=>{
+                window.location='/<%= ruta %>'
+            });
+        </script>
+    <% } %>
+>>>>>>> e7e6ded94032b777ec2e2404d88d930c47eb98e3
 </body>
 
 </html>

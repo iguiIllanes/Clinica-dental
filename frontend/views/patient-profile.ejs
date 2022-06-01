@@ -300,6 +300,7 @@
                                     class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                     <thead>
                                         <tr>
+                                            <th># Ficha</th>
                                             <th>Fecha</th>
                                             <th>Descripción</th>
                                             <th>Servicio</th>
@@ -309,6 +310,7 @@
                                     <tbody>
                                         <% for (var i = 0; i < consultas.length; i++) { %>
                                             <tr>
+                                                <td><%= consultas[i]['id_Cita']['id_cita'] %></td>
                                                 <td><%= consultas[i]['id_Cita']['fecha_consulta'].substring(0,10) %></td>
                                                 <td><%= consultas[i]['Descripcion'] %></td>
                                                 <td><%= consultas[i]['id_Servicio']['nombre_servicio'] %></td>
@@ -317,6 +319,16 @@
                                         <% } %>
 
                                         <tr>
+                                            <td>
+                                                <select name="ficha" class="form-control show-tick">
+                                                    <option value="" selected><strong>Seleccione una Ficha</strong></option>
+                                                    <% for(var i=0; i < fichas.length; i++) {%>
+                                                        <option value="<%= servicios[i]['id_servicio'] %>">
+                                                            <%= fichas[i]['id_cita'] %>
+                                                        </option>
+                                                    <% } %>
+                                                </select>
+                                            </td>
                                             <td>
                                                 <input name="fecha" type="text" class="form-control input-style"
                                                     value="<%= fecha %>" disabled>

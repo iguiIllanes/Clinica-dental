@@ -19,6 +19,7 @@ const medicos = require("./medicos");
 const getUserData = require("./getUserData");
 const servicios = require("./servicios");
 const consultas = require("./consultas");
+const fichas = require("./fichas");
 
 var app = express();
 
@@ -272,7 +273,7 @@ app.post('/auth', (req, res) => { // para iniciar sesion
     username = req.body.username
     password = req.body.password
 
-    const query = "SELECT usuario, password" + (req.session.isDoctor ? ", contratado " : " ") + "FROM " + (req.session.isDoctor ? "api_medico" : "api_paciente") + " WHERE usuario = '" + username + "' AND password = '" + password + "'";
+    const query = "SELECT id_persona_id, usuario, password" + (req.session.isDoctor ? ", contratado " : " ") + "FROM " + (req.session.isDoctor ? "api_medico" : "api_paciente") + " WHERE usuario = '" + username + "' AND password = '" + password + "'";
     sqlRequest = new Request(query, function (err, rowCount) {
         if (err) { // si falla algo
             res.send("Algo paso. Por favor intenta mas tarde.")
@@ -288,6 +289,8 @@ app.post('/auth', (req, res) => { // para iniciar sesion
     });
 
     sqlRequest.on('row', function (columns) {
+        req.session.ID_PERSONA = columns[0]['value']; // para poner el id_persona en las cookies
+
         if (req.session.isDoctor && !(columns[2]['value'])) {
             isValidDoctor = false;
         }
@@ -353,14 +356,14 @@ app.get('/historial-paciente', async function (req, res) { // -> patient-profile
                 }
             }
         ],
+        fichas: [],
     });
 });
 
 app.post('/historial-paciente', function (req, res) {
 
     id_persona = req.body.id_persona;
-    if(id_persona.length>0){
-
+    if(id_persona.length>0){ // 
         apiRequest("http://127.0.0.1:8000/api/pacientes/" + id_persona, async (err, response, body) => {
             if (!err) {
                 const paciente = JSON.parse(body); // asignamos el JSON a paciente
@@ -374,6 +377,7 @@ app.post('/historial-paciente', function (req, res) {
                 const serviciosJSON = await servicios.getServicios();
                 const consultasJSON = await consultas.getConsultas(id_persona); //TODO pasar parametro de usuario
                 const userData = await getUserData.getUserData(req.session.username, req.session.isDoctor);
+                const fichasJSON = await fichas.getFichas(req.session.ID_PERSONA, id_persona);
                 res.render('patient-profile', { // pasamos los datos de paciente a paciente-menu
                     nombre_usuario: userData['id_persona']['nombre'],
                     nombre: nombre,
@@ -386,11 +390,14 @@ app.post('/historial-paciente', function (req, res) {
                     fecha: fechaActual,
                     servicios: serviciosJSON,
                     consultas: consultasJSON,
+                    fichas: fichasJSON,
                 });
             } else {
                 res.send("Algo ocurrio con la conexion al API. Intenta mas tarde.")
             }
         });
+    }else{
+        res.redirect('/historial-paciente')
     }
 });
 

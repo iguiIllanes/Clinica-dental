@@ -577,11 +577,18 @@
     <script src="assets/bundles/morphingscripts.bundle.js"></script><!-- morphing search page js -->
     <script src="assets/js/pages/calendar/calendar.js"></script>
 
-    <script type="text/javascript">
-        $(".datepicker").datepicker({
-            format: "yyyy/mm/dd",
-        });
-    </script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SweetAlert2 CDN -->
+    <% if(typeof alert !="undefined" ){ %>
+        <script>
+            Swal.fire({
+                title: '<%= alertTitle %>',
+                text: '<%= alertMessage %>',
+                icon: '<%= alertIcon %>',
+                showConfirmButton: <%= showConfirmButton %> ,
+                timer: <%= time %>
+            });
+        </script>
+    <% } %>
 </body>
 
 </html>

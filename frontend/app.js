@@ -330,7 +330,7 @@ app.get('/historial-paciente', async function (req, res) { // -> patient-profile
     serviciosJSON = await servicios.getServicios();
     // consultasJSON = await consultas.getConsultas();
     res.render('patient-profile', {
-        nombre_usuario: userData['id_persona']['nombre'],
+        nombre_usuario: "Dr. " + userData['id_persona']['nombre'],
         nombre: "Nombre del Paciente",
         apellido: "Apellido del Paciente",
         correo: "Correo del Paciente",
@@ -481,6 +481,72 @@ app.get('/historial', async function (req, res) { // -> patient-profile.ejs
     });
 });
 
+app.get('/historialPaciente', async function (req, res) { // -> patient-profile.ejs
+    if (req.session.loggedIn) { // comprueba si ya hay una sesion iniciada
+        apiRequest("http://127.0.0.1:8000/api/pacientes/" + req.session.username, async (err, response, body) => {
+            if (!err) {
+                const usuario = JSON.parse(body); // asignamos el JSON a paciente
+                const id_paciente = usuario.id_persona.id_persona;
+                const nombre = usuario.id_persona.nombre; // accedemos al contenido de paciente
+                const apellido = usuario.id_persona.apellido;
+                const correo = usuario.correo_paciente;
+                const telefono = usuario.id_persona.telefono;
+                const alergias = usuario.alergias;
+                const enfermedades_base = usuario.enfermedades_base;
+                const consultasJSON = await consultas.getConsultas(id_paciente)
+                const serviciosJSON = await servicios.getServicios();
+                res.render('historial-medico-paciente', { // pasamos los datos de paciente a paciente-menu
+                    nombre_usuario: nombre,
+                    nombre: nombre,
+                    apellido: apellido,
+                    correo: correo,
+                    telefono: telefono,
+                    alergias: alergias.split(','),
+                    enfermedades_base: enfermedades_base.split(','),
+                    fecha: fechaActual,
+                    servicios: serviciosJSON,
+                    consultas: consultasJSON,
+                    fichas: fichasJSON,
+                });
+            } else {
+                res.send("Algo ocurrio con la conexion al API. Intenta mas tarde.")
+            }
+        });
+    } else {
+        res.redirect('/paciente-iniciar-sesion');
+    }
+    // if (req.session.loggedIn) { // comprueba si ya hay una sesion iniciada
+    //     apiRequest("http://127.0.0.1:8000/api/pacientes/" + req.session.username, async (err, response, body) => {
+    //         if (!err) {
+    //             const paciente = JSON.parse(body); // asignamos el JSON a paciente
+    //             const nombre = paciente.id_persona.nombre; // accedemos al contenido de paciente
+    //             const apellido = paciente.id_persona.apellido;
+    //             const correo = paciente.correo_paciente;
+    //             const telefono = paciente.id_persona.telefono;
+    //             const alergias = paciente.alergias;
+    //             const enfermedades_base = paciente.enfermedades_base;
+    //             //const pacientesJSON = await pacientes.getPacientes();
+    //             //const consultasJSON = await consultas.getConsultas(id_persona); //TODO pasar parametro de usuario
+    //             const userData = await getUserData.getUserData(req.session.username, req.session.isDoctor);
+    //             //const fichasJSON = await fichas.getFichas(req.session.ID_PERSONA, id_persona);
+    //             res.render('historial-medico-paciente', { // pasamos los datos de paciente a paciente-menu
+    //                 nombre_usuario: userData['id_persona']['nombre'],
+    //                 nombre: nombre,
+    //                 apellido: apellido,
+    //                 correo: correo,
+    //                 telefono: telefono,
+    //                 alergias: alergias.split(','),
+    //              //   fichas: fichasJSON,
+    //             });
+    //         } else {
+    //             res.send("Algo ocurrio con la conexion al API. Intenta mas tarde.")
+    //         }
+    //     });
+    // } else {
+    //     res.redirect('/historialPaciente');
+    // }
+});
+
 app.get('/agendarcita', async function (req, res) { // -> book-appointment.ejs
     checkSession(req, res);
     userData = await getUserData.getUserData(req.session.username, req.session.isDoctor);
@@ -510,7 +576,7 @@ app.get('/anadir-paciente', async function (req, res) { // -> add-patient.ejs
     checkSession(req, res);
     userData = await getUserData.getUserData(req.session.username, req.session.isDoctor);
     res.render('add-patient', {
-        nombre: await userData['id_persona']['nombre'],
+        nombre: "Dr. " + await userData['id_persona']['nombre'],
     });
 });
 

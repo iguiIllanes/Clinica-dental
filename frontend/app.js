@@ -75,7 +75,6 @@ app.set('view engine', 'ejs');
 
 // para los estilos
 app.use(express.static('public'));
-
 function checkSession(req, res) {
     if (!req.session.loggedIn) {
         res.redirect('/');

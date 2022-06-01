@@ -785,6 +785,7 @@ class ConsultasUsuarioDetailApiView(APIView): #TODO corregir esto para poder hac
 
 class ConsultasCitasDetailApiView(APIView): #TODO corregir esto para poder hacer get en historial-paciente
     def get_citas(self, id_paciente, id_doctor):
+        print(datetime.today());
         try:
             return Cita.objects.filter(id_paciente=id_paciente).filter(id_doctor=id_doctor).filter(fecha_consulta__date=datetime.today().strftime('%Y-%m-%d'))
         except Cita.DoesNotExist:

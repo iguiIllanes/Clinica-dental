@@ -18,7 +18,7 @@ function generarCalendario(id_paciente){
                 citasParsed = []
                 for(var i =0; i<citas.length; i++) {
                     citasParsed[i]={
-                        title: citas[i]['id_doctor']['nombre'],
+                        title: citas[i]['id_doctor']['nombre'] + " " + citas[i]['id_doctor']['apellido'] + " Ficha: " + citas[i]['id_cita'],
                         start: citas[i]['fecha_consulta'],
                         className: eventColors[Math.floor(Math.random() * 7)]
                     };

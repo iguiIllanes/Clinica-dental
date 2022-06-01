@@ -289,7 +289,7 @@ app.get('/historial-paciente', async function (req, res) { // -> patient-profile
                     "fecha_consulta": "2022-05-31T01:29:00Z"
                 },
                 "Descripcion": "Descripcion Consulta",
-                "MontoTotal": 2022.5,
+                "MontoTotal": 0,
                 "id_Servicio": {
                     "nombre_servicio": "Nombre de servicio"
                 }
@@ -301,37 +301,39 @@ app.get('/historial-paciente', async function (req, res) { // -> patient-profile
 app.post('/historial-paciente', function (req, res) {
 
     id_persona = req.body.id_persona;
+    if(id_persona.length>0){
 
-    apiRequest("http://127.0.0.1:8000/api/pacientes/" + id_persona, async (err, response, body) => {
-        if (!err) {
-            const paciente = JSON.parse(body); // asignamos el JSON a paciente
-            const nombre = paciente.id_persona.nombre; // accedemos al contenido de paciente
-            const apellido = paciente.id_persona.apellido;
-            const correo = paciente.correo_paciente;
-            const telefono = paciente.id_persona.telefono;
-            const alergias = paciente.alergias;
-            const enfermedades_base = paciente.enfermedades_base;
-            const pacientesJSON = await pacientes.getPacientes();
-            const serviciosJSON = await servicios.getServicios();
-            const consultasJSON = await consultas.getConsultas(); //TODO pasar parametro de usuario
-            const userData = await getUserData.getUserData(req.session.username, req.session.isDoctor);
-            res.render('patient-profile', { // pasamos los datos de paciente a paciente-menu
-                nombre_usuario: userData['id_persona']['nombre'],
-                nombre: nombre,
-                apellido: apellido,
-                correo: correo,
-                telefono: telefono,
-                alergias: alergias.split(';'),
-                enfermedades_base: enfermedades_base.split(';'),
-                pacientes: pacientesJSON,
-                fecha: fechaActual,
-                servicios: serviciosJSON,
-                consultas: consultasJSON,
-            });
-        } else {
-            res.send("Algo ocurrio con la conexion al API. Intenta mas tarde.")
-        }
-    });
+        apiRequest("http://127.0.0.1:8000/api/pacientes/" + id_persona, async (err, response, body) => {
+            if (!err) {
+                const paciente = JSON.parse(body); // asignamos el JSON a paciente
+                const nombre = paciente.id_persona.nombre; // accedemos al contenido de paciente
+                const apellido = paciente.id_persona.apellido;
+                const correo = paciente.correo_paciente;
+                const telefono = paciente.id_persona.telefono;
+                const alergias = paciente.alergias;
+                const enfermedades_base = paciente.enfermedades_base;
+                const pacientesJSON = await pacientes.getPacientes();
+                const serviciosJSON = await servicios.getServicios();
+                const consultasJSON = await consultas.getConsultas(id_persona); //TODO pasar parametro de usuario
+                const userData = await getUserData.getUserData(req.session.username, req.session.isDoctor);
+                res.render('patient-profile', { // pasamos los datos de paciente a paciente-menu
+                    nombre_usuario: userData['id_persona']['nombre'],
+                    nombre: nombre,
+                    apellido: apellido,
+                    correo: correo,
+                    telefono: telefono,
+                    alergias: alergias.split(';'),
+                    enfermedades_base: enfermedades_base.split(';'),
+                    pacientes: pacientesJSON,
+                    fecha: fechaActual,
+                    servicios: serviciosJSON,
+                    consultas: consultasJSON,
+                });
+            } else {
+                res.send("Algo ocurrio con la conexion al API. Intenta mas tarde.")
+            }
+        });
+    }
 });
 
 app.get('/historial', async function (req, res) { // -> patient-profile.ejs

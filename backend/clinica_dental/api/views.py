@@ -1,11 +1,13 @@
 import json
 import re
 
+from datetime import datetime
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, permissions
 
-from urllib import request
+from urllib import request, response
 from rest_framework import viewsets
 
 from .serializers import PersonaSerializer,MedicoSerializer, EspecialidadSerializer,MedicoEspecialidadSerializer
@@ -752,22 +754,51 @@ class ConsultasDetailApiView(APIView):
         )
 
 class ConsultasUsuarioDetailApiView(APIView): #TODO corregir esto para poder hacer get en historial-paciente
-    def get_consulta(self, usuario):
+    def get_citas(self, id_paciente):
         try:
-            return Consulta.objects.get(usuario=usuario)
-        except Consulta.DoesNotExist:
+            return Cita.objects.filter(id_paciente=id_paciente).values_list('id_cita',flat=True)
+        except Cita.DoesNotExist:
             return None
 
-    def get(self, request, usuario, *args, **kwargs):
-        consulta_instance = self.get_consulta(usuario)
-        if not consulta_instance:
+    def get_consultas(self, citas):
+        try:
+            return Consulta.objects.filter(id_Cita__in=citas)
+        except Cita.DoesNotExist:
+            return None
+
+    def get(self, request, id_paciente, *args, **kwargs):
+        citas_instance = self.get_citas(id_paciente)        
+        if not citas_instance:
+            return Response(
+                {"res": "Object with that id does not exists"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        consultas_instance = self.get_consultas(citas_instance)
+        if not consultas_instance:
             return Response(
                 {"res": "Object with that id does not exists"},
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-        serializer = ConsultaSerializer(consulta_instance)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        Serializer = ConsultaSerializer(consultas_instance, many=True)
+        return Response(Serializer.data, status=status.HTTP_200_OK)
+
+class ConsultasCitasDetailApiView(APIView): #TODO corregir esto para poder hacer get en historial-paciente
+    def get_citas(self, id_paciente, id_doctor):
+        try:
+            return Cita.objects.filter(id_paciente=id_paciente).filter(id_doctor=id_doctor).filter(fecha_consulta__date=datetime.today().strftime('%Y-%m-%d'))
+        except Cita.DoesNotExist:
+            return None
+
+    def get(self, request, id_paciente,id_doctor, *args, **kwargs):
+        citas_instance = self.get_citas(id_paciente,id_doctor)        
+        if not citas_instance:
+            return Response(
+                {"res": "Object with that id does not exists"},
+                status=status.HTTP_400_BAD_REQUEST
+            )    
+        Serializer = CitaSerializer(citas_instance, many=True)
+        return Response(Serializer.data, status=status.HTTP_200_OK)
 
 class  PagosConsultasListApiView(APIView):
     def get(self, request, *args, **kwargs):

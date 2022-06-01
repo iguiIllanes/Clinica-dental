@@ -347,6 +347,7 @@ app.get('/historial-paciente', async function (req, res) { // -> patient-profile
         consultas: [
             {
                 "id_Cita": {
+                    "id_cita":"#",
                     "fecha_consulta": "2022-05-31T01:29:00Z"
                 },
                 "Descripcion": "Descripcion Consulta",
@@ -363,7 +364,7 @@ app.get('/historial-paciente', async function (req, res) { // -> patient-profile
 app.post('/historial-paciente', function (req, res) {
 
     id_persona = req.body.id_persona;
-    if(id_persona.length>0){ // 
+    if (id_persona.length > 0) { // 
         apiRequest("http://127.0.0.1:8000/api/pacientes/" + id_persona, async (err, response, body) => {
             if (!err) {
                 const paciente = JSON.parse(body); // asignamos el JSON a paciente
@@ -396,9 +397,80 @@ app.post('/historial-paciente', function (req, res) {
                 res.send("Algo ocurrio con la conexion al API. Intenta mas tarde.")
             }
         });
-    }else{
+    } else {
         res.redirect('/historial-paciente')
     }
+});
+
+app.post('/anadir-historial', function (req, res) {
+    /*
+    
+    id_Cita: 16
+    Descripcion: Desc John Connor
+    MontoTotal: 2022.5
+    id_Servicio: 4
+    */
+
+    id_cita = req.body.ficha;
+    desc = req.body.descripcion;
+    id_servicio = req.body.id_servicio;
+    monto_total = req.body.MontoTotal;
+
+    if(id_cita=='' && desc=='' && id_servicio=='' && monto_total==''){
+        res.redirect('/historial-paciente');
+    }
+    apiRequest.post({
+        headers: {
+            'content-type': 'application/x-www-form-urlencoded'
+        },
+        url: 'http://127.0.0.1:8000/api/consultas/',
+        body: `id_Cita=${id_cita}&Descripcion=${desc}&MontoTotal=${monto_total}&id_Servicio=${id_servicio}`,
+    }, function (error, response, body) {
+        console.log(body);
+        if (!error) {
+            res.render('patient-profile', {
+                nombre_usuario: userData['id_persona']['nombre'],
+                nombre: "Nombre del Paciente",
+                apellido: "Apellido del Paciente",
+                correo: "Correo del Paciente",
+                telefono: "Telefono del Paciente",
+                alergias: [
+                    "Alergias del Paciente"
+                ],
+                enfermedades_base: [
+                    "Enfermedades base del Paciente"
+                ],
+                pacientes: pacientesJSON,
+                fecha: fechaActual,
+                servicios: serviciosJSON,
+                consultas: [
+                    {
+                        "id_Cita": {
+                            "id_cita":"#",
+                            "fecha_consulta": "2022-05-31T01:29:00Z"
+                        },
+                        "Descripcion": "Descripcion Consulta",
+                        "MontoTotal": 0,
+                        "id_Servicio": {
+                            "nombre_servicio": "Nombre de servicio"
+                        }
+                    }
+                ],
+                fichas: [],
+
+                // para sweetalerts
+                alert: true,
+                alertTitle: "Registro",
+                alertMessage: "Registro exitoso!",
+                alertIcon: 'success',
+                showConfirmButton: false,
+                time: 1500,
+                ruta: '' 
+            });
+        } else {
+            res.send('Algo ocurrio. Por favor intenta mas tarde.');
+        }
+    });
 });
 
 app.get('/historial', async function (req, res) { // -> patient-profile.ejs

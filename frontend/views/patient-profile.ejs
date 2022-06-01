@@ -296,71 +296,69 @@
                                 </ul>
                             </div>
                             <div class="body table-responsive historial-container">
-                                <table
-                                    class="table table-bordered table-striped table-hover js-basic-example dataTable">
-                                    <thead>
-                                        <tr>
-                                            <th># Ficha</th>
-                                            <th>Fecha</th>
-                                            <th>Descripción</th>
-                                            <th>Servicio</th>
-                                            <th>Monto Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <% for (var i = 0; i < consultas.length; i++) { %>
+                                <form action="/anadir-historial" method="POST">
+                                    <table
+                                        class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                        <thead>
                                             <tr>
-                                                <td><%= consultas[i]['id_Cita']['id_cita'] %></td>
-                                                <td><%= consultas[i]['id_Cita']['fecha_consulta'].substring(0,10) %></td>
-                                                <td><%= consultas[i]['Descripcion'] %></td>
-                                                <td><%= consultas[i]['id_Servicio']['nombre_servicio'] %></td>
-                                                <td><%= consultas[i]['MontoTotal'] %></td>
+                                                <th># Ficha</th>
+                                                <th>Fecha</th>
+                                                <th>Descripción</th>
+                                                <th>Servicio</th>
+                                                <th>Monto Total</th>
                                             </tr>
-                                        <% } %>
-
-                                        <tr>
-                                            <td>
-                                                <select name="ficha" class="form-control show-tick">
-                                                    <option value="" selected><strong>Seleccione una Ficha</strong></option>
-                                                    <% for(var i=0; i < fichas.length; i++) {%>
-                                                        <option value="<%= servicios[i]['id_servicio'] %>">
-                                                            <%= fichas[i]['id_cita'] %>
-                                                        </option>
-                                                    <% } %>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <input name="fecha" type="text" class="form-control input-style"
-                                                    value="<%= fecha %>" disabled>
-                                            </td>
-                                            <td>
-                                                <input name="descripcion" type="text" class="form-control input-style"
-                                                    id="exampleInputEmail1" aria-describedby="Introduce la descripción" placeholder="Descripción">
-                                            </td>
-                                            <td>
-                                                <select name="id_servicio" class="form-control show-tick">
-                                                    <option value="" selected><strong>Seleccione un servicio</strong></option>
-                                                    <% for(var i=0; i < servicios.length; i++) {%>
-                                                        <option value="<%= servicios[i]['id_servicio'] %>">
-                                                            <%= servicios[i]['nombre_servicio'] %>
-                                                        </option>
-                                                    <% } %>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <input type="text" class="form-control input-style"
-                                                    name="MontoTotal" aria-describedby="Introduzca el precio" placeholder="precio">
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <div class="col-sm-12">
-                                    <a href="historial" type="submit" class="btn btn-raised g-bg-cyan">Añadir
-                                        Registro</a>
-                                    <a href="historial-paciente" class="btn btn-raised">
-                                        Cancelar
-                                    </a>
-                                </div>
+                                        </thead>
+                                        <tbody>
+                                            <% for (var i = 0; i < consultas.length; i++) { %>
+                                                <tr>
+                                                    <td><%= consultas[i]['id_Cita']['id_cita'] %></td>
+                                                    <td><%= consultas[i]['id_Cita']['fecha_consulta'].substring(0,10) %></td>
+                                                    <td><%= consultas[i]['Descripcion'] %></td>
+                                                    <td><%= consultas[i]['id_Servicio']['nombre_servicio'] %></td>
+                                                    <td><%= consultas[i]['MontoTotal'] %></td>
+                                                </tr>
+                                            <% } %>
+    
+                                            <tr>
+                                                <td>
+                                                    <select name="ficha" class="form-control show-tick">
+                                                        <option value="" selected><strong># Ficha</strong></option>
+                                                        <% for(var i=0; i < fichas.length; i++) {%>
+                                                            <option value="<%= fichas[i]['id_cita'] %>">
+                                                                <%= fichas[i]['id_cita'] %>
+                                                            </option>
+                                                        <% } %>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <input name="fecha" type="text" class="form-control input-style"
+                                                        value="<%= fecha %>" disabled>
+                                                </td>
+                                                <td>
+                                                    <input name="descripcion" type="text" class="form-control input-style"
+                                                        id="exampleInputEmail1" aria-describedby="Introduce la descripción" placeholder="Descripción">
+                                                </td>
+                                                <td>
+                                                    <select name="id_servicio" class="form-control show-tick">
+                                                        <option value="" selected><strong>Seleccione un servicio</strong></option>
+                                                        <% for(var i=0; i < servicios.length; i++) {%>
+                                                            <option value="<%= servicios[i]['id_servicio'] %>">
+                                                                <%= servicios[i]['nombre_servicio'] %>
+                                                            </option>
+                                                        <% } %>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <input type="" class="form-control input-style"
+                                                        name="MontoTotal" aria-describedby="Introduzca el precio" placeholder="precio">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="col-sm-12">
+                                        <input type="submit" class="btn btn-raised g-bg-cyan" value="Añadir Registro">
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -376,6 +374,19 @@
 
     <script src="assets/bundles/mainscripts.bundle.js"></script><!-- Custom Js -->
     <script src="assets/bundles/morphingscripts.bundle.js"></script><!-- morphing search page js -->
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SweetAlert2 CDN -->
+    <% if(typeof alert != "undefined"){ %>
+        <script>
+            Swal.fire({
+                title: '<%= alertTitle %>',
+                text: '<%= alertMessage %>',
+                icon: '<%= alertIcon %>',
+                showConfirmButton: <%= showConfirmButton %>,
+                timer: <%= time %>
+            });
+        </script>
+    <% } %>
 </body>
 
 </html>
